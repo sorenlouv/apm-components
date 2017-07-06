@@ -6,23 +6,23 @@ function SingleRect({
   borderRadius,
   className,
   height,
-  blockCount,
+  numberOfBuckets,
   marginLeft,
+  marginTop,
+  style,
   x
 }) {
-  const blockWidth = innerWidth / blockCount;
+  const bucketWidth = innerWidth / numberOfBuckets;
   return (
-    <g transform={`translate(${marginLeft}, 10)`}>
+    <g transform={`translate(${marginLeft}, ${marginTop})`}>
       <rect
-        style={{
-          fill: '#dddddd'
-        }}
+        style={style}
         className={className}
         height={height}
-        width={blockWidth}
-        rx={borderRadius && '2px'}
-        ry={borderRadius && '2px'}
-        x={x * blockWidth}
+        width={bucketWidth}
+        rx={'2px'}
+        ry={'2px'}
+        x={x * bucketWidth}
       />
     </g>
   );
@@ -32,7 +32,7 @@ SingleRect.requiresSVG = true;
 
 SingleRect.propTypes = {
   className: PropTypes.string,
-  blockCount: PropTypes.number.isRequired,
+  numberOfBuckets: PropTypes.number.isRequired,
   marginLeft: PropTypes.number.isRequired,
   borderRadius: PropTypes.bool,
   innerWidth: PropTypes.number, // From react-vis
