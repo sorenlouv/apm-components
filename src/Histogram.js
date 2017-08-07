@@ -10,16 +10,13 @@ import {
   VerticalRectSeries
 } from 'react-vis';
 
-// LAYOUT CONSTANTS
 const MARGIN_LEFT = 100;
-
-const NUM_OF_X_TICK = 9;
 const MARGIN_TOP = 20;
+const NUM_OF_X_TICK = 9;
 const PLOT_HEIGHT = 120;
-const SINGLE_RECT_HEIGHT = PLOT_HEIGHT - MARGIN_TOP * 3;
 
-function getYMax(graphItems) {
-  return Math.max(...graphItems.map(item => item.y));
+function getYMax(buckets) {
+  return Math.max(...buckets.map(item => item.y));
 }
 
 function getYMaxRounded(yMax) {
@@ -36,64 +33,54 @@ class Histogram extends PureComponent {
     };
   }
 
-  componentDidMount() {
-    const elm = document.querySelector('.rv-xy-plot__series--rect');
-    if (elm) {
-      this.graphInnerWidth = elm.getBoundingClientRect().width;
-    }
-  }
+  onValueClick = value => {
+    const bucketIndex = value.x0 / this.props.bucketSize;
+    this.props.onClick(bucketIndex);
+  };
 
-  onHover = (value, { event }) => {
-    this.updateHover(event.clientX);
+  onHover = (value, { event, innerX, index }) => {
+    const newIndex = innerX > event.layerX - MARGIN_LEFT ? index : index + 1;
+    this.updateHover(newIndex);
   };
 
   onLeave = () => {
-    this.updateHover();
-  };
-
-  onClick = event => {
-    const bucketIndex = Math.round(
-      event.target.x.baseVal.value / this.getBucketWidth()
-    );
-    if (bucketIndex >= 0) {
-      this.props.onClick(bucketIndex);
-    }
+    this.updateHover(null);
   };
 
   getBucketCount() {
-    return _.size(this.props.graphItems);
+    return _.size(this.props.buckets);
   }
 
-  getBucketWidth() {
-    return this.graphInnerWidth / this.getBucketCount();
+  getWithHighlightedBucket(items, selected) {
+    return items.map((item, i) => {
+      if (i === selected) {
+        return { ...item, color: '#3360a3' };
+      }
+      return item;
+    });
   }
 
-  updateHover = _.throttle(clientX => {
-    let hoveredBucket = null;
-    if (clientX) {
-      const index = Math.floor((clientX - MARGIN_LEFT) / this.getBucketWidth());
-      hoveredBucket =
-        _.get(this.props.graphItems, `[${index}].y`) > 0 ? index : null;
-    }
+  updateHover = _.throttle(index => {
+    const hoveredBucket =
+      _.get(this.props.buckets, `[${index}].y`) > 0 ? index : null;
     this.setState({ hoveredBucket });
   }, 20);
 
   render() {
-    const { graphItems, bucketSize, selectedBucket } = this.props;
+    const { buckets, bucketSize, selectedBucket } = this.props;
     const bucketCount = this.getBucketCount();
 
-    if (!graphItems) {
+    if (!buckets) {
       return null;
     }
 
-    const yMax = getYMax(graphItems);
-    const yMaxRounded = getYMaxRounded(yMax);
+    const yMax = getYMax(buckets);
+    const yMaxRounded = getYMaxRounded(yMax * 1.1);
     const yTickValues = [yMaxRounded, yMaxRounded / 2];
     const XYPlotWidth = 900;
 
     return (
       <XYPlot
-        onMouseDown={this.onClick}
         onMouseLeave={this.onLeave}
         margin={{ left: MARGIN_LEFT, top: MARGIN_TOP }}
         width={XYPlotWidth}
@@ -103,13 +90,18 @@ class Histogram extends PureComponent {
       >
         <HorizontalGridLines tickValues={yTickValues} />
         <XAxis
+          style={{ strokeWidth: '1px' }}
           marginRight={10}
+          tickSizeOuter={10}
+          tickSizeInner={0}
           tickTotal={NUM_OF_X_TICK}
           tickFormat={x => {
-            return `${x / 1000} ms`;
+            return `${x / 1000000} s`;
           }}
         />
         <YAxis
+          tickSize={0}
+          hideLine
           marginTop={MARGIN_TOP}
           tickValues={yTickValues}
           tickFormat={y => {
@@ -119,7 +111,7 @@ class Histogram extends PureComponent {
 
         {Number.isInteger(this.state.hoveredBucket)
           ? <SingleRect
-              height={SINGLE_RECT_HEIGHT}
+              onClick={this.props.onClick}
               numberOfBuckets={bucketCount}
               x={this.state.hoveredBucket}
               marginLeft={MARGIN_LEFT}
@@ -132,7 +124,6 @@ class Histogram extends PureComponent {
 
         {Number.isInteger(selectedBucket)
           ? <SingleRect
-              height={SINGLE_RECT_HEIGHT}
               numberOfBuckets={bucketCount}
               x={selectedBucket}
               marginLeft={MARGIN_LEFT}
@@ -145,10 +136,12 @@ class Histogram extends PureComponent {
           : null}
 
         <VerticalRectSeries
-          data={graphItems}
+          colorType="literal"
+          color="rgb(172, 189, 216)"
+          stroke="#fff"
+          onValueClick={this.onValueClick}
+          data={this.getWithHighlightedBucket(buckets, selectedBucket)}
           style={{
-            stroke: 0,
-            fill: 'rgb(172, 189, 216)',
             rx: '2px',
             ry: '2px'
           }}

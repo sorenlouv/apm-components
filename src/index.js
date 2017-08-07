@@ -1,24 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import _ from 'lodash';
 import './index.css';
 import Histogram from './Histogram';
 import response from './response.json';
 
-const graphItems = getGraphItems(response.distribution, response.bucketSize);
+const buckets = getFormattedBuckets(response.buckets, response.bucketSize);
 
-function getGraphItems(distribution, bucketSize) {
-  function getYMax(distribution) {
-    return Math.max(...Object.values(distribution).map(item => item.count));
+function getFormattedBuckets(buckets, bucketSize) {
+  if (!buckets) {
+    return null;
   }
-  const yMax = getYMax(distribution);
 
-  return _.map(distribution, ({ count }, key) => {
-    const bucket = parseInt(key, 10);
+  const yMax = Math.max(...buckets.map(item => item.count));
+  const yMin = yMax * 0.1;
+
+  return buckets.map(({ count, key }) => {
     return {
-      x0: bucket,
-      x: bucket + bucketSize,
-      y: count > 0 ? Math.max(count, yMax * 0.1) : 0
+      x0: key,
+      x: key + bucketSize,
+      y: count > 0 ? Math.max(count, yMin) : 0
     };
   });
 }
@@ -34,7 +34,7 @@ class App extends React.Component {
   render() {
     return (
       <Histogram
-        graphItems={graphItems}
+        buckets={buckets}
         bucketSize={response.bucketSize}
         selectedBucket={this.state.selectedBucket}
         onClick={selectedBucket => this.setState({ selectedBucket })}
