@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import React, { Component } from 'react';
-import './App.css';
+import React, { PureComponent } from 'react';
 import SingleRect from './SingleRect';
+import 'react-vis/dist/style.css';
 import {
   XYPlot,
   XAxis,
@@ -10,56 +10,25 @@ import {
   VerticalRectSeries
 } from 'react-vis';
 
-// Constants
-const NUM_OF_X_TICK = 9;
-const NUMBER_OF_BUCKETS = 28; // TODO: this should be 27 after POC
-
 // LAYOUT CONSTANTS
-const WIDTH = 900;
 const MARGIN_LEFT = 100;
+
+const NUM_OF_X_TICK = 9;
 const MARGIN_TOP = 20;
 const PLOT_HEIGHT = 120;
 const SINGLE_RECT_HEIGHT = PLOT_HEIGHT - MARGIN_TOP * 3;
-const BUCKET_WIDTH = (WIDTH - MARGIN_LEFT - 10) / NUMBER_OF_BUCKETS;
 
-const sortNumerical = (a, b) => a - b;
-
-// Max number of transactions for a single bucket
-function getYMax(distribution) {
-  return _.last(Object.values(distribution).sort(sortNumerical));
+function getYMax(graphItems) {
+  return Math.max(...graphItems.map(item => item.y));
 }
 
-function getGraphData(distribution, bucketSize, yMax) {
-  function getYValue(i) {
-    const yValue = distribution[i * bucketSize];
-    const minYValue = yMax * 0.1; // minimum bucket value is 10% of the highest bucket value
-    if (!yValue) {
-      return 0;
-    } else if (yValue > minYValue) {
-      return yValue;
-    } else {
-      return minYValue;
-    }
-  }
-
-  return _.range(NUMBER_OF_BUCKETS).map(i => {
-    return {
-      x0: i * bucketSize,
-      x: (i + 1) * bucketSize,
-      y: getYValue(i)
-    };
-  });
+function getYMaxRounded(yMax) {
+  const initialBase = Math.floor(Math.log10(yMax));
+  const base = initialBase > 2 ? initialBase - 1 : initialBase;
+  return Math.ceil(yMax / 10 ** base) * 10 ** base;
 }
 
-//  Format of data:
-//   distribution: {
-//     '0': 5667,
-//     '1867894': 2,
-//     '50433138': 1
-//   }
-//   bucketSize: 1867894
-
-class Histogram extends Component {
+class Histogram extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -67,60 +36,91 @@ class Histogram extends Component {
     };
   }
 
-  onHover = _.throttle((value, { event, innerX, index }) => {
-    this.setState({ hoveredBucket: index });
-  }, 20);
+  componentDidMount() {
+    const elm = document.querySelector('.rv-xy-plot__series--rect');
+    if (elm) {
+      this.graphInnerWidth = elm.getBoundingClientRect().width;
+    }
+  }
+
+  onHover = (value, { event }) => {
+    this.updateHover(event.clientX);
+  };
 
   onLeave = () => {
-    this.setState({ hoveredBucket: null });
+    this.updateHover();
   };
 
   onClick = event => {
-    const bucketIndex = Math.round(event.target.x.baseVal.value / BUCKET_WIDTH);
-    this.props.onClick(bucketIndex);
+    const bucketIndex = Math.round(
+      event.target.x.baseVal.value / this.getBucketWidth()
+    );
+    if (bucketIndex >= 0) {
+      this.props.onClick(bucketIndex);
+    }
   };
 
-  render() {
-    const { distribution, bucketSize, selectedBucket } = this.props;
+  getBucketCount() {
+    return _.size(this.props.graphItems);
+  }
 
-    if (!distribution) {
+  getBucketWidth() {
+    return this.graphInnerWidth / this.getBucketCount();
+  }
+
+  updateHover = _.throttle(clientX => {
+    let hoveredBucket = null;
+    if (clientX) {
+      const index = Math.floor((clientX - MARGIN_LEFT) / this.getBucketWidth());
+      hoveredBucket =
+        _.get(this.props.graphItems, `[${index}].y`) > 0 ? index : null;
+    }
+    this.setState({ hoveredBucket });
+  }, 20);
+
+  render() {
+    const { graphItems, bucketSize, selectedBucket } = this.props;
+    const bucketCount = this.getBucketCount();
+
+    if (!graphItems) {
       return null;
     }
 
-    const yMax = getYMax(distribution);
-    const yTickValues = [yMax / 2, yMax];
-    const graphData = getGraphData(distribution, bucketSize, yMax);
+    const yMax = getYMax(graphItems);
+    const yMaxRounded = getYMaxRounded(yMax);
+    const yTickValues = [yMaxRounded, yMaxRounded / 2];
+    const XYPlotWidth = 900;
 
     return (
       <XYPlot
         onMouseDown={this.onClick}
         onMouseLeave={this.onLeave}
         margin={{ left: MARGIN_LEFT, top: MARGIN_TOP }}
-        width={WIDTH}
+        width={XYPlotWidth}
         height={PLOT_HEIGHT}
-        xDomain={[0, NUMBER_OF_BUCKETS * bucketSize]}
-        yDomain={[0, yMax * 1.3]}
+        xDomain={[0, bucketCount * bucketSize]}
+        yDomain={[0, yMaxRounded]}
       >
         <HorizontalGridLines tickValues={yTickValues} />
         <XAxis
           marginRight={10}
           tickTotal={NUM_OF_X_TICK}
           tickFormat={x => {
-            return x / 1000 + ' ms';
+            return `${x / 1000} ms`;
           }}
         />
         <YAxis
           marginTop={MARGIN_TOP}
           tickValues={yTickValues}
           tickFormat={y => {
-            return y + ' reqs.';
+            return `${y} reqs.`;
           }}
         />
 
         {Number.isInteger(this.state.hoveredBucket)
           ? <SingleRect
               height={SINGLE_RECT_HEIGHT}
-              numberOfBuckets={NUMBER_OF_BUCKETS}
+              numberOfBuckets={bucketCount}
               x={this.state.hoveredBucket}
               marginLeft={MARGIN_LEFT}
               marginTop={MARGIN_TOP}
@@ -133,7 +133,7 @@ class Histogram extends Component {
         {Number.isInteger(selectedBucket)
           ? <SingleRect
               height={SINGLE_RECT_HEIGHT}
-              numberOfBuckets={NUMBER_OF_BUCKETS}
+              numberOfBuckets={bucketCount}
               x={selectedBucket}
               marginLeft={MARGIN_LEFT}
               marginTop={MARGIN_TOP}
@@ -145,7 +145,7 @@ class Histogram extends Component {
           : null}
 
         <VerticalRectSeries
-          data={graphData}
+          data={graphItems}
           style={{
             stroke: 0,
             fill: 'rgb(172, 189, 216)',

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 function SingleRect({
   innerWidth,
-  borderRadius,
-  className,
   height,
   numberOfBuckets,
   marginLeft,
@@ -17,7 +15,6 @@ function SingleRect({
     <g transform={`translate(${marginLeft}, ${marginTop})`}>
       <rect
         style={style}
-        className={className}
         height={height}
         width={bucketWidth}
         rx={'2px'}
@@ -31,12 +28,10 @@ function SingleRect({
 SingleRect.requiresSVG = true;
 
 SingleRect.propTypes = {
-  className: PropTypes.string,
   numberOfBuckets: PropTypes.number.isRequired,
   marginLeft: PropTypes.number.isRequired,
-  borderRadius: PropTypes.bool,
-  innerWidth: PropTypes.number, // From react-vis
-  x: PropTypes.number
+  innerWidth: PropTypes.number.isRequired, // From react-vis
+  x: PropTypes.number.isRequired
 };
 
 export default SingleRect;

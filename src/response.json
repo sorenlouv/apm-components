@@ -1,0 +1,79 @@
+{
+  "distribution": {
+    "0": {
+      "count": 400,
+      "transaction_id": "43917ebd-6f7b-4acd-aca9-3261a44f7f0d"
+    },
+    "9426859": {
+      "count": 550,
+      "transaction_id": "405ff0ff-10b5-4ae6-85bf-ba43b1ab58cb"
+    },
+    "18853718": {
+      "count": 19,
+      "transaction_id": "cfe60e74-c3a9-4c8a-bcdc-3ca272ea8b6a"
+    },
+    "28280577": {
+      "count": 371,
+      "transaction_id": "c6c3f751-3674-4fed-a6c7-595ec084cd39"
+    },
+    "37707436": {
+      "count": 6,
+      "transaction_id": "eac15902-983c-42af-95d6-aef57df7b821"
+    },
+    "47134295": { "count": 0 },
+    "56561154": {
+      "count": 171,
+      "transaction_id": "f7b62cc7-3e76-4895-b281-f2b71fc866ba"
+    },
+    "65988013": {
+      "count": 11,
+      "transaction_id": "7db5e51b-98ac-4091-9f54-e12860b98d45"
+    },
+    "75414872": {
+      "count": 1,
+      "transaction_id": "60f9aaca-c4fe-4c76-9f74-bc79d3d95092"
+    },
+    "84841731": { "count": 0 },
+    "94268590": { "count": 0 },
+    "103695449": { "count": 0 },
+    "113122308": { "count": 0 },
+    "122549167": {
+      "count": 99,
+      "transaction_id": "c743f01c-ce21-4488-9dab-b06e56d8d1c2"
+    },
+    "131976026": {
+      "count": 5,
+      "transaction_id": "d5aab394-c432-4753-8eaa-b71f2e1ecf2d"
+    },
+    "141402885": {
+      "count": 6,
+      "transaction_id": "ad2bb364-45cc-45ec-9cdb-5e16669d10cc"
+    },
+    "150829744": {
+      "count": 5,
+      "transaction_id": "9c32fe80-1b9b-4b4a-9661-e62107ee5518"
+    },
+    "160256603": { "count": 0 },
+    "169683462": { "count": 0 },
+    "179110321": { "count": 0 },
+    "188537180": {
+      "count": 12,
+      "transaction_id": "ef6ffdf8-139c-4eae-bb82-d075bd62f118"
+    },
+    "197964039": { "count": 0 },
+    "207390898": { "count": 0 },
+    "216817757": { "count": 0 },
+    "226244616": { "count": 0 },
+    "235671475": { "count": 0 },
+    "245098334": {
+      "count": 8,
+      "transaction_id": "16e10473-f649-42fc-9999-e17c292d57bb"
+    },
+    "254525193": {
+      "count": 7,
+      "transaction_id": "b5ec22c0-31bb-4aad-9bed-d42150520a27"
+    }
+  },
+  "bucketSize": 9426859,
+  "defaultBucket": 131976026
+}
