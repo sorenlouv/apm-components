@@ -4,4 +4,4 @@ import Histogram from './Histogram';
 import ResponseTimeChart from './ResponseTimeChart';
 import './index.css';
 
-ReactDOM.render(<Histogram />, document.getElementById('root'));
+ReactDOM.render(<ResponseTimeChart />, document.getElementById('root'));

@@ -38,13 +38,14 @@ export default class Chart extends React.Component {
   }
 
   render() {
+    const xMin = getXMin(this.props.p99);
     const xMax = getXMax(this.props.p99);
     const yMax = getYMax(this.props.p99);
     const yMaxRounded = getYMaxRounded(yMax);
     const yTickValues = [yMaxRounded, yMaxRounded / 2];
 
     const x = scaleLinear()
-      .domain([0, xMax])
+      .domain([xMin, xMax])
       .range([XY_MARGIN_LEFT, XY_WIDTH - XY_MARGIN_RIGHT]);
     const y = scaleLinear().domain([0, yMaxRounded]).range([XY_HEIGHT, 0]);
 
@@ -52,7 +53,11 @@ export default class Chart extends React.Component {
       <XYPlot
         width={XY_WIDTH}
         height={XY_HEIGHT}
-        margin={{ top: XY_MARGIN_TOP, left: XY_MARGIN_LEFT }}
+        margin={{
+          top: XY_MARGIN_TOP,
+          left: XY_MARGIN_LEFT,
+          right: XY_MARGIN_RIGHT
+        }}
         xType="time"
         xDomain={x.domain()}
         yDomain={y.domain()}
