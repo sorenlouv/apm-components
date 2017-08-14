@@ -9,21 +9,12 @@ import {
   HorizontalGridLines,
   VerticalRectSeries
 } from 'react-vis';
+import { getYMax, getYMaxRounded } from '../chart_utils';
 
 const MARGIN_LEFT = 100;
 const MARGIN_TOP = 20;
 const NUM_OF_X_TICK = 9;
 const PLOT_HEIGHT = 120;
-
-function getYMax(buckets) {
-  return Math.max(...buckets.map(item => item.y));
-}
-
-function getYMaxRounded(yMax) {
-  const initialBase = Math.floor(Math.log10(yMax));
-  const base = initialBase > 2 ? initialBase - 1 : initialBase;
-  return Math.ceil(yMax / 10 ** base) * 10 ** base;
-}
 
 class Histogram extends PureComponent {
   constructor(props) {
@@ -33,9 +24,8 @@ class Histogram extends PureComponent {
     };
   }
 
-  onValueClick = value => {
-    const bucketIndex = value.x0 / this.props.bucketSize;
-    this.props.onClick(bucketIndex);
+  onValueClick = item => {
+    this.props.onClick(item.i);
   };
 
   onHover = (value, { event, innerX, index }) => {
@@ -52,12 +42,16 @@ class Histogram extends PureComponent {
   }
 
   getWithHighlightedBucket(items, selected) {
-    return items.map((item, i) => {
-      if (i === selected) {
-        return { ...item, color: '#3360a3' };
-      }
-      return item;
-    });
+    return items
+      .map((item, i) => {
+        if (i === selected) {
+          return { ...item, color: '#3360a3' };
+        }
+        return item;
+      })
+      .map((item, i) => {
+        return { ...item, x: item.x - 10000, x0: item.x0 + 10000, i };
+      });
   }
 
   updateHover = _.throttle(index => {
@@ -75,7 +69,7 @@ class Histogram extends PureComponent {
     }
 
     const yMax = getYMax(buckets);
-    const yMaxRounded = getYMaxRounded(yMax * 1.1);
+    const yMaxRounded = getYMaxRounded(yMax);
     const yTickValues = [yMaxRounded, yMaxRounded / 2];
     const XYPlotWidth = 900;
 
@@ -138,7 +132,6 @@ class Histogram extends PureComponent {
         <VerticalRectSeries
           colorType="literal"
           color="rgb(172, 189, 216)"
-          stroke="#fff"
           onValueClick={this.onValueClick}
           data={this.getWithHighlightedBucket(buckets, selectedBucket)}
           style={{
