@@ -1,29 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function SingleRect({
-  innerWidth,
-  onClick,
-  innerHeight,
-  numberOfBuckets,
-  marginLeft,
-  marginTop,
-  style,
-  x
-}) {
-  const bucketWidth = innerWidth / numberOfBuckets;
+function SingleRect({ innerHeight, marginTop, style, x, width }) {
   return (
-    <g
-      transform={`translate(${marginLeft}, ${marginTop})`}
-      onClick={() => onClick && onClick(x)}
-    >
+    <g transform={`translate(0, ${marginTop})`}>
       <rect
         style={style}
         height={innerHeight}
-        width={bucketWidth}
+        width={width}
         rx={'2px'}
         ry={'2px'}
-        x={x * bucketWidth}
+        x={x}
       />
     </g>
   );
@@ -32,8 +19,6 @@ function SingleRect({
 SingleRect.requiresSVG = true;
 
 SingleRect.propTypes = {
-  numberOfBuckets: PropTypes.number.isRequired,
-  marginLeft: PropTypes.number.isRequired,
   x: PropTypes.number.isRequired
 };
 

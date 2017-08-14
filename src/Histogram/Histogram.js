@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { PureComponent } from 'react';
+import { scaleLinear } from 'd3-scale';
 import SingleRect from './SingleRect';
 import 'react-vis/dist/style.css';
 import {
@@ -7,14 +8,17 @@ import {
   XAxis,
   YAxis,
   HorizontalGridLines,
-  VerticalRectSeries
+  VerticalRectSeries,
+  Voronoi
 } from 'react-vis';
-import { getYMax, getYMaxRounded } from '../chart_utils';
+import { getYMax, getXMax, getYMaxRounded } from '../chart_utils';
 
-const MARGIN_LEFT = 100;
-const MARGIN_TOP = 20;
-const NUM_OF_X_TICK = 9;
-const PLOT_HEIGHT = 120;
+const XY_MARGIN_LEFT = 50;
+const XY_MARGIN_RIGHT = 10;
+const XY_MARGIN_TOP = 20;
+const XY_HEIGHT = 120;
+const XY_WIDTH = 900;
+const NUM_OF_X_TICK = 10;
 
 class Histogram extends PureComponent {
   constructor(props) {
@@ -24,22 +28,18 @@ class Histogram extends PureComponent {
     };
   }
 
-  onValueClick = item => {
-    this.props.onClick(item.i);
+  onClick = bucket => {
+    return this.props.buckets[bucket.i].y > 0 && this.props.onClick(bucket.i);
   };
 
-  onHover = (value, { event, innerX, index }) => {
-    const newIndex = innerX > event.layerX - MARGIN_LEFT ? index : index + 1;
-    this.updateHover(newIndex);
+  onHover = bucket => {
+    this.props.buckets[bucket.i].y > 0 &&
+      this.setState({ hoveredBucket: bucket });
   };
 
-  onLeave = () => {
-    this.updateHover(null);
+  onBlur = () => {
+    this.setState({ hoveredBucket: null });
   };
-
-  getBucketCount() {
-    return _.size(this.props.buckets);
-  }
 
   getWithHighlightedBucket(items, selected) {
     return items
@@ -50,37 +50,36 @@ class Histogram extends PureComponent {
         return item;
       })
       .map((item, i) => {
-        return { ...item, x: item.x - 10000, x0: item.x0 + 10000, i };
+        const padding = (item.x - item.x0) / 20;
+        return { ...item, x: item.x - padding, x0: item.x0 + padding, i };
       });
   }
 
-  updateHover = _.throttle(index => {
-    const hoveredBucket =
-      _.get(this.props.buckets, `[${index}].y`) > 0 ? index : null;
-    this.setState({ hoveredBucket });
-  }, 20);
-
   render() {
-    const { buckets, bucketSize, selectedBucket } = this.props;
-    const bucketCount = this.getBucketCount();
+    const { buckets, selectedBucket, bucketSize } = this.props;
 
     if (!buckets) {
       return null;
     }
 
+    const xMax = getXMax(buckets);
     const yMax = getYMax(buckets);
     const yMaxRounded = getYMaxRounded(yMax);
     const yTickValues = [yMaxRounded, yMaxRounded / 2];
-    const XYPlotWidth = 900;
+
+    const x = scaleLinear()
+      .domain([0, xMax])
+      .range([XY_MARGIN_LEFT, XY_WIDTH - XY_MARGIN_RIGHT]);
+    const y = scaleLinear().domain([0, yMaxRounded]).range([XY_HEIGHT, 0]);
 
     return (
       <XYPlot
         onMouseLeave={this.onLeave}
-        margin={{ left: MARGIN_LEFT, top: MARGIN_TOP }}
-        width={XYPlotWidth}
-        height={PLOT_HEIGHT}
-        xDomain={[0, bucketCount * bucketSize]}
-        yDomain={[0, yMaxRounded]}
+        margin={{ left: XY_MARGIN_LEFT, top: XY_MARGIN_TOP }}
+        width={XY_WIDTH}
+        height={XY_HEIGHT}
+        xDomain={x.domain()}
+        yDomain={y.domain()}
       >
         <HorizontalGridLines tickValues={yTickValues} />
         <XAxis
@@ -89,27 +88,22 @@ class Histogram extends PureComponent {
           tickSizeOuter={10}
           tickSizeInner={0}
           tickTotal={NUM_OF_X_TICK}
-          tickFormat={x => {
-            return `${x / 1000000} s`;
-          }}
         />
         <YAxis
           tickSize={0}
           hideLine
-          marginTop={MARGIN_TOP}
+          marginTop={XY_MARGIN_TOP}
           tickValues={yTickValues}
           tickFormat={y => {
             return `${y} reqs.`;
           }}
         />
 
-        {Number.isInteger(this.state.hoveredBucket)
+        {this.state.hoveredBucket
           ? <SingleRect
-              onClick={this.props.onClick}
-              numberOfBuckets={bucketCount}
-              x={this.state.hoveredBucket}
-              marginLeft={MARGIN_LEFT}
-              marginTop={MARGIN_TOP}
+              x={x(this.state.hoveredBucket.x0)}
+              width={x(bucketSize) - x(0)}
+              marginTop={XY_MARGIN_TOP}
               style={{
                 fill: '#dddddd'
               }}
@@ -118,10 +112,9 @@ class Histogram extends PureComponent {
 
         {Number.isInteger(selectedBucket)
           ? <SingleRect
-              numberOfBuckets={bucketCount}
-              x={selectedBucket}
-              marginLeft={MARGIN_LEFT}
-              marginTop={MARGIN_TOP}
+              x={x(selectedBucket * bucketSize)}
+              width={x(bucketSize) - x(0)}
+              marginTop={XY_MARGIN_TOP}
               style={{
                 fill: 'transparent',
                 stroke: 'rgb(172, 189, 220)'
@@ -132,13 +125,25 @@ class Histogram extends PureComponent {
         <VerticalRectSeries
           colorType="literal"
           color="rgb(172, 189, 216)"
-          onValueClick={this.onValueClick}
           data={this.getWithHighlightedBucket(buckets, selectedBucket)}
           style={{
             rx: '2px',
             ry: '2px'
           }}
-          onNearestX={this.onHover}
+        />
+
+        <Voronoi
+          extent={[[XY_MARGIN_LEFT, XY_MARGIN_TOP], [XY_WIDTH, XY_HEIGHT]]}
+          nodes={this.props.buckets.map(item => ({
+            ...item,
+            x: (item.x0 + item.x) / 2,
+            y: 1
+          }))}
+          onClick={this.onClick}
+          onHover={this.onHover}
+          onBlur={this.onBlur}
+          x={d => x(d.x)}
+          y={d => y(d.y)}
         />
       </XYPlot>
     );
