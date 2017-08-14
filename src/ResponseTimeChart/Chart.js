@@ -10,7 +10,8 @@ import {
   LineSeries,
   AreaSeries,
   Voronoi,
-  MarkSeries
+  MarkSeries,
+  VerticalGridLines
 } from 'react-vis';
 import { getYMax, getYMaxRounded, getXMax, getXMin } from '../chart_utils';
 
@@ -24,13 +25,11 @@ const XY_MARGIN = {
 
 export default class Chart extends React.Component {
   state = {
-    hoveredNode: null
+    hoveredX: null
   };
 
-  getHoveredNodes() {
-    const index = this.props.avg.findIndex(
-      item => item.x === this.state.hoveredNode.x
-    );
+  getHoveredPoints(hoveredX) {
+    const index = this.props.avg.findIndex(item => item.x === hoveredX);
 
     return [
       this.props.avg[index],
@@ -38,6 +37,14 @@ export default class Chart extends React.Component {
       this.props.p99[index]
     ];
   }
+
+  onHover = node => {
+    this.setState({ hoveredX: node.x });
+  };
+
+  onBlur = node => {
+    this.setState({ hoveredX: null });
+  };
 
   render() {
     const xMin = getXMin(this.props.p99);
@@ -88,19 +95,23 @@ export default class Chart extends React.Component {
           data={this.props.avg}
         />
 
-        {this.state.hoveredNode !== null
+        {this.state.hoveredX !== null
           ? <MarkSeries
-              data={this.getHoveredNodes()}
+              data={this.getHoveredPoints(this.state.hoveredX)}
               xDomain={x.domain()}
               yDomain={y.domain()}
             />
           : null}
 
+        {this.state.hoveredX
+          ? <VerticalGridLines tickValues={[this.state.hoveredX]} />
+          : null}
+
         <Voronoi
           extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
           nodes={this.props.avg.map(item => ({ ...item, y: 0 }))}
-          onHover={node => this.setState({ hoveredNode: node })}
-          onBlur={node => this.setState({ hoveredNode: null })}
+          onHover={this.onHover}
+          onBlur={this.onBlur}
           x={d => x(d.x)}
           y={d => y(d.y)}
         />
