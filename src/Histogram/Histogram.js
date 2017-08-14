@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { scaleLinear } from 'd3-scale';
 import SingleRect from './SingleRect';
@@ -13,11 +12,14 @@ import {
 } from 'react-vis';
 import { getYMax, getXMax, getYMaxRounded } from '../chart_utils';
 
-const XY_MARGIN_LEFT = 50;
-const XY_MARGIN_RIGHT = 10;
-const XY_MARGIN_TOP = 20;
 const XY_HEIGHT = 120;
 const XY_WIDTH = 900;
+const XY_MARGIN = {
+  top: 20,
+  left: 50,
+  right: 10
+};
+
 const NUM_OF_X_TICK = 10;
 
 class Histogram extends PureComponent {
@@ -62,22 +64,23 @@ class Histogram extends PureComponent {
       return null;
     }
 
+    const xMin = 0;
     const xMax = getXMax(buckets);
+    const yMin = 0;
     const yMax = getYMax(buckets);
     const yMaxRounded = getYMaxRounded(yMax);
     const yTickValues = [yMaxRounded, yMaxRounded / 2];
 
     const x = scaleLinear()
-      .domain([0, xMax])
-      .range([XY_MARGIN_LEFT, XY_WIDTH - XY_MARGIN_RIGHT]);
-    const y = scaleLinear().domain([0, yMaxRounded]).range([XY_HEIGHT, 0]);
+      .domain([xMin, xMax])
+      .range([XY_MARGIN.left, XY_WIDTH - XY_MARGIN.right]);
+    const y = scaleLinear().domain([yMin, yMaxRounded]).range([XY_HEIGHT, 0]);
 
     return (
       <XYPlot
-        onMouseLeave={this.onLeave}
-        margin={{ left: XY_MARGIN_LEFT, top: XY_MARGIN_TOP }}
         width={XY_WIDTH}
         height={XY_HEIGHT}
+        margin={XY_MARGIN}
         xDomain={x.domain()}
         yDomain={y.domain()}
       >
@@ -92,7 +95,7 @@ class Histogram extends PureComponent {
         <YAxis
           tickSize={0}
           hideLine
-          marginTop={XY_MARGIN_TOP}
+          marginTop={XY_MARGIN.top}
           tickValues={yTickValues}
           tickFormat={y => {
             return `${y} reqs.`;
@@ -103,7 +106,7 @@ class Histogram extends PureComponent {
           ? <SingleRect
               x={x(this.state.hoveredBucket.x0)}
               width={x(bucketSize) - x(0)}
-              marginTop={XY_MARGIN_TOP}
+              marginTop={XY_MARGIN.top}
               style={{
                 fill: '#dddddd'
               }}
@@ -114,7 +117,7 @@ class Histogram extends PureComponent {
           ? <SingleRect
               x={x(selectedBucket * bucketSize)}
               width={x(bucketSize) - x(0)}
-              marginTop={XY_MARGIN_TOP}
+              marginTop={XY_MARGIN.top}
               style={{
                 fill: 'transparent',
                 stroke: 'rgb(172, 189, 220)'
@@ -133,7 +136,7 @@ class Histogram extends PureComponent {
         />
 
         <Voronoi
-          extent={[[XY_MARGIN_LEFT, XY_MARGIN_TOP], [XY_WIDTH, XY_HEIGHT]]}
+          extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
           nodes={this.props.buckets.map(item => ({
             ...item,
             x: (item.x0 + item.x) / 2,
