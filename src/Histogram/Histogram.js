@@ -20,7 +20,7 @@ const XY_MARGIN = {
   right: 10
 };
 
-const NUM_OF_X_TICK = 10;
+const X_TICK_TOTAL = 10;
 
 class Histogram extends PureComponent {
   constructor(props) {
@@ -31,17 +31,22 @@ class Histogram extends PureComponent {
   }
 
   onClick = bucket => {
-    return this.props.buckets[bucket.i].y > 0 && this.props.onClick(bucket.i);
+    if (!this.isEmpty(bucket)) {
+      this.props.onClick(bucket.i);
+    }
   };
 
   onHover = bucket => {
-    this.props.buckets[bucket.i].y > 0 &&
+    if (!this.isEmpty(bucket)) {
       this.setState({ hoveredBucket: bucket });
+    }
   };
 
   onBlur = () => {
     this.setState({ hoveredBucket: null });
   };
+
+  isEmpty = bucket => this.props.buckets[bucket.i].y === 0;
 
   getWithHighlightedBucket(items, selected) {
     return items
@@ -90,16 +95,13 @@ class Histogram extends PureComponent {
           marginRight={10}
           tickSizeOuter={10}
           tickSizeInner={0}
-          tickTotal={NUM_OF_X_TICK}
+          tickTotal={X_TICK_TOTAL}
         />
         <YAxis
           tickSize={0}
           hideLine
-          marginTop={XY_MARGIN.top}
           tickValues={yTickValues}
-          tickFormat={y => {
-            return `${y} reqs.`;
-          }}
+          tickFormat={y => `${y} reqs.`}
         />
 
         {this.state.hoveredBucket

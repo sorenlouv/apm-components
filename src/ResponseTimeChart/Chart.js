@@ -1,5 +1,6 @@
 import React from 'react';
 import 'react-vis/dist/style.css';
+import PropTypes from 'prop-types';
 
 import { scaleLinear } from 'd3-scale';
 import {
@@ -11,19 +12,20 @@ import {
   AreaSeries,
   Voronoi,
   MarkSeries,
-  VerticalGridLines
+  VerticalGridLines,
+  makeWidthFlexible
 } from 'react-vis';
 import { getYMax, getYMaxRounded, getXMax, getXMin } from '../chart_utils';
 
-const XY_WIDTH = 800;
 const XY_HEIGHT = 300;
 const XY_MARGIN = {
   top: 50,
   left: 50,
   right: 10
 };
+const X_TICK_TOTAL = 7;
 
-export default class Chart extends React.Component {
+class Chart extends React.Component {
   state = {
     hoveredX: null
   };
@@ -53,6 +55,7 @@ export default class Chart extends React.Component {
     const yMax = getYMax(this.props.p99);
     const yMaxRounded = getYMaxRounded(yMax);
     const yTickValues = [yMaxRounded, yMaxRounded / 2];
+    const XY_WIDTH = this.props.width; // from makeWidthFlexible HOC
 
     const x = scaleLinear()
       .domain([xMin, xMax])
@@ -60,62 +63,77 @@ export default class Chart extends React.Component {
     const y = scaleLinear().domain([yMin, yMaxRounded]).range([XY_HEIGHT, 0]);
 
     return (
-      <XYPlot
-        width={XY_WIDTH}
-        height={XY_HEIGHT}
-        margin={XY_MARGIN}
-        xType="time"
-        xDomain={x.domain()}
-        yDomain={y.domain()}
-      >
-        <HorizontalGridLines tickValues={yTickValues} />
-        <XAxis tickTotal={7} />
-        <YAxis
-          marginLeft={XY_MARGIN.left + 50}
-          marginTop={XY_MARGIN.top + 10}
-          tickSize={0}
-          hideLine
-          tickValues={yTickValues}
-          tickFormat={t => `${t} ms`}
-        />
-        <AreaSeries
-          curve={'curveMonotoneX'}
-          data={this.props.p95}
-          color="rgba(26, 49, 119, 0.6)"
-        />
-        <AreaSeries
+      <div>
+        <XYPlot
+          width={XY_WIDTH}
+          height={XY_HEIGHT}
+          margin={XY_MARGIN}
           xType="time"
-          curve={'curveMonotoneX'}
-          data={this.props.p99}
-          color="rgba(121, 199, 227, 0.5)"
-        />
-        <LineSeries
-          xType="time"
-          curve={'curveMonotoneX'}
-          data={this.props.avg}
-        />
+          xDomain={x.domain()}
+          yDomain={y.domain()}
+        >
+          <HorizontalGridLines tickValues={yTickValues} />
+          <XAxis tickTotal={X_TICK_TOTAL} />
+          <YAxis
+            marginLeft={XY_MARGIN.left + 50}
+            marginTop={XY_MARGIN.top + 10}
+            tickSize={0}
+            hideLine
+            tickValues={yTickValues}
+            tickFormat={t => `${t} ms`}
+          />
 
-        {this.state.hoveredX !== null
-          ? <MarkSeries
+          <AreaSeries
+            curve={'curveMonotoneX'}
+            data={this.props.p95}
+            color="rgba(26, 49, 119, 0.6)"
+          />
+
+          <AreaSeries
+            xType="time"
+            curve={'curveMonotoneX'}
+            data={this.props.p99}
+            color="rgba(121, 199, 227, 0.5)"
+          />
+
+          <LineSeries
+            xType="time"
+            curve={'curveMonotoneX'}
+            data={this.props.avg}
+          />
+
+          {this.state.hoveredX !== null &&
+            <MarkSeries
               data={this.getHoveredPoints(this.state.hoveredX)}
               xDomain={x.domain()}
               yDomain={y.domain()}
-            />
-          : null}
+            />}
 
-        {this.state.hoveredX
-          ? <VerticalGridLines tickValues={[this.state.hoveredX]} />
-          : null}
+          <MarkSeries
+            fill="transparent"
+            stroke="transparent"
+            data={this.props.avg.map(point => ({ ...point, y: 0 }))}
+          />
 
-        <Voronoi
-          extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
-          nodes={this.props.avg.map(item => ({ ...item, y: 0 }))}
-          onHover={this.onHover}
-          onBlur={this.onBlur}
-          x={d => x(d.x)}
-          y={d => y(d.y)}
-        />
-      </XYPlot>
+          {this.state.hoveredX &&
+            <VerticalGridLines tickValues={[this.state.hoveredX]} />}
+
+          <Voronoi
+            extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
+            nodes={this.props.avg.map(item => ({ ...item, y: 0 }))}
+            onHover={this.onHover}
+            onBlur={this.onBlur}
+            x={d => x(d.x)}
+            y={d => y(d.y)}
+          />
+        </XYPlot>
+      </div>
     );
   }
 }
+
+Chart.propTypes = {
+  width: PropTypes.number
+};
+
+export default makeWidthFlexible(Chart);
