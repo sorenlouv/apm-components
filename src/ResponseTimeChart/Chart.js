@@ -1,6 +1,8 @@
 import React from 'react';
 import 'react-vis/dist/style.css';
 import PropTypes from 'prop-types';
+import Voronoi from './Voronoi';
+import DragMarker from './DragMarker';
 
 import { scaleLinear } from 'd3-scale';
 import {
@@ -10,7 +12,6 @@ import {
   HorizontalGridLines,
   LineSeries,
   AreaSeries,
-  Voronoi,
   MarkSeries,
   VerticalGridLines,
   makeWidthFlexible
@@ -25,12 +26,29 @@ const XY_MARGIN = {
 };
 const X_TICK_TOTAL = 7;
 
-class Chart extends React.Component {
+class ResponseTime extends React.Component {
   state = {
-    hoveredX: null
+    isDrawing: false,
+    x: null,
+    x2: null
   };
 
-  getHoveredPoints(hoveredX) {
+  onMouseLeave = (...args) => {
+    if (this.state.isDrawing) {
+      this.setState({ isDrawing: false });
+    }
+    this.props.onMouseLeave(...args);
+  };
+  onMouseDown = node => this.setState({ isDrawing: true, x: node.x, x2: null });
+  onMouseUp = node => this.setState({ isDrawing: false });
+  onHover = node => {
+    if (this.state.isDrawing) {
+      this.setState({ x2: node.x });
+    }
+    this.props.onHover(node);
+  };
+
+  getHoveredPoints = hoveredX => {
     const index = this.props.avg.findIndex(item => item.x === hoveredX);
 
     return [
@@ -38,24 +56,18 @@ class Chart extends React.Component {
       this.props.p95[index],
       this.props.p99[index]
     ];
-  }
-
-  onHover = node => {
-    this.setState({ hoveredX: node.x });
-  };
-
-  onBlur = node => {
-    this.setState({ hoveredX: null });
   };
 
   render() {
-    const xMin = getXMin(this.props.p99);
-    const xMax = getXMax(this.props.p99);
+    const { hoveredX, avg, p95, p99, width } = this.props;
+
+    const xMin = getXMin(p99);
+    const xMax = getXMax(p99);
     const yMin = 0;
-    const yMax = getYMax(this.props.p99);
+    const yMax = getYMax(p99);
     const yMaxRounded = getYMaxRounded(yMax);
     const yTickValues = [yMaxRounded, yMaxRounded / 2];
-    const XY_WIDTH = this.props.width; // from makeWidthFlexible HOC
+    const XY_WIDTH = width; // from makeWidthFlexible HOC
 
     const x = scaleLinear()
       .domain([xMin, xMax])
@@ -65,6 +77,7 @@ class Chart extends React.Component {
     return (
       <div>
         <XYPlot
+          onMouseLeave={this.onMouseLeave}
           width={XY_WIDTH}
           height={XY_HEIGHT}
           margin={XY_MARGIN}
@@ -85,55 +98,55 @@ class Chart extends React.Component {
 
           <AreaSeries
             curve={'curveMonotoneX'}
-            data={this.props.p95}
+            data={p95}
             color="rgba(26, 49, 119, 0.6)"
           />
 
           <AreaSeries
             xType="time"
             curve={'curveMonotoneX'}
-            data={this.props.p99}
+            data={p99}
             color="rgba(121, 199, 227, 0.5)"
           />
 
-          <LineSeries
-            xType="time"
-            curve={'curveMonotoneX'}
-            data={this.props.avg}
-          />
+          <LineSeries xType="time" curve={'curveMonotoneX'} data={avg} />
 
-          {this.state.hoveredX !== null &&
-            <MarkSeries
-              data={this.getHoveredPoints(this.state.hoveredX)}
-              xDomain={x.domain()}
-              yDomain={y.domain()}
-            />}
+          {hoveredX !== null &&
+            !this.state.isDrawing &&
+            <MarkSeries data={this.getHoveredPoints(hoveredX)} />}
 
           <MarkSeries
             fill="transparent"
             stroke="transparent"
-            data={this.props.avg.map(point => ({ ...point, y: 0 }))}
+            data={avg.map(point => ({ ...point, y: 0 }))}
           />
 
-          {this.state.hoveredX &&
-            <VerticalGridLines tickValues={[this.state.hoveredX]} />}
+          {hoveredX !== null && <VerticalGridLines tickValues={[hoveredX]} />}
 
           <Voronoi
             extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
-            nodes={this.props.avg.map(item => ({ ...item, y: 0 }))}
+            nodes={avg}
             onHover={this.onHover}
-            onBlur={this.onBlur}
+            onMouseDown={this.onMouseDown}
+            onMouseUp={this.onMouseUp}
             x={d => x(d.x)}
-            y={d => y(d.y)}
+            y={d => 0}
           />
+
+          {this.state.isDrawing &&
+            this.state.x2 !== null &&
+            <DragMarker x={x(this.state.x)} x2={x(this.state.x2)} />}
         </XYPlot>
       </div>
     );
   }
 }
 
-Chart.propTypes = {
-  width: PropTypes.number
+ResponseTime.displayName = 'ResponseTime';
+ResponseTime.propTypes = {
+  width: PropTypes.number,
+  onHover: PropTypes.func,
+  onBlur: PropTypes.func
 };
 
-export default makeWidthFlexible(Chart);
+export default makeWidthFlexible(ResponseTime);

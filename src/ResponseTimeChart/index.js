@@ -12,8 +12,18 @@ function getCoordinates(xValues, yValues) {
 export default class extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      hoveredX: null
+    };
   }
+
+  onHover = node => {
+    this.setState({ hoveredX: node.x });
+  };
+
+  onMouseLeave = node => {
+    this.setState({ hoveredX: null });
+  };
 
   render() {
     const avg = getCoordinates(
@@ -30,6 +40,15 @@ export default class extends React.Component {
       response.response_times.dates,
       response.response_times.p99
     );
-    return <Chart avg={avg} p95={p95} p99={p99} />;
+    return (
+      <Chart
+        avg={avg}
+        p95={p95}
+        p99={p99}
+        onHover={this.onHover}
+        onMouseLeave={this.onMouseLeave}
+        hoveredX={this.state.hoveredX}
+      />
+    );
   }
 }
