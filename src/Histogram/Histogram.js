@@ -108,7 +108,6 @@ class Histogram extends PureComponent {
           ? <SingleRect
               x={x(this.state.hoveredBucket.x0)}
               width={x(bucketSize) - x(0)}
-              marginTop={XY_MARGIN.top}
               style={{
                 fill: '#dddddd'
               }}
@@ -119,7 +118,6 @@ class Histogram extends PureComponent {
           ? <SingleRect
               x={x(selectedBucket * bucketSize)}
               width={x(bucketSize) - x(0)}
-              marginTop={XY_MARGIN.top}
               style={{
                 fill: 'transparent',
                 stroke: 'rgb(172, 189, 220)'
