@@ -6,13 +6,13 @@ Perf.start();
 
 export default class extends React.Component {
   state = {
-    randomNumber: null
+    markIndex: null
   };
 
   componentDidMount() {
     const interval = setInterval(() => {
       this.setState({
-        randomNumber: Math.random()
+        markIndex: Math.floor(Math.random() * 20) + 1
       });
     }, 100);
 
@@ -20,11 +20,16 @@ export default class extends React.Component {
       Perf.stop();
       Perf.printInclusive();
       Perf.printWasted();
+      console.log(
+        'XAxis > Axis',
+        Perf.getInclusive().find(item => item.key === 'XAxis > Axis')
+          .renderCount
+      );
       clearInterval(interval);
     }, 2000);
   }
 
   render() {
-    return <PerfPlot randomNumber={this.state.randomNumber} />;
+    return <PerfPlot markIndex={this.state.markIndex} />;
   }
 }
