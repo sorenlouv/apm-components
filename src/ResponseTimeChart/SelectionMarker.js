@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function DragMarker({ innerHeight, marginTop, x, x2 }) {
-  const width = Math.abs(x2 - x);
-  const start = x2 > x ? x : x2;
+function DragMarker({ innerHeight, marginTop, start, end }) {
+  const width = Math.abs(end - start);
+  const x = end > start ? start : end;
   return (
     <rect
       pointerEvents="none"
       fill="black"
       opacity="0.2"
-      x={start}
+      x={x}
       y={marginTop}
       width={width}
       height={innerHeight}
@@ -19,8 +19,8 @@ function DragMarker({ innerHeight, marginTop, x, x2 }) {
 
 DragMarker.requiresSVG = true;
 DragMarker.propTypes = {
-  x: PropTypes.number,
-  x2: PropTypes.number
+  start: PropTypes.number,
+  end: PropTypes.number
 };
 
 export default DragMarker;

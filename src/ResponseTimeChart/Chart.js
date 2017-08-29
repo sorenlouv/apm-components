@@ -2,7 +2,7 @@ import React from 'react';
 import 'react-vis/dist/style.css';
 import PropTypes from 'prop-types';
 import Voronoi from './Voronoi';
-import DragMarker from './DragMarker';
+import SelectionMarker from './SelectionMarker';
 
 import { scaleLinear } from 'd3-scale';
 import {
@@ -29,8 +29,8 @@ const X_TICK_TOTAL = 7;
 class ResponseTime extends React.Component {
   state = {
     isDrawing: false,
-    x: null,
-    x2: null
+    selectionStart: null,
+    selectionEnd: null
   };
 
   onMouseLeave = (...args) => {
@@ -39,11 +39,16 @@ class ResponseTime extends React.Component {
     }
     this.props.onMouseLeave(...args);
   };
-  onMouseDown = node => this.setState({ isDrawing: true, x: node.x, x2: null });
+  onMouseDown = node =>
+    this.setState({
+      isDrawing: true,
+      selectionStart: node.x,
+      selectionEnd: null
+    });
   onMouseUp = node => this.setState({ isDrawing: false });
   onHover = node => {
     if (this.state.isDrawing) {
-      this.setState({ x2: node.x });
+      this.setState({ selectionEnd: node.x });
     }
     this.props.onHover(node);
   };
@@ -134,8 +139,11 @@ class ResponseTime extends React.Component {
           />
 
           {this.state.isDrawing &&
-            this.state.x2 !== null &&
-            <DragMarker x={x(this.state.x)} x2={x(this.state.x2)} />}
+            this.state.selectionEnd !== null &&
+            <SelectionMarker
+              start={x(this.state.selectionStart)}
+              end={x(this.state.selectionEnd)}
+            />}
         </XYPlot>
       </div>
     );
