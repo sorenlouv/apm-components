@@ -8,7 +8,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.10",
-    "react-vis": "^1.7.3"
+    "react-vis": "1.7.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -22,6 +22,7 @@
     "eslint-config-prettier": "^2.3.0",
     "eslint-plugin-prettier": "^2.2.0",
     "eslint-plugin-react": "^7.3.0",
-    "prettier": "^1.6.0"
+    "prettier": "^1.6.0",
+    "react-addons-perf": "^15.4.2"
   }
 }
