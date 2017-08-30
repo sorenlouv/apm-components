@@ -46,20 +46,19 @@ class CustomPlot extends PureComponent {
       selectionEnd: null
     });
   onMouseUp = () => {
-    this.setState({ isDrawing: false });
-
     if (this.state.selectionEnd !== null) {
       this.props.onSelection({
         start: this.state.selectionStart,
         end: this.state.selectionEnd
       });
     }
+    this.setState({ isDrawing: false });
   };
   onHover = node => {
+    this.props.onHover(node);
     if (this.state.isDrawing) {
       this.setState({ selectionEnd: node.x });
     }
-    this.props.onHover(node);
   };
 
   getHoveredPoints = hoveredX => {
@@ -91,7 +90,9 @@ class CustomPlot extends PureComponent {
     const x = scaleLinear()
       .domain([xMin, xMax])
       .range([XY_MARGIN.left, XY_WIDTH - XY_MARGIN.right]);
-    const y = scaleLinear().domain([yMin, yMaxRounded]).range([XY_HEIGHT, 0]);
+    const y = scaleLinear()
+      .domain([yMin, yMaxRounded])
+      .range([XY_HEIGHT, 0]);
 
     return (
       <XYPlot
@@ -142,8 +143,9 @@ class CustomPlot extends PureComponent {
         })}
 
         {hoveredX !== null &&
-          !this.state.isDrawing &&
-          <MarkSeries data={this.getHoveredPoints(hoveredX)} />}
+        !this.state.isDrawing && (
+          <MarkSeries data={this.getHoveredPoints(hoveredX)} />
+        )}
 
         <MarkSeries
           fill="transparent"
@@ -164,11 +166,12 @@ class CustomPlot extends PureComponent {
         />
 
         {this.state.isDrawing &&
-          this.state.selectionEnd !== null &&
+        this.state.selectionEnd !== null && (
           <SelectionMarker
             start={x(this.state.selectionStart)}
             end={x(this.state.selectionEnd)}
-          />}
+          />
+        )}
       </XYPlot>
     );
   }
