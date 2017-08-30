@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Histogram from './Histogram';
 import PerfTest from './PerfTest';
-import ResponseTimeChart from './ResponseTimeChart';
+import CustomPlot from './CustomPlot';
 import './index.css';
 
-ReactDOM.render(<ResponseTimeChart />, document.getElementById('root'));
+ReactDOM.render(<CustomPlot />, document.getElementById('root'));
