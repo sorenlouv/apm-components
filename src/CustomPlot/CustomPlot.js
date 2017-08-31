@@ -16,6 +16,8 @@ import {
   VerticalGridLines,
   makeWidthFlexible
 } from 'react-vis';
+import { CustomHint } from './CustomHint';
+import { Legend } from './Legend';
 import { getYMax, getYMaxRounded, getXMax, getXMin } from '../chart_utils';
 
 const XY_HEIGHT = 300;
@@ -30,8 +32,17 @@ class CustomPlot extends PureComponent {
   state = {
     isDrawing: false,
     selectionStart: null,
-    selectionEnd: null
+    selectionEnd: null,
+    disabledSeries: []
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (_.isEmpty(this.state.disabledSeries) && !_.isEmpty(nextProps.series)) {
+      this.setState(() => ({
+        disabledSeries: nextProps.series.map(() => false)
+      }));
+    }
+  }
 
   onMouseLeave = (...args) => {
     if (this.state.isDrawing) {
@@ -39,12 +50,14 @@ class CustomPlot extends PureComponent {
     }
     this.props.onMouseLeave(...args);
   };
+
   onMouseDown = node =>
     this.setState({
       isDrawing: true,
       selectionStart: node.x,
       selectionEnd: null
     });
+
   onMouseUp = () => {
     if (this.state.selectionEnd !== null) {
       this.props.onSelection({
@@ -54,30 +67,82 @@ class CustomPlot extends PureComponent {
     }
     this.setState({ isDrawing: false });
   };
-  onHover = node => {
-    this.props.onHover(node);
+
+  onHover = (node, a, b) => {
+    const index = this.props.series[0].data.findIndex(
+      item => item.x === node.x
+    );
+    this.props.onHover(index);
+
     if (this.state.isDrawing) {
       this.setState({ selectionEnd: node.x });
     }
   };
 
-  getHoveredPoints = hoveredX => {
-    const index = this.props.series[0].data.findIndex(
-      item => item.x === hoveredX
-    );
-
-    return this.props.series.map(serie => serie.data[index]);
+  clickLegend = i => {
+    this.setState(({ disabledSeries }) => {
+      const value = disabledSeries[i];
+      return {
+        disabledSeries: [
+          ...disabledSeries.slice(0, i),
+          !value,
+          ...disabledSeries.slice(i + 1)
+        ]
+      };
+    });
   };
 
+  getHoveredPoints = hoverIndex => {
+    if (hoverIndex === null) {
+      return [];
+    }
+
+    return this.getEnabledSeries(this.props.series).map(
+      serie => serie.data[hoverIndex]
+    );
+  };
+
+  getEnabledSeries(series) {
+    return series.filter((serie, i) => !this.state.disabledSeries[i]);
+  }
+
+  getSerie(serie, i) {
+    switch (serie.type) {
+      case 'line':
+        return (
+          <LineSeries
+            key={serie.title}
+            xType="time"
+            curve={'curveMonotoneX'}
+            data={serie.data}
+            color={serie.color}
+          />
+        );
+      case 'area':
+        return (
+          <AreaSeries
+            key={serie.title}
+            xType="time"
+            curve={'curveMonotoneX'}
+            data={serie.data}
+            color={serie.color}
+          />
+        );
+      default:
+        throw new Error(`Unknown type ${serie.type}`);
+    }
+  }
+
   render() {
-    const { hoveredX, series, width, tickFormatY } = this.props;
+    const { hoverIndex, series, width, tickFormatY } = this.props;
+    const { isDrawing, selectionStart, selectionEnd } = this.state;
 
     if (_.isEmpty(series)) {
       return null;
     }
 
     const defaultSerie = series[0].data;
-    const allCoordinates = [].concat(...series.map(serie => serie.data));
+    const allCoordinates = _.flatten(series.map(serie => serie.data));
 
     const xMin = getXMin(allCoordinates);
     const xMax = getXMax(allCoordinates);
@@ -87,6 +152,8 @@ class CustomPlot extends PureComponent {
     const yTickValues = [yMaxRounded, yMaxRounded / 2];
     const XY_WIDTH = width; // from makeWidthFlexible HOC
 
+    const hoveredPoints = this.getHoveredPoints(hoverIndex);
+
     const x = scaleLinear()
       .domain([xMin, xMax])
       .range([XY_MARGIN.left, XY_WIDTH - XY_MARGIN.right]);
@@ -95,89 +162,78 @@ class CustomPlot extends PureComponent {
       .range([XY_HEIGHT, 0]);
 
     return (
-      <XYPlot
-        onMouseLeave={this.onMouseLeave}
-        width={XY_WIDTH}
-        height={XY_HEIGHT}
-        margin={XY_MARGIN}
-        xType="time"
-        xDomain={x.domain()}
-        yDomain={y.domain()}
-      >
-        <HorizontalGridLines tickValues={yTickValues} />
-        <XAxis tickTotal={X_TICK_TOTAL} />
-        <YAxis
-          marginLeft={XY_MARGIN.left + 50}
-          marginTop={XY_MARGIN.top + 10}
-          tickSize={0}
-          hideLine
-          tickValues={yTickValues}
-          tickFormat={tickFormatY}
-        />
-
-        {series.map((serie, i) => {
-          switch (serie.type) {
-            case 'line':
-              return (
-                <LineSeries
-                  key={i}
-                  xType="time"
-                  curve={'curveMonotoneX'}
-                  data={serie.data}
-                  color={serie.color}
-                />
-              );
-            case 'area':
-              return (
-                <AreaSeries
-                  key={i}
-                  xType="time"
-                  curve={'curveMonotoneX'}
-                  data={serie.data}
-                  color={serie.color}
-                />
-              );
-            default:
-              throw new Error(`Unknown type ${serie.type}`);
-          }
-        })}
-
-        {hoveredX !== null &&
-        !this.state.isDrawing && (
-          <MarkSeries data={this.getHoveredPoints(hoveredX)} />
-        )}
-
-        <MarkSeries
-          fill="transparent"
-          stroke="transparent"
-          data={defaultSerie.map(point => ({ ...point, y: 0 }))}
-        />
-
-        {hoveredX !== null && <VerticalGridLines tickValues={[hoveredX]} />}
-
-        <Voronoi
-          extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
-          nodes={defaultSerie}
-          onHover={this.onHover}
-          onMouseDown={this.onMouseDown}
-          onMouseUp={this.onMouseUp}
-          x={d => x(d.x)}
-          y={d => 0}
-        />
-
-        {this.state.isDrawing &&
-        this.state.selectionEnd !== null && (
-          <SelectionMarker
-            start={x(this.state.selectionStart)}
-            end={x(this.state.selectionEnd)}
+      <div>
+        {series.map((serie, i) => (
+          <Legend
+            key={i}
+            i={i}
+            serie={serie}
+            onClick={this.clickLegend}
+            isDisabled={this.state.disabledSeries[i]}
           />
-        )}
-      </XYPlot>
+        ))}
+
+        <XYPlot
+          onMouseLeave={this.onMouseLeave}
+          width={XY_WIDTH}
+          height={XY_HEIGHT}
+          margin={XY_MARGIN}
+          xType="time"
+          xDomain={x.domain()}
+          yDomain={y.domain()}
+        >
+          <HorizontalGridLines tickValues={yTickValues} />
+          <XAxis tickSize={0} tickTotal={X_TICK_TOTAL} />
+          <YAxis
+            tickSize={0}
+            tickValues={yTickValues}
+            tickFormat={tickFormatY}
+          />
+
+          {hoverIndex !== null &&
+          !isDrawing && (
+            <CustomHint
+              hoveredPoints={hoveredPoints}
+              series={series}
+              y={yTickValues[1]}
+            />
+          )}
+
+          {this.getEnabledSeries(series).map(this.getSerie)}
+
+          {hoverIndex !== null &&
+          !isDrawing && <MarkSeries data={hoveredPoints} />}
+
+          <MarkSeries
+            fill="transparent"
+            stroke="transparent"
+            data={defaultSerie.map(point => ({ ...point, y: 0 }))}
+          />
+
+          {hoverIndex !== null && (
+            <VerticalGridLines tickValues={[defaultSerie[hoverIndex].x]} />
+          )}
+
+          <Voronoi
+            extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
+            nodes={defaultSerie}
+            onHover={this.onHover}
+            onMouseDown={this.onMouseDown}
+            onMouseUp={this.onMouseUp}
+            x={d => x(d.x)}
+            y={() => 0}
+          />
+
+          {isDrawing &&
+          selectionEnd !== null && (
+            <SelectionMarker start={x(selectionStart)} end={x(selectionEnd)} />
+          )}
+        </XYPlot>
+      </div>
     );
   }
 }
 
-CustomPlot.displayName = 'CustomPlot';
 CustomPlot.propTypes = {
   width: PropTypes.number,
   onHover: PropTypes.func,

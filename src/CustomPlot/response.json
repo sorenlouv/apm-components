@@ -1,5 +1,5 @@
 {
-  "response_times": {
+  "responseTimes": {
     "avg": [
       0,
       480074.48979591834,
@@ -133,7 +133,7 @@
       "2017-08-09T13:17:00.000Z"
     ]
   },
-  "rpm_per_status_class": {
+  "rpmPerStatusClass": {
     "dates": [
       "2017-08-09T12:47:00.000Z",
       "2017-08-09T12:48:00.000Z",
@@ -300,11 +300,11 @@
       0
     ]
   },
-  "rpm_per_status_class_average": {
+  "rpmPerStatusClassAverage": {
     "2xx": 41.61538461538461,
     "3xx": 0,
     "4xx": 1.4615384615384615,
     "5xx": 5.6923076923076925
   },
-  "weighted_average": 467582.45401459857
+  "weightedAverage": 467582.45401459857
 }
