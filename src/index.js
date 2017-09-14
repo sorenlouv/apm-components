@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Histogram from './Histogram';
 import PerfTest from './PerfTest';
 import CustomPlot from './CustomPlot';
+import Legend from './Legend';
 import './index.css';
 
-ReactDOM.render(<CustomPlot />, document.getElementById('root'));
+ReactDOM.render(<Legend />, document.getElementById('root'));
