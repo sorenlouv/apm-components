@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { Sticky } from 'react-sticky';
-import { XYPlot, XAxis, MarkSeries, VerticalGridLines } from 'react-vis';
+import { XYPlot, XAxis, VerticalGridLines } from 'react-vis';
 
 function getTickValuesWithHoveredX(tickValues, hoveredX) {
   const tolerance = (tickValues[1] - tickValues[0]) / 5;
@@ -14,14 +14,7 @@ function getTickValuesWithHoveredX(tickValues, hoveredX) {
     .concat([hoveredX]);
 }
 
-function TimelineAxis({
-  x,
-  width,
-  margins,
-  tickValues,
-  placeholderData,
-  hoveredX
-}) {
+function TimelineAxis({ x, width, margins, tickValues, hoveredX }) {
   const tickValuesWithHoveredX = getTickValuesWithHoveredX(
     tickValues,
     hoveredX
@@ -40,6 +33,7 @@ function TimelineAxis({
             }}
           >
             <XYPlot
+              dontCheckIfEmpty
               width={width}
               height={margins.top}
               margin={margins}
@@ -54,12 +48,6 @@ function TimelineAxis({
               />
 
               <VerticalGridLines tickValues={[3000]} />
-
-              <MarkSeries
-                fill="transparent"
-                stroke="transparent"
-                data={placeholderData}
-              />
             </XYPlot>
           </div>
         );

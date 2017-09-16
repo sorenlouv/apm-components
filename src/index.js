@@ -6,6 +6,7 @@ import PerfTest from './PerfTest';
 import CustomPlot from './CustomPlot';
 import Timeline from './Timeline';
 import Legend from './Legend';
+import EmptyPlot from './EmptyPlot';
 import './index.css';
 import Perf from 'react-addons-perf';
 

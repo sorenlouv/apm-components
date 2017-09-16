@@ -9,10 +9,6 @@ import TimelineAxis from './TimelineAxis';
 import VerticalLines from './VerticalLines';
 import HoverArea from './HoverArea';
 
-const getPlaceholderData = _.memoize(xMax => {
-  return [0, xMax].map(x => ({ x, y: 0 }));
-});
-
 const getXScale = _.memoize(
   (xMin, xMax, margins, width) => {
     return scaleLinear()
@@ -34,12 +30,12 @@ class Timeline extends Component {
   onHover = hoveredX => this.setState({ hoveredX });
 
   componentDidMount() {
-    // const interval = setInterval(() => {
-    //   this.setState({
-    //     hoveredX: Math.floor(Math.random() * 50000) + 1
-    //   });
-    // }, 10);
-    // setTimeout(() => clearInterval(interval), 4000);
+    const interval = setInterval(() => {
+      this.setState({
+        hoveredX: Math.floor(Math.random() * 50000) + 1
+      });
+    }, 10);
+    setTimeout(() => clearInterval(interval), 4000);
   }
 
   render() {
@@ -52,7 +48,6 @@ class Timeline extends Component {
 
     const xMin = 0;
     const xMax = max;
-    const placeholderData = getPlaceholderData(xMax);
     const x = getXScale(xMin, xMax, margins, width);
     const tickValues = getTicks(x);
 
@@ -63,7 +58,6 @@ class Timeline extends Component {
           margins={margins}
           x={x}
           tickValues={tickValues}
-          placeholderData={placeholderData}
           hoveredX={hoveredX}
         />
 
@@ -73,7 +67,6 @@ class Timeline extends Component {
           margins={margins}
           x={x}
           tickValues={tickValues}
-          placeholderData={placeholderData}
         />
 
         <VerticalHoverLine
@@ -83,7 +76,6 @@ class Timeline extends Component {
           x={x}
           max={max}
           hoveredX={hoveredX}
-          placeholderData={placeholderData}
         />
 
         <HoverArea
@@ -92,7 +84,6 @@ class Timeline extends Component {
           margins={margins}
           x={x}
           max={max}
-          placeholderData={placeholderData}
           onHover={this.onHover}
         />
       </div>

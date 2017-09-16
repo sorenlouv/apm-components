@@ -1,16 +1,9 @@
 import React, { PureComponent } from 'react';
-import { XYPlot, MarkSeries, VerticalGridLines } from 'react-vis';
+import { XYPlot, VerticalGridLines } from 'react-vis';
 
 export default class VerticalLines extends PureComponent {
   render() {
-    const {
-      width,
-      height,
-      margins,
-      x,
-      tickValues,
-      placeholderData
-    } = this.props;
+    const { width, height, margins, x, tickValues } = this.props;
 
     return (
       <div
@@ -21,18 +14,13 @@ export default class VerticalLines extends PureComponent {
         }}
       >
         <XYPlot
+          dontCheckIfEmpty
           width={width}
           height={height + margins.top}
           margin={margins}
           xDomain={x.domain()}
         >
           <VerticalGridLines tickValues={tickValues} />
-
-          <MarkSeries
-            fill="transparent"
-            stroke="transparent"
-            data={placeholderData}
-          />
         </XYPlot>
       </div>
     );

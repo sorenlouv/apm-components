@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import _ from 'lodash';
-import { XYPlot, MarkSeries, Voronoi } from 'react-vis';
+import { XYPlot, Voronoi } from 'react-vis';
 
 const getVerticalHoverLines = _.memoize(max => {
   const STEPS = 100;
@@ -17,7 +17,7 @@ class HoverArea extends PureComponent {
     this.props.onHover(p.x);
   };
   render() {
-    const { width, height, margins, x, max, placeholderData } = this.props;
+    const { width, height, margins, x, max } = this.props;
     const verticalHoverLines = getVerticalHoverLines(max);
 
     return (
@@ -30,18 +30,13 @@ class HoverArea extends PureComponent {
         }}
       >
         <XYPlot
+          dontCheckIfEmpty
           onMouseLeave={this.onMouseLeave}
           width={width}
           height={height + margins.top}
           margin={margins}
           xDomain={x.domain()}
         >
-          <MarkSeries
-            fill="transparent"
-            stroke="transparent"
-            data={placeholderData}
-          />
-
           <Voronoi
             extent={[[margins.left, margins.top], [width, height]]}
             nodes={verticalHoverLines}

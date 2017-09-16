@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
-import { XYPlot, MarkSeries, VerticalGridLines } from 'react-vis';
+import { XYPlot, VerticalGridLines } from 'react-vis';
 
 class VerticalHoverLine extends PureComponent {
   render() {
-    const { width, height, margins, x, placeholderData, hoveredX } = this.props;
+    const { width, height, margins, x, hoveredX } = this.props;
     return (
       <div
         style={{
@@ -14,6 +14,7 @@ class VerticalHoverLine extends PureComponent {
         }}
       >
         <XYPlot
+          dontCheckIfEmpty
           onMouseLeave={this.onMouseLeave}
           width={width}
           height={height + margins.top}
@@ -26,12 +27,6 @@ class VerticalHoverLine extends PureComponent {
               style={{ stroke: '#666' }}
             />
           )}
-
-          <MarkSeries
-            fill="transparent"
-            stroke="transparent"
-            data={placeholderData}
-          />
         </XYPlot>
       </div>
     );
