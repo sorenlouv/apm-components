@@ -15,9 +15,8 @@ const getXScale = _.memoize(
       .domain([xMin, xMax])
       .range([margins.left, width - margins.right]);
   },
-  (xMin, xMax, margins, width) => {
-    [xMin, xMax, margins.left, margins.rigt, width].join('__');
-  }
+  (xMin, xMax, margins, width) =>
+    [xMin, xMax, margins.left, margins.right, width].join('__')
 );
 
 const getTicks = _.memoize(x => x.ticks(7));
