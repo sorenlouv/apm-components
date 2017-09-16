@@ -28,15 +28,6 @@ class Timeline extends Component {
 
   onHover = hoveredX => this.setState({ hoveredX });
 
-  componentDidMount() {
-    const interval = setInterval(() => {
-      this.setState({
-        hoveredX: Math.floor(Math.random() * 50000) + 1
-      });
-    }, 10);
-    setTimeout(() => clearInterval(interval), 4000);
-  }
-
   render() {
     const { width, height, margins, max } = this.props;
     const { hoveredX } = this.state;

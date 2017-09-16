@@ -10,10 +10,4 @@ import EmptyPlot from './EmptyPlot';
 import './index.css';
 import Perf from 'react-addons-perf';
 
-Perf.start();
-setTimeout(() => {
-  Perf.stop();
-  Perf.printWasted();
-}, 4000);
-
 ReactDOM.render(<Timeline />, document.getElementById('root'));
