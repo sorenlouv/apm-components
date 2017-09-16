@@ -19,7 +19,7 @@ const getXScale = _.memoize(
     [xMin, xMax, margins.left, margins.right, width].join('__')
 );
 
-const getTicks = _.memoize(x => x.ticks(7));
+const getTicks = _.memoize(xScale => xScale.ticks(7));
 
 class Timeline extends Component {
   state = {

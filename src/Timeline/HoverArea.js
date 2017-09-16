@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
 import _ from 'lodash';
+import { scaleLinear } from 'd3-scale';
 import { XYPlot, Voronoi } from 'react-vis';
 
 const getVerticalHoverLines = _.memoize(max => {
-  const STEPS = 100;
-  return _.range(STEPS + 1).map(i => ({
-    x: max / STEPS * i
-  }));
+  return scaleLinear()
+    .domain([0, max])
+    .nice()
+    .ticks(100)
+    .map(x => ({ x }));
 });
 
 class HoverArea extends PureComponent {
