@@ -3,7 +3,7 @@ import { XYPlot, VerticalGridLines } from 'react-vis';
 
 export default class VerticalLines extends PureComponent {
   render() {
-    const { width, height, margins, x, tickValues } = this.props;
+    const { width, height, margins, xDomain, tickValues } = this.props;
 
     return (
       <div
@@ -18,7 +18,7 @@ export default class VerticalLines extends PureComponent {
           width={width}
           height={height + margins.top}
           margin={margins}
-          xDomain={x.domain()}
+          xDomain={xDomain}
         >
           <VerticalGridLines tickValues={tickValues} />
         </XYPlot>

@@ -21,7 +21,7 @@ function getTickValuesWithHoveredX(tickValues, hoveredX) {
 const tickFormatSeconds = value => `${value / 1000} s`;
 const tickFormatMilliSeconds = value => `${value} ms`;
 
-function TimelineAxis({ x, width, margins, tickValues, hoveredX }) {
+function TimelineAxis({ xDomain, width, margins, tickValues, hoveredX }) {
   const tickValuesWithHoveredX = getTickValuesWithHoveredX(
     tickValues,
     hoveredX
@@ -47,7 +47,7 @@ function TimelineAxis({ x, width, margins, tickValues, hoveredX }) {
               width={width}
               height={margins.top}
               margin={margins}
-              xDomain={x.domain()}
+              xDomain={xDomain}
             >
               <XAxis
                 hideLine

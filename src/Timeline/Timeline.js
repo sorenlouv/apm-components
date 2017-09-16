@@ -20,6 +20,7 @@ const getXScale = _.memoize(
 );
 
 const getTicks = _.memoize(xScale => xScale.ticks(7));
+const getXDomain = _.memoize(xScale => xScale.domain());
 
 class Timeline extends Component {
   state = {
@@ -38,15 +39,16 @@ class Timeline extends Component {
 
     const xMin = 0;
     const xMax = max;
-    const x = getXScale(xMin, xMax, margins, width);
-    const tickValues = getTicks(x);
+    const xScale = getXScale(xMin, xMax, margins, width);
+    const xDomain = getXDomain(xScale);
+    const tickValues = getTicks(xScale);
 
     return (
       <div>
         <TimelineAxis
           width={width}
           margins={margins}
-          x={x}
+          xDomain={xDomain}
           tickValues={tickValues}
           hoveredX={hoveredX}
         />
@@ -55,7 +57,7 @@ class Timeline extends Component {
           width={width}
           height={height}
           margins={margins}
-          x={x}
+          xDomain={xDomain}
           tickValues={tickValues}
         />
 
@@ -63,7 +65,7 @@ class Timeline extends Component {
           width={width}
           height={height}
           margins={margins}
-          x={x}
+          xDomain={xDomain}
           max={max}
           hoveredX={hoveredX}
         />
@@ -72,7 +74,8 @@ class Timeline extends Component {
           width={width}
           height={height}
           margins={margins}
-          x={x}
+          xDomain={xDomain}
+          xScale={xScale}
           max={max}
           onHover={this.onHover}
         />

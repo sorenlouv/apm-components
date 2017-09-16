@@ -3,7 +3,7 @@ import { XYPlot, VerticalGridLines } from 'react-vis';
 
 class VerticalHoverLine extends PureComponent {
   render() {
-    const { width, height, margins, x, hoveredX } = this.props;
+    const { width, height, margins, xDomain, hoveredX } = this.props;
     return (
       <div
         style={{
@@ -19,7 +19,7 @@ class VerticalHoverLine extends PureComponent {
           width={width}
           height={height + margins.top}
           margin={margins}
-          xDomain={x.domain()}
+          xDomain={xDomain}
         >
           {hoveredX != null && (
             <VerticalGridLines

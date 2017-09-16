@@ -19,7 +19,7 @@ class HoverArea extends PureComponent {
     this.props.onHover(p.x);
   };
   render() {
-    const { width, height, margins, x, max } = this.props;
+    const { width, height, margins, xScale, xDomain, max } = this.props;
     const verticalHoverLines = getVerticalHoverLines(max);
 
     return (
@@ -37,13 +37,13 @@ class HoverArea extends PureComponent {
           width={width}
           height={height + margins.top}
           margin={margins}
-          xDomain={x.domain()}
+          xDomain={xDomain}
         >
           <Voronoi
             extent={[[margins.left, margins.top], [width, height]]}
             nodes={verticalHoverLines}
             onHover={this.onHover}
-            x={d => x(d.x)}
+            x={d => xScale(d.x)}
             y={() => 0}
           />
         </XYPlot>
