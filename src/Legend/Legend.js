@@ -1,6 +1,6 @@
 import React from 'react';
-import { units, px, fontSizes, colors } from '../variables';
 import styled from 'styled-components';
+import { units, px, fontSizes, colors } from '../variables';
 
 const Container = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const Container = styled.div`
   }};
   color: ${colors.gray2};
   cursor: pointer;
-  opacity: ${props => (props.isDisabled ? '0.4' : '1')};
+  opacity: ${props => (props.isDisabled ? 0.4 : 1)};
   margin-right: ${px(units.half)};
 
   &:last-of-type {
@@ -39,7 +39,7 @@ export default function Legend({ color, text, size = 1, isDisabled = false }) {
   return (
     <Container isDisabled={isDisabled} size={size}>
       <Indicator color={color} size={size} />
-      <span>{text}</span>
+      <div>{text}</div>
     </Container>
   );
 }

@@ -3,6 +3,7 @@ import _ from 'lodash';
 import 'react-vis/dist/style.css';
 import PropTypes from 'prop-types';
 import SelectionMarker from './SelectionMarker';
+import d3 from 'd3';
 import { scaleLinear } from 'd3-scale';
 import {
   XYPlot,
@@ -18,7 +19,6 @@ import {
 } from 'react-vis';
 import { CustomHint } from './CustomHint';
 import { Legend } from './Legend';
-import { getYMax, getYMaxRounded, getXMax, getXMin } from '../chart_utils';
 
 const XY_HEIGHT = 300;
 const XY_MARGIN = {
@@ -141,25 +141,26 @@ class CustomPlot extends PureComponent {
       return null;
     }
 
+    const hoveredPoints = this.getHoveredPoints(hoverIndex);
     const defaultSerie = series[0].data;
     const allCoordinates = _.flatten(series.map(serie => serie.data));
 
-    const xMin = getXMin(allCoordinates);
-    const xMax = getXMax(allCoordinates);
+    const xMin = d3.min(allCoordinates, d => d.x);
+    const xMax = d3.max(allCoordinates, d => d.x);
     const yMin = 0;
-    const yMax = getYMax(allCoordinates);
-    const yMaxRounded = getYMaxRounded(yMax);
-    const yTickValues = [yMaxRounded, yMaxRounded / 2];
+    const yMax = d3.max(allCoordinates, d => d.y);
     const XY_WIDTH = width; // from makeWidthFlexible HOC
-
-    const hoveredPoints = this.getHoveredPoints(hoverIndex);
 
     const x = scaleLinear()
       .domain([xMin, xMax])
       .range([XY_MARGIN.left, XY_WIDTH - XY_MARGIN.right]);
     const y = scaleLinear()
-      .domain([yMin, yMaxRounded])
-      .range([XY_HEIGHT, 0]);
+      .domain([yMin, yMax])
+      .range([XY_HEIGHT, 0])
+      .nice();
+
+    const yDomainNice = y.domain();
+    const yTickValues = [0, yDomainNice[1] / 2, yDomainNice[1]];
 
     return (
       <div>
