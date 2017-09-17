@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { scaleLinear } from 'd3-scale';
+import d3 from 'd3';
 import SingleRect from './SingleRect';
 import 'react-vis/dist/style.css';
 import {
@@ -10,7 +11,6 @@ import {
   VerticalRectSeries,
   Voronoi
 } from 'react-vis';
-import { getYMax, getXMax, getYMaxRounded } from '../chart_utils';
 
 const XY_HEIGHT = 120;
 const XY_WIDTH = 900;
@@ -70,16 +70,20 @@ class Histogram extends PureComponent {
     }
 
     const xMin = 0;
-    const xMax = getXMax(buckets);
+    const xMax = d3.max(buckets, d => d.x);
     const yMin = 0;
-    const yMax = getYMax(buckets);
-    const yMaxRounded = getYMaxRounded(yMax);
-    const yTickValues = [yMaxRounded, yMaxRounded / 2];
+    const yMax = d3.max(buckets, d => d.y);
 
     const x = scaleLinear()
       .domain([xMin, xMax])
       .range([XY_MARGIN.left, XY_WIDTH - XY_MARGIN.right]);
-    const y = scaleLinear().domain([yMin, yMaxRounded]).range([XY_HEIGHT, 0]);
+    const y = scaleLinear()
+      .domain([yMin, yMax])
+      .range([XY_HEIGHT, 0])
+      .nice();
+
+    const yDomainNice = y.domain();
+    const yTickValues = [0, yDomainNice[1] / 2, yDomainNice[1]];
 
     return (
       <XYPlot
@@ -104,26 +108,26 @@ class Histogram extends PureComponent {
           tickFormat={y => `${y} reqs.`}
         />
 
-        {this.state.hoveredBucket
-          ? <SingleRect
-              x={x(this.state.hoveredBucket.x0)}
-              width={x(bucketSize) - x(0)}
-              style={{
-                fill: '#dddddd'
-              }}
-            />
-          : null}
+        {this.state.hoveredBucket ? (
+          <SingleRect
+            x={x(this.state.hoveredBucket.x0)}
+            width={x(bucketSize) - x(0)}
+            style={{
+              fill: '#dddddd'
+            }}
+          />
+        ) : null}
 
-        {Number.isInteger(selectedBucket)
-          ? <SingleRect
-              x={x(selectedBucket * bucketSize)}
-              width={x(bucketSize) - x(0)}
-              style={{
-                fill: 'transparent',
-                stroke: 'rgb(172, 189, 220)'
-              }}
-            />
-          : null}
+        {Number.isInteger(selectedBucket) ? (
+          <SingleRect
+            x={x(selectedBucket * bucketSize)}
+            width={x(bucketSize) - x(0)}
+            style={{
+              fill: 'transparent',
+              stroke: 'rgb(172, 189, 220)'
+            }}
+          />
+        ) : null}
 
         <VerticalRectSeries
           colorType="literal"
