@@ -18,7 +18,7 @@ import {
   makeWidthFlexible
 } from 'react-vis';
 import { CustomHint } from './CustomHint';
-import { Legend } from './Legend';
+import Legend from '../Legend/Legend';
 
 const XY_HEIGHT = 300;
 const XY_MARGIN = {
@@ -167,10 +167,11 @@ class CustomPlot extends PureComponent {
         {series.map((serie, i) => (
           <Legend
             key={i}
-            i={i}
-            serie={serie}
-            onClick={this.clickLegend}
+            color={serie.color}
             isDisabled={this.state.disabledSeries[i]}
+            onClick={() => this.clickLegend(i)}
+            size={2}
+            text={serie.title}
           />
         ))}
 

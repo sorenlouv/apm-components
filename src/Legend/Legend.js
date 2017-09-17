@@ -1,26 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { units, px, fontSizes, colors } from '../variables';
+import { units, px, colors } from '../variables';
 
+const getSize = props => px(units.half + units.quarter * props.size);
 const Container = styled.div`
   display: flex;
   align-items: center;
-  font-size: ${props => {
-    switch (Math.round(props.size)) {
-      case 1:
-        return fontSizes.small;
-      case 2:
-        return fontSizes.large;
-      case 3:
-        return fontSizes.xlarge;
-      default:
-        return fontSizes.small;
-    }
-  }};
+  font-size: ${getSize};
   color: ${colors.gray2};
   cursor: pointer;
   opacity: ${props => (props.isDisabled ? 0.4 : 1)};
   margin-right: ${px(units.half)};
+  user-select: none;
 
   &:last-of-type {
     margin-right: 0;
@@ -28,16 +19,22 @@ const Container = styled.div`
 `;
 
 const Indicator = styled.span`
-  width: ${props => px(units.half + units.quarter * props.size)};
-  height: ${props => px(units.half + units.quarter * props.size)};
+  width: ${getSize};
+  height: ${getSize};
   margin-right: ${px(units.quarter)};
   background: ${props => props.color};
   border-radius: 100%;
 `;
 
-export default function Legend({ color, text, size = 1, isDisabled = false }) {
+export default function Legend({
+  color,
+  text,
+  size = 1,
+  onClick,
+  isDisabled = false
+}) {
   return (
-    <Container isDisabled={isDisabled} size={size}>
+    <Container onClick={onClick} isDisabled={isDisabled} size={size}>
       <Indicator color={color} size={size} />
       <div>{text}</div>
     </Container>
