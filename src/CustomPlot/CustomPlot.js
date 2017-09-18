@@ -193,18 +193,18 @@ class CustomPlot extends PureComponent {
           />
 
           {hoverIndex !== null &&
-          !isDrawing && (
-            <CustomHint
-              hoveredPoints={hoveredPoints}
-              series={series}
-              y={yTickValues[1]}
-            />
-          )}
+            !isDrawing && (
+              <CustomHint
+                hoveredPoints={hoveredPoints}
+                series={series}
+                y={yTickValues[1]}
+              />
+            )}
 
           {this.getEnabledSeries(series).map(this.getSerie)}
 
           {hoverIndex !== null &&
-          !isDrawing && <MarkSeries data={hoveredPoints} />}
+            !isDrawing && <MarkSeries data={hoveredPoints} />}
 
           <MarkSeries
             fill="transparent"
@@ -227,9 +227,12 @@ class CustomPlot extends PureComponent {
           />
 
           {isDrawing &&
-          selectionEnd !== null && (
-            <SelectionMarker start={x(selectionStart)} end={x(selectionEnd)} />
-          )}
+            selectionEnd !== null && (
+              <SelectionMarker
+                start={x(selectionStart)}
+                end={x(selectionEnd)}
+              />
+            )}
         </XYPlot>
       </div>
     );
