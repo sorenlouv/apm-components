@@ -22,11 +22,10 @@
   },
   "devDependencies": {
     "eslint": "^4.1.1",
-    "eslint-config-prettier": "^2.4.0",
-    "eslint-plugin-prettier": "^2.2.0",
+    "eslint-config-prettier": "2.5.0",
+    "eslint-plugin-prettier": "2.3.0",
     "eslint-plugin-react": "^7.3.0",
-    "hoist-non-react-statics": "^2.3.0",
-    "prettier": "^1.6.1",
+    "prettier": "1.7.0",
     "react-addons-perf": "^15.4.2"
   }
 }

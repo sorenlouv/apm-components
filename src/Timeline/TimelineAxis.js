@@ -2,6 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { Sticky } from 'react-sticky';
 import { XYPlot, XAxis, VerticalGridLines } from 'react-vis';
+import ActiveTickValue from './ActiveTickValue';
 
 function getTickValuesWithHoveredX(tickValues, hoveredX) {
   if (hoveredX == null) {
@@ -11,23 +12,31 @@ function getTickValuesWithHoveredX(tickValues, hoveredX) {
   const tolerance = (tickValues[1] - tickValues[0]) / 5;
   const high = hoveredX + tolerance;
   const low = hoveredX - tolerance;
-  return tickValues
-    .filter(value => {
-      return !_.inRange(value, low, high);
-    })
-    .concat([hoveredX]);
+  return tickValues.filter(value => {
+    return !_.inRange(value, low, high);
+  });
 }
 
 const tickFormatSeconds = value => `${value / 1000} s`;
 const tickFormatMilliSeconds = value => `${value} ms`;
+const getTickFormat = _.memoize(
+  highestValue =>
+    highestValue < 5000 ? tickFormatMilliSeconds : tickFormatSeconds
+);
 
-function TimelineAxis({ xDomain, width, margins, tickValues, hoveredX }) {
+function TimelineAxis({
+  xScale,
+  xDomain,
+  width,
+  margins,
+  tickValues,
+  hoveredX
+}) {
   const tickValuesWithHoveredX = getTickValuesWithHoveredX(
     tickValues,
     hoveredX
   );
-  const tickFormat =
-    _.last(tickValues) < 5000 ? tickFormatMilliSeconds : tickFormatSeconds;
+  const tickFormat = getTickFormat(_.last(tickValues));
 
   return (
     <Sticky disableCompensation>
@@ -56,6 +65,13 @@ function TimelineAxis({ xDomain, width, margins, tickValues, hoveredX }) {
                 tickValues={tickValuesWithHoveredX}
                 tickFormat={tickFormat}
               />
+
+              {hoveredX != null && (
+                <ActiveTickValue
+                  x={xScale(hoveredX)}
+                  value={tickFormat(hoveredX)}
+                />
+              )}
 
               <VerticalGridLines tickValues={[3000]} />
             </XYPlot>

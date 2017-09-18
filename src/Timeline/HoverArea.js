@@ -8,6 +8,7 @@ const getVerticalHoverLines = _.memoize(max => {
     .domain([0, max])
     .nice()
     .ticks(100)
+    .filter(x => x <= max)
     .map(x => ({ x }));
 });
 

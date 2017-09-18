@@ -48,6 +48,7 @@ class Timeline extends Component {
         <TimelineAxis
           width={width}
           margins={margins}
+          xScale={xScale}
           xDomain={xDomain}
           tickValues={tickValues}
           hoveredX={hoveredX}
