@@ -4,10 +4,8 @@ import _ from 'lodash';
 import 'react-vis/dist/style.css';
 import { scaleLinear } from 'd3-scale';
 import { makeWidthFlexible } from 'react-vis';
-import VerticalHoverLine from './VerticalHoverLine';
 import TimelineAxis from './TimelineAxis';
 import VerticalLines from './VerticalLines';
-import HoverArea from './HoverArea';
 
 const getXScale = _.memoize(
   (xMin, xMax, margins, width) => {
@@ -23,15 +21,8 @@ const getTicks = _.memoize(xScale => xScale.ticks(7));
 const getXDomain = _.memoize(xScale => xScale.domain());
 
 class Timeline extends Component {
-  state = {
-    hoveredX: null
-  };
-
-  onHover = hoveredX => this.setState({ hoveredX });
-
   render() {
     const { width, height, margins, max } = this.props;
-    const { hoveredX } = this.state;
 
     if (max == null || !width) {
       return null;
@@ -51,7 +42,6 @@ class Timeline extends Component {
           xScale={xScale}
           xDomain={xDomain}
           tickValues={tickValues}
-          hoveredX={hoveredX}
         />
 
         <VerticalLines
@@ -60,25 +50,6 @@ class Timeline extends Component {
           margins={margins}
           xDomain={xDomain}
           tickValues={tickValues}
-        />
-
-        <VerticalHoverLine
-          width={width}
-          height={height}
-          margins={margins}
-          xDomain={xDomain}
-          max={max}
-          hoveredX={hoveredX}
-        />
-
-        <HoverArea
-          width={width}
-          height={height}
-          margins={margins}
-          xDomain={xDomain}
-          xScale={xScale}
-          max={max}
-          onHover={this.onHover}
         />
       </div>
     );
