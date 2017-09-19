@@ -3,7 +3,7 @@ import { XYPlot, VerticalGridLines } from 'react-vis';
 
 export default class VerticalLines extends PureComponent {
   render() {
-    const { width, height, margins, xDomain, tickValues } = this.props;
+    const { width, height, margins, xDomain, tickValues, xMax } = this.props;
 
     return (
       <div
@@ -21,6 +21,7 @@ export default class VerticalLines extends PureComponent {
           xDomain={xDomain}
         >
           <VerticalGridLines tickValues={tickValues} />
+          <VerticalGridLines tickValues={[xMax]} style={{ stroke: '#666' }} />
         </XYPlot>
       </div>
     );

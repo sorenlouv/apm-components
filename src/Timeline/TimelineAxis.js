@@ -1,8 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 import { Sticky } from 'react-sticky';
-import { XYPlot, XAxis, VerticalGridLines } from 'react-vis';
-import ActiveTickValue from './ActiveTickValue';
+import { XYPlot, XAxis } from 'react-vis';
+import LastTickValue from './LastTickValue';
 
 const tickFormatSeconds = value => `${value / 1000} s`;
 const tickFormatMilliSeconds = value => `${value} ms`;
@@ -11,8 +11,12 @@ const getTickFormat = _.memoize(
     highestValue < 5000 ? tickFormatMilliSeconds : tickFormatSeconds
 );
 
-function TimelineAxis({ xScale, xDomain, width, margins, tickValues }) {
-  const tickFormat = getTickFormat(_.last(tickValues));
+const getXAxisTickValues = (tickValues, xMax) =>
+  _.last(tickValues) * 1.05 > xMax ? tickValues.slice(0, -1) : tickValues;
+
+function TimelineAxis({ xScale, xDomain, width, margins, tickValues, xMax }) {
+  const tickFormat = getTickFormat(xMax);
+  const xAxisTickValues = getXAxisTickValues(tickValues, xMax);
 
   return (
     <Sticky disableCompensation>
@@ -38,11 +42,11 @@ function TimelineAxis({ xScale, xDomain, width, margins, tickValues }) {
                 hideLine
                 orientation="top"
                 tickSize={0}
-                tickValues={tickValues}
+                tickValues={xAxisTickValues}
                 tickFormat={tickFormat}
               />
 
-              <VerticalGridLines tickValues={[3000]} />
+              <LastTickValue x={xScale(xMax)} value={tickFormat(xMax)} />
             </XYPlot>
           </div>
         );

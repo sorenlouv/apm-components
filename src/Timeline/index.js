@@ -22,7 +22,7 @@ export default function TimelineWrapper() {
         }}
       >
         <StickyContainer>
-          <Timeline max={31230} height={500} margins={MARGINS} />
+          <Timeline duration={41000} height={500} margins={MARGINS} />
 
           <div
             style={{

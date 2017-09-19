@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ActiveTickValue({ x, marginTop, value }) {
+export default function LastTickValue({ x, marginTop, value }) {
   return (
     <g transform={`translate(${x}, ${marginTop})`}>
       <text textAnchor="middle" dy="0" transform="translate(0, -8)">
@@ -10,4 +10,4 @@ export default function ActiveTickValue({ x, marginTop, value }) {
   );
 }
 
-ActiveTickValue.requiresSVG = true;
+LastTickValue.requiresSVG = true;

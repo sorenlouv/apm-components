@@ -17,19 +17,25 @@ const getXScale = _.memoize(
     [xMin, xMax, margins.left, margins.right, width].join('__')
 );
 
-const getTicks = _.memoize(xScale => xScale.ticks(7));
-const getXDomain = _.memoize(xScale => xScale.domain());
+const getTicks = _.memoize(
+  xScale => xScale.ticks(7),
+  xScale => xScale.domain().join('__')
+);
+const getXDomain = _.memoize(
+  xScale => xScale.domain(),
+  xScale => xScale.domain().join('__')
+);
 
 class Timeline extends Component {
   render() {
-    const { width, height, margins, max } = this.props;
+    const { width, height, margins, duration } = this.props;
 
-    if (max == null || !width) {
+    if (duration == null || !width) {
       return null;
     }
 
     const xMin = 0;
-    const xMax = max;
+    const xMax = duration;
     const xScale = getXScale(xMin, xMax, margins, width);
     const xDomain = getXDomain(xScale);
     const tickValues = getTicks(xScale);
@@ -42,6 +48,7 @@ class Timeline extends Component {
           xScale={xScale}
           xDomain={xDomain}
           tickValues={tickValues}
+          xMax={xMax}
         />
 
         <VerticalLines
@@ -50,6 +57,7 @@ class Timeline extends Component {
           margins={margins}
           xDomain={xDomain}
           tickValues={tickValues}
+          xMax={xMax}
         />
       </div>
     );
