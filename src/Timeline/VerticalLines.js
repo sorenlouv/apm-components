@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { XYPlot, VerticalGridLines } from 'react-vis';
+import { colors } from '../variables';
 
 export default class VerticalLines extends PureComponent {
   render() {
@@ -21,7 +22,10 @@ export default class VerticalLines extends PureComponent {
           xDomain={xDomain}
         >
           <VerticalGridLines tickValues={tickValues} />
-          <VerticalGridLines tickValues={[xMax]} style={{ stroke: '#666' }} />
+          <VerticalGridLines
+            tickValues={[xMax]}
+            style={{ stroke: colors.gray2 }}
+          />
         </XYPlot>
       </div>
     );

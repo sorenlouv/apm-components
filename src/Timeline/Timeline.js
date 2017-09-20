@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import 'react-vis/dist/style.css';
@@ -26,9 +26,9 @@ const getXDomain = _.memoize(
   xScale => xScale.domain().join('__')
 );
 
-class Timeline extends Component {
+class Timeline extends PureComponent {
   render() {
-    const { width, height, margins, duration } = this.props;
+    const { width, height, margins, duration, legends } = this.props;
 
     if (duration == null || !width) {
       return null;
@@ -49,6 +49,7 @@ class Timeline extends Component {
           xDomain={xDomain}
           tickValues={tickValues}
           xMax={xMax}
+          legends={legends}
         />
 
         <VerticalLines

@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { Sticky } from 'react-sticky';
 import { XYPlot, XAxis } from 'react-vis';
 import LastTickValue from './LastTickValue';
+import { colors } from '../variables';
 
 const tickFormatSeconds = value => `${value / 1000} s`;
 const tickFormatMilliSeconds = value => `${value} ms`;
@@ -11,10 +12,19 @@ const getTickFormat = _.memoize(
     highestValue < 5000 ? tickFormatMilliSeconds : tickFormatSeconds
 );
 
+// Remove last tick if it's too close to xMax
 const getXAxisTickValues = (tickValues, xMax) =>
   _.last(tickValues) * 1.05 > xMax ? tickValues.slice(0, -1) : tickValues;
 
-function TimelineAxis({ xScale, xDomain, width, margins, tickValues, xMax }) {
+function TimelineAxis({
+  xScale,
+  xDomain,
+  width,
+  margins,
+  tickValues,
+  xMax,
+  legends
+}) {
   const tickFormat = getTickFormat(xMax);
   const xAxisTickValues = getXAxisTickValues(tickValues, xMax);
 
@@ -25,17 +35,23 @@ function TimelineAxis({ xScale, xDomain, width, margins, tickValues, xMax }) {
           <div
             style={{
               position: 'absolute',
-              backgroundColor: 'white',
-              borderBottom: '1px solid black',
+              backgroundColor: colors.white,
+              borderBottom: `1px solid ${colors.black}`,
+              height: margins.top,
               zIndex: 2,
               ...style
             }}
           >
+            {legends}
             <XYPlot
               dontCheckIfEmpty
               width={width}
-              height={margins.top}
-              margin={margins}
+              height={40}
+              margin={{
+                top: 40,
+                left: margins.left,
+                right: margins.right
+              }}
               xDomain={xDomain}
             >
               <XAxis
