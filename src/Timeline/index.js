@@ -1,5 +1,6 @@
 import React from 'react';
 import { StickyContainer } from 'react-sticky';
+import styled from 'styled-components';
 import Timeline from './Timeline';
 
 const MARGINS = {
@@ -8,6 +9,19 @@ const MARGINS = {
   right: 50,
   bottom: 0
 };
+
+const TraceContainer = styled.div`padding: 15px 0;`;
+const TraceBar = styled.div`
+  position: relative;
+  height: 50px;
+  background-color: red;
+`;
+const TraceLabel = styled.div`
+  white-space: nowrap;
+  position: relative;
+  direction: rtl;
+  text-align: left;
+`;
 
 export default function TimelineWrapper() {
   return (
@@ -18,11 +32,11 @@ export default function TimelineWrapper() {
           marginTop: '200px',
           marginLeft: '150px',
           position: 'relative',
-          border: '1px solid red'
+          border: '1px solid #bbb'
         }}
       >
         <StickyContainer>
-          <Timeline duration={41000} height={500} margins={MARGINS} />
+          <Timeline duration={41000} height={687} margins={MARGINS} />
 
           <div
             style={{
@@ -31,16 +45,28 @@ export default function TimelineWrapper() {
               paddingRight: MARGINS.right
             }}
           >
-            <div style={getStyles('0%', 'red')} />
-            <div style={getStyles('10%', 'blue')} />
-            <div style={getStyles('20%', 'yellow')} />
-            <div style={getStyles('30%', 'gray')} />
-            <div style={getStyles('40%', 'violet')} />
-            <div style={getStyles('50%', 'green')} />
-            <div style={getStyles('60%', 'pink')} />
-            <div style={getStyles('70%', 'purple')} />
-            <div style={getStyles('80%', 'cyan')} />
-            <div style={getStyles('90%', 'brown')} />
+            {[
+              { start: 0, duration: 10 },
+              { start: 10, duration: 30 },
+              { start: 30, duration: 20 },
+              { start: 50, duration: 30 },
+              { start: 80, duration: 20 },
+              { start: 85, duration: 10 },
+              { start: 90, duration: 10 }
+            ].map(({ start, duration }, i) => {
+              return (
+                <TraceContainer>
+                  <TraceBar
+                    style={{ left: `${start}%`, width: `${duration}%` }}
+                  />
+                  <TraceLabel
+                    style={{ left: `${start}%`, width: `${100 - start}%` }}
+                  >
+                    I am a very long text, that should not be broken
+                  </TraceLabel>
+                </TraceContainer>
+              );
+            })}
           </div>
         </StickyContainer>
       </div>
@@ -57,14 +83,4 @@ export default function TimelineWrapper() {
       <br />
     </div>
   );
-}
-
-function getStyles(left, color) {
-  return {
-    position: 'relative',
-    left,
-    backgroundColor: color,
-    height: '50px',
-    width: '10%'
-  };
 }
