@@ -1,6 +1,6 @@
 import React from 'react';
 import CustomPlot from './CustomPlot';
-import response from './response.json';
+import response from './emptyResponse.json';
 
 export default class extends React.Component {
   state = {
@@ -12,26 +12,30 @@ export default class extends React.Component {
   onSelection = selection => {
     console.log(new Date(selection.start), new Date(selection.end));
   };
+  getResponseTimeTickFormat = t => `${response.totalHits === 0 ? '-' : t} ms`;
+  getRPMTickFormat = t => `${response.totalHits === 0 ? '-' : t} rpm`;
 
   render() {
     return (
       <div>
         <CustomPlot
+          isEmpty={response.totalHits === 0}
           series={getResponseTimeSeries(response)}
           onHover={this.onHover}
           onMouseLeave={this.onMouseLeave}
           onSelection={this.onSelection}
           hoverIndex={this.state.hoverIndex}
-          tickFormatY={t => `${t} ms`}
+          tickFormatY={this.getResponseTimeTickFormat}
         />
 
         <CustomPlot
+          isEmpty={response.totalHits === 0}
           series={getRpmSeries(response)}
           onHover={this.onHover}
           onMouseLeave={this.onMouseLeave}
           onSelection={this.onSelection}
           hoverIndex={this.state.hoverIndex}
-          tickFormatY={t => `${t} rpm`}
+          tickFormatY={this.getRPMTickFormat}
         />
       </div>
     );

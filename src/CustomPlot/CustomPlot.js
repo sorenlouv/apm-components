@@ -134,7 +134,7 @@ class CustomPlot extends PureComponent {
   }
 
   render() {
-    const { hoverIndex, series, width, tickFormatY } = this.props;
+    const { isEmpty, hoverIndex, series, width, tickFormatY } = this.props;
     const { isDrawing, selectionStart, selectionEnd } = this.state;
 
     if (_.isEmpty(series)) {
@@ -201,7 +201,7 @@ class CustomPlot extends PureComponent {
               />
             )}
 
-          {this.getEnabledSeries(series).map(this.getSerie)}
+          {!isEmpty && this.getEnabledSeries(series).map(this.getSerie)}
 
           {hoverIndex !== null &&
             !isDrawing && <MarkSeries data={hoveredPoints} />}
@@ -216,15 +216,17 @@ class CustomPlot extends PureComponent {
             <VerticalGridLines tickValues={[defaultSerie[hoverIndex].x]} />
           )}
 
-          <Voronoi
-            extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
-            nodes={defaultSerie}
-            onHover={this.onHover}
-            onMouseDown={this.onMouseDown}
-            onMouseUp={this.onMouseUp}
-            x={d => x(d.x)}
-            y={() => 0}
-          />
+          {!isEmpty && (
+            <Voronoi
+              extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
+              nodes={defaultSerie}
+              onHover={this.onHover}
+              onMouseDown={this.onMouseDown}
+              onMouseUp={this.onMouseUp}
+              x={d => x(d.x)}
+              y={() => 0}
+            />
+          )}
 
           {isDrawing &&
             selectionEnd !== null && (
