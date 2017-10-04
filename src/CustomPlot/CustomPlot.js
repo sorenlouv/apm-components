@@ -206,12 +206,6 @@ class CustomPlot extends PureComponent {
           {hoverIndex !== null &&
             !isDrawing && <MarkSeries data={hoveredPoints} />}
 
-          <MarkSeries
-            fill="transparent"
-            stroke="transparent"
-            data={defaultSerie.map(point => ({ ...point, y: 0 }))}
-          />
-
           {hoverIndex !== null && (
             <VerticalGridLines tickValues={[defaultSerie[hoverIndex].x]} />
           )}
