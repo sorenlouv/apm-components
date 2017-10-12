@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { Hint } from 'react-vis';
 
-export function CustomHint({ hoveredPoints, series, y, ...props }) {
+export function Tooltip({ hoveredPoints, series, y, ...props }) {
   if (_.isEmpty(hoveredPoints)) {
     return null;
   }
@@ -11,7 +11,7 @@ export function CustomHint({ hoveredPoints, series, y, ...props }) {
     <Hint {...props} value={{ x, y }}>
       <div
         style={{
-          border: '1 px solid #eee',
+          border: '1px solid #eee',
           background: '#fff',
           color: '#000',
           transform: 'translateY(-50%)',

@@ -6,11 +6,13 @@
     "d3": "^3.5.6",
     "d3-scale": "^1.0.6",
     "moment": "^2.18.1",
+    "numeral": "^2.0.6",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.10",
     "react-sticky": "^6.0.1",
     "react-vis": "1.7.4",
+    "reselect": "^3.0.1",
     "styled-components": "^2.1.2"
   },
   "scripts": {
@@ -21,11 +23,15 @@
     "lint": "eslint ./src"
   },
   "devDependencies": {
+    "diffable-html": "^2.1.0",
+    "enzyme": "^2.9.1",
+    "enzyme-to-json": "^2.0.0",
     "eslint": "^3.19.0",
     "eslint-config-prettier": "2.5.0",
     "eslint-plugin-prettier": "2.3.0",
     "eslint-plugin-react": "^7.3.0",
-    "prettier": "1.7.0",
-    "react-addons-perf": "^15.4.2"
+    "prettier": "1.7.4",
+    "react-addons-perf": "^15.4.2",
+    "react-test-renderer": "^16.0.0"
   }
 }

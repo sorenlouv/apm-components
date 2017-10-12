@@ -2,18 +2,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "chrome",
+      "name": "Jest",
+      "type": "node",
       "request": "launch",
-      "name": "Launch Chrome against localhost",
-      "url": "http://localhost:3000",
-      "webRoot": "${workspaceRoot}"
-    },
-    {
-      "type": "chrome",
-      "request": "attach",
-      "name": "Attach to Chrome",
-      "port": 9222,
-      "webRoot": "${workspaceRoot}"
+      "program": "${workspaceRoot}/node_modules/react-scripts/scripts/test.js",
+      "args": ["--runInBand", "--env=jsdom"],
+      "cwd": "${workspaceRoot}"
     }
   ]
 }

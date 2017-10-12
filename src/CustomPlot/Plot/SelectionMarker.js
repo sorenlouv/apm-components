@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function DragMarker({ innerHeight, marginTop, start, end }) {
   const width = Math.abs(end - start);
-  const x = end > start ? start : end;
+  const x = start < end ? start : end;
   return (
     <rect
       pointerEvents="none"
