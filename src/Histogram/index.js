@@ -12,9 +12,9 @@ function getFormattedBuckets(buckets, bucketSize) {
   const yMax = Math.max(...buckets.map(item => item.count));
   const yMin = yMax * 0.1;
 
-  return buckets.map(({ count, key }, i) => {
+  return buckets.map(({ count, key, transactionId }) => {
     return {
-      i,
+      transactionId,
       x0: key,
       x: key + bucketSize,
       y: count > 0 ? Math.max(count, yMin) : 0
@@ -26,7 +26,7 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedBucket: 10
+      transactionId: null
     };
   }
 
@@ -35,8 +35,10 @@ export default class extends React.Component {
       <Histogram
         buckets={buckets}
         bucketSize={response.bucketSize}
-        selectedBucket={this.state.selectedBucket}
-        onClick={selectedBucket => this.setState({ selectedBucket })}
+        transactionId={this.state.transactionId}
+        onClick={selectedBucket => {
+          this.setState({ transactionId: selectedBucket.transactionId });
+        }}
       />
     );
   }

@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
-import { scaleLinear } from 'd3-scale';
 import d3 from 'd3';
+import _ from 'lodash';
+import PropTypes from 'prop-types';
+import { scaleLinear } from 'd3-scale';
 import SingleRect from './SingleRect';
 import 'react-vis/dist/style.css';
 import {
@@ -9,11 +11,12 @@ import {
   YAxis,
   HorizontalGridLines,
   VerticalRectSeries,
-  Voronoi
+  Voronoi,
+  makeWidthFlexible
 } from 'react-vis';
+import { colors } from '../variables';
 
 const XY_HEIGHT = 120;
-const XY_WIDTH = 900;
 const XY_MARGIN = {
   top: 20,
   left: 50,
@@ -31,13 +34,13 @@ class Histogram extends PureComponent {
   }
 
   onClick = bucket => {
-    if (!this.isEmpty(bucket)) {
-      this.props.onClick(bucket.i);
+    if (bucket.y > 0) {
+      this.props.onClick(bucket);
     }
   };
 
   onHover = bucket => {
-    if (!this.isEmpty(bucket)) {
+    if (bucket.y > 0) {
       this.setState({ hoveredBucket: bucket });
     }
   };
@@ -46,33 +49,33 @@ class Histogram extends PureComponent {
     this.setState({ hoveredBucket: null });
   };
 
-  isEmpty = bucket => this.props.buckets[bucket.i].y === 0;
-
-  getWithHighlightedBucket(items, selected) {
+  getChartData(items, transactionId) {
     return items
-      .map((item, i) => {
-        if (i === selected) {
-          return { ...item, color: '#3360a3' };
-        }
-        return item;
-      })
-      .map((item, i) => {
+      .map(item => ({
+        ...item,
+        color: item.transactionId === transactionId ? colors.blue1 : undefined
+      }))
+      .map(item => {
         const padding = (item.x - item.x0) / 20;
-        return { ...item, x: item.x - padding, x0: item.x0 + padding, i };
+        return { ...item, x: item.x - padding, x0: item.x0 + padding };
       });
   }
 
   render() {
-    const { buckets, selectedBucket, bucketSize } = this.props;
-
-    if (!buckets) {
+    const { buckets, transactionId, bucketSize, width: XY_WIDTH } = this.props;
+    if (_.isEmpty(buckets) || XY_WIDTH === 0) {
       return null;
     }
 
-    const xMin = 0;
+    const selectedBucket =
+      transactionId &&
+      buckets.find(bucket => bucket.transactionId === transactionId);
+
+    const xMin = d3.min(buckets, d => d.x0);
     const xMax = d3.max(buckets, d => d.x);
     const yMin = 0;
     const yMax = d3.max(buckets, d => d.y);
+    const chartData = this.getChartData(buckets, transactionId);
 
     const x = scaleLinear()
       .domain([xMin, xMax])
@@ -87,6 +90,7 @@ class Histogram extends PureComponent {
 
     return (
       <XYPlot
+        xType={this.props.xType}
         width={XY_WIDTH}
         height={XY_HEIGHT}
         margin={XY_MARGIN}
@@ -105,56 +109,66 @@ class Histogram extends PureComponent {
           tickSize={0}
           hideLine
           tickValues={yTickValues}
-          tickFormat={y => `${y} reqs.`}
+          tickFormat={this.props.formatYValue}
         />
-
-        {this.state.hoveredBucket ? (
+        {this.state.hoveredBucket && (
           <SingleRect
             x={x(this.state.hoveredBucket.x0)}
             width={x(bucketSize) - x(0)}
             style={{
-              fill: '#dddddd'
+              fill: colors.gray4
             }}
           />
-        ) : null}
-
-        {Number.isInteger(selectedBucket) ? (
+        )}
+        {selectedBucket && (
           <SingleRect
-            x={x(selectedBucket * bucketSize)}
+            x={x(selectedBucket.x0)}
             width={x(bucketSize) - x(0)}
             style={{
               fill: 'transparent',
               stroke: 'rgb(172, 189, 220)'
             }}
           />
-        ) : null}
-
+        )}
         <VerticalRectSeries
           colorType="literal"
           color="rgb(172, 189, 216)"
-          data={this.getWithHighlightedBucket(buckets, selectedBucket)}
+          data={chartData}
           style={{
             rx: '2px',
             ry: '2px'
           }}
         />
-
         <Voronoi
           extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
           nodes={this.props.buckets.map(item => ({
             ...item,
-            x: (item.x0 + item.x) / 2,
-            y: 1
+            x: (item.x0 + item.x) / 2
           }))}
           onClick={this.onClick}
           onHover={this.onHover}
           onBlur={this.onBlur}
           x={d => x(d.x)}
-          y={d => y(d.y)}
+          y={() => 1}
         />
       </XYPlot>
     );
   }
 }
 
-export default Histogram;
+Histogram.propTypes = {
+  width: PropTypes.number.isRequired,
+  transactionId: PropTypes.string,
+  bucketSize: PropTypes.number.isRequired,
+  onClick: PropTypes.func,
+  buckets: PropTypes.array.isRequired,
+  xType: PropTypes.string,
+  formatYValue: PropTypes.func
+};
+
+Histogram.defaultProps = {
+  onClick: () => {},
+  xType: 'linear'
+};
+
+export default makeWidthFlexible(Histogram);
