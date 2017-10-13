@@ -1,10 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import moment from 'moment';
 import toDiffableHtml from 'diffable-html';
-import { InnerCustomPlot } from './Plot';
+import { InnerCustomPlot } from '../CustomPlot/';
 import responseWithData from './responseWithData.json';
 import responseWithoutData from './responseWithoutData.json';
-import { getResponseTimeSeries, getSeries } from './selectors';
+import { getResponseTimeSeries, getSeries } from '../selectors';
 
 describe('when response has data', () => {
   let wrapper;
@@ -23,6 +24,7 @@ describe('when response has data', () => {
         onMouseLeave={onMouseLeave}
         onSelectionEnd={onSelectionEnd}
         width={800}
+        tickFormatX={x => x.getTime()} // Avoid timezone issues in snapshots
       />
     );
   });
@@ -105,6 +107,10 @@ describe('when response has data', () => {
 
   describe('when setting hoverIndex', () => {
     beforeEach(() => {
+      // Avoid timezone issues in snapshots
+      jest.spyOn(moment.prototype, 'format').mockImplementation(function() {
+        return this.unix();
+      });
       wrapper.setProps({ hoverIndex: 15 });
     });
 
@@ -150,6 +156,7 @@ describe('when response has no data', () => {
         onMouseLeave={onMouseLeave}
         onSelectionEnd={onSelectionEnd}
         width={100}
+        tickFormatX={x => x.getTime()} // Avoid timezone issues in snapshots
       />
     );
   });

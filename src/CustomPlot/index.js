@@ -1,6 +1,6 @@
 import React from 'react';
-import Plot from './Plot';
-import response from './responseWithData.json';
+import CustomPlot from './CustomPlot';
+import response from './test/responseWithData.json';
 // import Perf from 'react-addons-perf';
 import { getResponseTimeSeries, getRpmSeries, getSeries } from './selectors';
 
@@ -10,7 +10,7 @@ import { getResponseTimeSeries, getRpmSeries, getSeries } from './selectors';
 //   Perf.printWasted();
 // }, 5000);
 
-class CustomPlot extends React.Component {
+class TwoCustomPlots extends React.Component {
   state = {
     hoverIndex: null,
     responseTimeSeries: [],
@@ -53,7 +53,7 @@ class CustomPlot extends React.Component {
   render() {
     return (
       <div>
-        <Plot
+        <CustomPlot
           series={this.state.responseTimeSeries}
           onHover={this.onHover}
           onMouseLeave={this.onMouseLeave}
@@ -62,7 +62,7 @@ class CustomPlot extends React.Component {
           tickFormatY={this.getResponseTimeTickFormat}
         />
 
-        <Plot
+        <CustomPlot
           series={this.state.rpmSeries}
           onHover={this.onHover}
           onMouseLeave={this.onMouseLeave}
@@ -75,4 +75,4 @@ class CustomPlot extends React.Component {
   }
 }
 
-export default CustomPlot;
+export default TwoCustomPlots;

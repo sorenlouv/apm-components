@@ -178,6 +178,7 @@ export class InnerCustomPlot extends PureComponent {
           <StaticPlot
             series={enabledSeries}
             tickFormatY={this.props.tickFormatY}
+            tickFormatX={this.props.tickFormatX}
             XYPlot={getXYPlot(x, y, width)}
             yTickValues={yTickValues}
           />
@@ -218,6 +219,7 @@ InnerCustomPlot.propTypes = {
   onMouseLeave: PropTypes.func.isRequired,
   onSelectionEnd: PropTypes.func.isRequired,
   hoverIndex: PropTypes.number,
+  tickFormatX: PropTypes.func,
   tickFormatY: PropTypes.func
 };
 

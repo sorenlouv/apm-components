@@ -124,7 +124,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  02:50
+                  1502283000000
                 </text>
               </g>
               <g transform=\\"translate(194.66666666666666, 0)\\"
@@ -142,7 +142,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  02:55
+                  1502283300000
                 </text>
               </g>
               <g transform=\\"translate(316.33333333333337, 0)\\"
@@ -160,7 +160,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  03 PM
+                  1502283600000
                 </text>
               </g>
               <g transform=\\"translate(438, 0)\\"
@@ -178,7 +178,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  03:05
+                  1502283900000
                 </text>
               </g>
               <g transform=\\"translate(559.6666666666667, 0)\\"
@@ -196,7 +196,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  03:10
+                  1502284200000
                 </text>
               </g>
               <g transform=\\"translate(681.3333333333334, 0)\\"
@@ -214,7 +214,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  03:15
+                  1502284500000
                 </text>
               </g>
             </g>
@@ -1055,7 +1055,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  02:50
+                  1502283000000
                 </text>
               </g>
               <g transform=\\"translate(194.66666666666666, 0)\\"
@@ -1073,7 +1073,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  02:55
+                  1502283300000
                 </text>
               </g>
               <g transform=\\"translate(316.33333333333337, 0)\\"
@@ -1091,7 +1091,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  03 PM
+                  1502283600000
                 </text>
               </g>
               <g transform=\\"translate(438, 0)\\"
@@ -1109,7 +1109,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  03:05
+                  1502283900000
                 </text>
               </g>
               <g transform=\\"translate(559.6666666666667, 0)\\"
@@ -1127,7 +1127,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  03:10
+                  1502284200000
                 </text>
               </g>
               <g transform=\\"translate(681.3333333333334, 0)\\"
@@ -1145,7 +1145,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  03:15
+                  1502284500000
                 </text>
               </g>
             </g>
@@ -1288,7 +1288,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
         >
           <div style=\\"border: 1px solid #eee; background: rgb(255, 255, 255); color: rgb(0, 0, 0); margin-left: 20px;\\">
             <div>
-              Wed Aug 09 2017 15:02:00 GMT+0200 (CEST)
+              1502283720
             </div>
             <p>
               <!-- react-text: 103 -->
@@ -2003,7 +2003,7 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  03 AM
+                  801190800000
                 </text>
               </g>
               <g transform=\\"translate(4.285714285714286, 0)\\"
@@ -2021,7 +2021,7 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  06 AM
+                  801201600000
                 </text>
               </g>
               <g transform=\\"translate(8.571428571428571, 0)\\"
@@ -2039,7 +2039,7 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  09 AM
+                  801212400000
                 </text>
               </g>
               <g transform=\\"translate(12.857142857142856, 0)\\"
@@ -2057,7 +2057,7 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  12 PM
+                  801223200000
                 </text>
               </g>
               <g transform=\\"translate(17.142857142857142, 0)\\"
@@ -2075,7 +2075,7 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  03 PM
+                  801234000000
                 </text>
               </g>
               <g transform=\\"translate(21.42857142857143, 0)\\"
@@ -2093,7 +2093,7 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  06 PM
+                  801244800000
                 </text>
               </g>
               <g transform=\\"translate(25.71428571428571, 0)\\"
@@ -2111,7 +2111,7 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  09 PM
+                  801255600000
                 </text>
               </g>
               <g transform=\\"translate(30, 0)\\"
@@ -2129,7 +2129,7 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  Wed 24
+                  801266400000
                 </text>
               </g>
             </g>

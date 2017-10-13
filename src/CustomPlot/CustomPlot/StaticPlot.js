@@ -43,7 +43,13 @@ class StaticPlot extends PureComponent {
   }
 
   render() {
-    const { series, tickFormatY, XYPlot, yTickValues } = this.props;
+    const {
+      series,
+      tickFormatX,
+      tickFormatY,
+      XYPlot,
+      yTickValues
+    } = this.props;
 
     const filteredSeries = series
       .filter(serie => !serie.isEmpty)
@@ -53,7 +59,7 @@ class StaticPlot extends PureComponent {
     return (
       <XYPlot>
         <HorizontalGridLines tickValues={yTickValues} />
-        <XAxis tickSize={0} tickTotal={X_TICK_TOTAL} />
+        <XAxis tickSize={0} tickTotal={X_TICK_TOTAL} tickFormat={tickFormatX} />
         <YAxis tickSize={0} tickValues={yTickValues} tickFormat={tickFormatY} />
 
         {_.isEmpty(filteredSeries) ? (
@@ -70,6 +76,7 @@ export default StaticPlot;
 
 StaticPlot.propTypes = {
   series: PropTypes.array.isRequired,
+  tickFormatX: PropTypes.func,
   tickFormatY: PropTypes.func.isRequired,
   XYPlot: PropTypes.func.isRequired,
   yTickValues: PropTypes.array.isRequired
