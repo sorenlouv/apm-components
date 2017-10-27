@@ -7,7 +7,8 @@ import CustomPlot from './CustomPlot';
 import Timeline from './Timeline';
 import Legend from './Legend';
 import EmptyPlot from './EmptyPlot';
+import Modal from './Modal';
 import './index.css';
 import Perf from 'react-addons-perf';
 
-ReactDOM.render(<Histogram />, document.getElementById('root'));
+ReactDOM.render(<Modal />, document.getElementById('root'));
