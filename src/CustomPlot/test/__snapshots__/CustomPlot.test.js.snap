@@ -317,10 +317,6 @@ exports[`when response has data Initially should have correct markup 1`] = `
              width=\\"800\\"
              height=\\"250\\"
         >
-          <g class=\\"rv-xy-plot__series rv-xy-plot__series--mark \\"
-             transform=\\"translate(55,25)\\"
-          >
-          </g>
         </svg>
       </div>
     </div>
@@ -1294,9 +1290,9 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
             <div class=\\"sc-bxivhb etAnDE\\">
               1502283720
             </div>
-            <div class=\\"sc-ifAKCX fBXBdR\\">
-              <div>
-                <div class=\\"sc-EHOje fxIYbA sc-bdVaJa eWvHJG\\"
+            <div class=\\"sc-ifAKCX gVdyMJ\\">
+              <div class=\\"sc-EHOje hxHpbH\\">
+                <div class=\\"sc-bZQynM bHRdln sc-bdVaJa eWvHJG\\"
                      font-size=\\"12px\\"
                 >
                   <span class=\\"sc-bwzfXH bzaemo\\"
@@ -1308,12 +1304,12 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
                   Avg.
                   <!-- /react-text -->
                 </div>
-                <div class=\\"sc-bZQynM kYQrZU\\">
+                <div class=\\"sc-gzVnrw zwJEr\\">
                   438.7044
                 </div>
               </div>
-              <div>
-                <div class=\\"sc-EHOje fxIYbA sc-bdVaJa eWvHJG\\"
+              <div class=\\"sc-EHOje hxHpbH\\">
+                <div class=\\"sc-bZQynM bHRdln sc-bdVaJa eWvHJG\\"
                      font-size=\\"12px\\"
                 >
                   <span class=\\"sc-bwzfXH jmAhPm\\"
@@ -1325,12 +1321,12 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
                   95th
                   <!-- /react-text -->
                 </div>
-                <div class=\\"sc-bZQynM kYQrZU\\">
+                <div class=\\"sc-gzVnrw zwJEr\\">
                   1557.383999999999
                 </div>
               </div>
-              <div>
-                <div class=\\"sc-EHOje fxIYbA sc-bdVaJa eWvHJG\\"
+              <div class=\\"sc-EHOje hxHpbH\\">
+                <div class=\\"sc-bZQynM bHRdln sc-bdVaJa eWvHJG\\"
                      font-size=\\"12px\\"
                 >
                   <span class=\\"sc-bwzfXH klrMPo\\"
@@ -1342,7 +1338,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
                   99th
                   <!-- /react-text -->
                 </div>
-                <div class=\\"sc-bZQynM kYQrZU\\">
+                <div class=\\"sc-gzVnrw zwJEr\\">
                   1820.3771200000006
                 </div>
               </div>
@@ -2244,14 +2240,10 @@ exports[`when response has no data Initially should have correct markup 1`] = `
              width=\\"100\\"
              height=\\"250\\"
         >
-          <g class=\\"rv-xy-plot__series rv-xy-plot__series--mark \\"
-             transform=\\"translate(55,25)\\"
-          >
-          </g>
         </svg>
       </div>
     </div>
-    <!-- react-empty: 54 -->
+    <!-- react-empty: 53 -->
   </div>
 </div>
 "

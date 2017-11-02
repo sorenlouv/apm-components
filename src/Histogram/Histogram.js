@@ -46,9 +46,9 @@ export class HistogramWithoutHOC extends PureComponent {
     this.setState({ hoveredBucket: bucket });
   };
 
-  // onBlur = () => {
-  //   this.setState({ hoveredBucket: null });
-  // };
+  onBlur = () => {
+    this.setState({ hoveredBucket: null });
+  };
 
   getChartData(items, transactionId) {
     return items
@@ -102,7 +102,7 @@ export class HistogramWithoutHOC extends PureComponent {
     const hoveredX0 = _.get(this.state.hoveredBucket, 'x0', 0);
     const hoveredY = _.get(this.state.hoveredBucket, 'y', 0);
     const isTimeSeries = this.props.xType === 'time';
-    const shouldDisplayTooltip = hoveredX > 0 && (hoveredY > 0 || isTimeSeries);
+    const shouldShowTooltip = hoveredX > 0 && (hoveredY > 0 || isTimeSeries);
 
     return (
       <XYPlot
@@ -141,7 +141,7 @@ export class HistogramWithoutHOC extends PureComponent {
             />
           )}
 
-        {shouldDisplayTooltip && (
+        {shouldShowTooltip && (
           <Tooltip
             header={formatTooltipHeader(hoveredX0, hoveredX)}
             tooltipPoints={[

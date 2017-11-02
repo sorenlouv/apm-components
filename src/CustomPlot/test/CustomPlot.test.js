@@ -144,8 +144,8 @@ describe('when response has no data', () => {
   let wrapper;
   beforeEach(() => {
     const series = getSeries({
-      start: new Date(Date.UTC(1995, 4, 23)),
-      end: new Date(Date.UTC(1995, 4, 24)),
+      start: 801187200000,
+      end: 801273600000,
       chartsData: responseWithoutData,
       handler: getResponseTimeSeries
     });

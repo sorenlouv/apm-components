@@ -35,9 +35,18 @@ const Header = styled.div`
 
 const Legends = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   padding: ${px(units.half)};
+  padding: ${px(units.quarter)} ${px(unit)} ${px(units.quarter)}
+    ${px(units.half)};
   font-size: ${fontSizes.small};
+`;
+
+const LegendContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: ${px(units.quarter)} 0;
+  justify-content: space-between;
 `;
 
 const LegendGray = styled(Legend)`
@@ -45,7 +54,6 @@ const LegendGray = styled(Legend)`
 `;
 
 const Value = styled.div`
-  margin-top: ${units.half}px;
   color: ${colors.gray2};
   font-size: ${fontSize};
 `;
@@ -60,7 +68,7 @@ export default function Tooltip({ header, tooltipPoints, x, y, ...props }) {
         <Header>{header || moment(x).format('MMMM Do YYYY, HH:mm')}</Header>
         <Legends>
           {tooltipPoints.map((point, i) => (
-            <div key={i}>
+            <LegendContainer key={i}>
               <LegendGray
                 fontSize={fontSize.tiny}
                 radius={units.half}
@@ -68,7 +76,7 @@ export default function Tooltip({ header, tooltipPoints, x, y, ...props }) {
                 text={point.text}
               />
               <Value>{point.value}</Value>
-            </div>
+            </LegendContainer>
           ))}
         </Legends>
       </TooltipElm>

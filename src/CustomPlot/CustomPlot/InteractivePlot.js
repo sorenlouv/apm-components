@@ -45,15 +45,18 @@ class InteractivePlot extends PureComponent {
         text: series[i].titleShort || series[i].title
       };
     });
+    const shouldShowTooltip = !_.isEmpty(hoveredPoints) && !isDrawing;
+    const shouldShowMark = !_.isEmpty(hoveredPoints) && !isDrawing;
 
     return (
       <XYPlot>
-        {!_.isEmpty(hoveredPoints) &&
-          !isDrawing && (
-            <Tooltip tooltipPoints={tooltipPoints} x={hoveredX} y={0} />
-          )}
-        {!!hoveredPoints &&
-          !isDrawing && <MarkSeries data={hoveredPoints} colorType="literal" />}
+        {shouldShowTooltip && (
+          <Tooltip tooltipPoints={tooltipPoints} x={hoveredX} y={0} />
+        )}
+
+        {shouldShowMark && (
+          <MarkSeries data={hoveredPoints} colorType="literal" />
+        )}
         {hoveredX && <VerticalGridLines tickValues={[hoveredX]} />}
 
         {isDrawing &&

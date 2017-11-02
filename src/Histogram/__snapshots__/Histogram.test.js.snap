@@ -645,9 +645,9 @@ exports[`Histogram when hovering over a non-empty bucket should have correct mar
     <div class=\\"sc-bxivhb etAnDE\\">
       811.076 - 869.01 ms
     </div>
-    <div class=\\"sc-ifAKCX fBXBdR\\">
-      <div>
-        <div class=\\"sc-EHOje fxIYbA sc-bdVaJa eWvHJG\\"
+    <div class=\\"sc-ifAKCX gVdyMJ\\">
+      <div class=\\"sc-EHOje hxHpbH\\">
+        <div class=\\"sc-bZQynM bHRdln sc-bdVaJa eWvHJG\\"
              font-size=\\"12px\\"
         >
           <span class=\\"sc-bwzfXH eKfWHj\\"
@@ -659,7 +659,7 @@ exports[`Histogram when hovering over a non-empty bucket should have correct mar
           Requests
           <!-- /react-text -->
         </div>
-        <div class=\\"sc-bZQynM kYQrZU\\">
+        <div class=\\"sc-gzVnrw zwJEr\\">
           49
         </div>
       </div>
