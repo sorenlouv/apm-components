@@ -1,10 +1,12 @@
 import React from 'react';
+import d3 from 'd3';
 import Histogram from './Histogram';
 import response from './response.json';
+import { getTimeFormatter } from '../formatters';
 
 const buckets = getFormattedBuckets(response.buckets, response.bucketSize);
 
-function getFormattedBuckets(buckets, bucketSize) {
+export function getFormattedBuckets(buckets, bucketSize) {
   if (!buckets) {
     return null;
   }
@@ -31,15 +33,31 @@ export default class extends React.Component {
   }
 
   render() {
+    const xMax = d3.max(buckets, d => d.x);
     return (
-      <Histogram
-        buckets={buckets}
-        bucketSize={response.bucketSize}
-        transactionId={this.state.transactionId}
-        onClick={selectedBucket => {
-          this.setState({ transactionId: selectedBucket.transactionId });
-        }}
-      />
+      <div>
+        <Histogram
+          buckets={buckets}
+          bucketSize={response.bucketSize}
+          transactionId={this.state.transactionId}
+          onClick={selectedBucket => {
+            this.setState({ transactionId: selectedBucket.transactionId });
+          }}
+          formatXValue={getTimeFormatter(xMax)}
+          formatYValue={value => `${value} rpm`}
+          formatTooltipHeader={(hoveredX0, hoveredX) =>
+            `${hoveredX0 / 1000} - ${hoveredX / 1000} ms`}
+          tooltipLegendTitle="Requests"
+        />
+
+        <Histogram
+          xType="time"
+          buckets={buckets}
+          bucketSize={response.bucketSize}
+          formatYValue={value => `${value} occ.`}
+          tooltipLegendTitle="Occurences"
+        />
+      </div>
     );
   }
 }

@@ -317,6 +317,10 @@ exports[`when response has data Initially should have correct markup 1`] = `
              width=\\"800\\"
              height=\\"250\\"
         >
+          <g class=\\"rv-xy-plot__series rv-xy-plot__series--mark \\"
+             transform=\\"translate(55,25)\\"
+          >
+          </g>
         </svg>
       </div>
     </div>
@@ -938,18 +942,18 @@ exports[`when response has data when setting hoverIndex should display tooltip 1
 Array [
   Object {
     "color": "#3185FC",
-    "x": 1502283720000,
-    "y": 438.7044,
+    "text": "Avg.",
+    "value": 438.7044,
   },
   Object {
     "color": "#ECAE23",
-    "x": 1502283720000,
-    "y": 1557.383999999999,
+    "text": "95th",
+    "value": 1557.383999999999,
   },
   Object {
     "color": "#F98510",
-    "x": 1502283720000,
-    "y": 1820.3771200000006,
+    "text": "99th",
+    "value": 1820.3771200000006,
   },
 ]
 `;
@@ -1286,40 +1290,63 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
      rv-hint--verticalAlign-top\\"
              style=\\"left: 420px; bottom: 40px; position: absolute;\\"
         >
-          <div style=\\"border: 1px solid #eee; background: rgb(255, 255, 255); color: rgb(0, 0, 0); margin-left: 20px;\\">
-            <div>
+          <div class=\\"sc-htpNat jejoiB\\">
+            <div class=\\"sc-bxivhb etAnDE\\">
               1502283720
             </div>
-            <p>
-              <!-- react-text: 103 -->
-              :
-              <!-- /react-text -->
-              <!-- react-text: 104 -->
-              438.7044
-              <!-- /react-text -->
-            </p>
-            <p>
-              <!-- react-text: 106 -->
-              95th
-              <!-- /react-text -->
-              <!-- react-text: 107 -->
-              :
-              <!-- /react-text -->
-              <!-- react-text: 108 -->
-              1557.383999999999
-              <!-- /react-text -->
-            </p>
-            <p>
-              <!-- react-text: 110 -->
-              99th
-              <!-- /react-text -->
-              <!-- react-text: 111 -->
-              :
-              <!-- /react-text -->
-              <!-- react-text: 112 -->
-              1820.3771200000006
-              <!-- /react-text -->
-            </p>
+            <div class=\\"sc-ifAKCX fBXBdR\\">
+              <div>
+                <div class=\\"sc-EHOje fxIYbA sc-bdVaJa eWvHJG\\"
+                     font-size=\\"12px\\"
+                >
+                  <span class=\\"sc-bwzfXH bzaemo\\"
+                        color=\\"#3185FC\\"
+                        radius=\\"8\\"
+                  >
+                  </span>
+                  <!-- react-text: 106 -->
+                  Avg.
+                  <!-- /react-text -->
+                </div>
+                <div class=\\"sc-bZQynM kYQrZU\\">
+                  438.7044
+                </div>
+              </div>
+              <div>
+                <div class=\\"sc-EHOje fxIYbA sc-bdVaJa eWvHJG\\"
+                     font-size=\\"12px\\"
+                >
+                  <span class=\\"sc-bwzfXH jmAhPm\\"
+                        color=\\"#ECAE23\\"
+                        radius=\\"8\\"
+                  >
+                  </span>
+                  <!-- react-text: 111 -->
+                  95th
+                  <!-- /react-text -->
+                </div>
+                <div class=\\"sc-bZQynM kYQrZU\\">
+                  1557.383999999999
+                </div>
+              </div>
+              <div>
+                <div class=\\"sc-EHOje fxIYbA sc-bdVaJa eWvHJG\\"
+                     font-size=\\"12px\\"
+                >
+                  <span class=\\"sc-bwzfXH klrMPo\\"
+                        color=\\"#F98510\\"
+                        radius=\\"8\\"
+                  >
+                  </span>
+                  <!-- react-text: 116 -->
+                  99th
+                  <!-- /react-text -->
+                </div>
+                <div class=\\"sc-bZQynM kYQrZU\\">
+                  1820.3771200000006
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -2217,10 +2244,14 @@ exports[`when response has no data Initially should have correct markup 1`] = `
              width=\\"100\\"
              height=\\"250\\"
         >
+          <g class=\\"rv-xy-plot__series rv-xy-plot__series--mark \\"
+             transform=\\"translate(55,25)\\"
+          >
+          </g>
         </svg>
       </div>
     </div>
-    <!-- react-empty: 53 -->
+    <!-- react-empty: 54 -->
   </div>
 </div>
 "

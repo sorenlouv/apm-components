@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import SelectionMarker from './SelectionMarker';
 
 import { MarkSeries, VerticalGridLines } from 'react-vis';
-import { Tooltip } from './Tooltip';
+import Tooltip from '../../Tooltip';
 
 class InteractivePlot extends PureComponent {
   getHoveredPoints = hoverIndex => {
     if (hoverIndex == null) {
-      return;
+      return [];
     }
 
     return this.props.series.map(serie => ({
@@ -37,22 +37,24 @@ class InteractivePlot extends PureComponent {
 
     const hoveredPoints = this.getHoveredPoints(hoverIndex);
     const defaultSerie = series[0].data;
-    const verticalLineX = _.get(defaultSerie[hoverIndex], 'x');
+    const hoveredX = _.get(defaultSerie[hoverIndex], 'x');
+    const tooltipPoints = hoveredPoints.map(({ y, color }, i) => {
+      return {
+        color,
+        value: tickFormatY(y),
+        text: series[i].titleShort || series[i].title
+      };
+    });
 
     return (
       <XYPlot>
-        {!!hoveredPoints &&
+        {!_.isEmpty(hoveredPoints) &&
           !isDrawing && (
-            <Tooltip
-              hoveredPoints={hoveredPoints}
-              series={series}
-              valueFormatter={tickFormatY}
-              y={0}
-            />
+            <Tooltip tooltipPoints={tooltipPoints} x={hoveredX} y={0} />
           )}
         {!!hoveredPoints &&
           !isDrawing && <MarkSeries data={hoveredPoints} colorType="literal" />}
-        {verticalLineX && <VerticalGridLines tickValues={[verticalLineX]} />}
+        {hoveredX && <VerticalGridLines tickValues={[hoveredX]} />}
 
         {isDrawing &&
           selectionEnd !== null && (

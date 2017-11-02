@@ -11,4 +11,4 @@ import Modal from './Modal';
 import './index.css';
 import Perf from 'react-addons-perf';
 
-ReactDOM.render(<Modal />, document.getElementById('root'));
+ReactDOM.render(<Histogram />, document.getElementById('root'));

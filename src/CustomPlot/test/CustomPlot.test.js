@@ -115,7 +115,8 @@ describe('when response has data', () => {
     });
 
     it('should display tooltip', () => {
-      expect(wrapper.find('Tooltip').prop('hoveredPoints')).toMatchSnapshot();
+      expect(wrapper.find('Tooltip').length).toEqual(1);
+      expect(wrapper.find('Tooltip').prop('tooltipPoints')).toMatchSnapshot();
     });
 
     it('should display vertical line at correct time', () => {

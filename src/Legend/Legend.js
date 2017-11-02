@@ -33,10 +33,17 @@ export default class Legend extends PureComponent {
       text,
       fontSize = fontSizes.small,
       radius = units.minus - 1,
-      isDisabled = false
+      isDisabled = false,
+      className
     } = this.props;
+
     return (
-      <Container onClick={onClick} isDisabled={isDisabled} fontSize={fontSize}>
+      <Container
+        onClick={onClick}
+        isDisabled={isDisabled}
+        fontSize={fontSize}
+        className={className}
+      >
         <Indicator color={color} radius={radius} />
         {text}
       </Container>

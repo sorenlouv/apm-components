@@ -10,7 +10,9 @@ const MARGINS = {
   bottom: 0
 };
 
-const TraceContainer = styled.div`padding: 15px 0;`;
+const TraceContainer = styled.div`
+  padding: 15px 0;
+`;
 const TraceBar = styled.div`
   position: relative;
   height: 50px;
