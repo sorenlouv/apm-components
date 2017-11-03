@@ -8,15 +8,36 @@ import { MarkSeries, VerticalGridLines } from 'react-vis';
 import Tooltip from '../../Tooltip';
 
 class InteractivePlot extends PureComponent {
-  getHoveredPoints = hoverIndex => {
+  getMarkPoints = hoverIndex => {
+    if (hoverIndex == null) {
+      return [];
+    }
+
+    return this.props.series.map(serie => {
+      const { x, y } = serie.data[hoverIndex];
+      return {
+        x,
+        y,
+        color: serie.color
+      };
+    });
+  };
+
+  getTooltipPoints = hoverIndex => {
     if (hoverIndex == null) {
       return [];
     }
 
     return this.props.series.map(serie => ({
-      ...serie.data[hoverIndex],
-      color: serie.color
+      color: serie.color,
+      value: this.props.tickFormatY(serie.data[hoverIndex].y),
+      text: serie.titleShort || serie.title
     }));
+  };
+
+  getHoveredX = hoverIndex => {
+    const defaultSerie = this.props.series[0].data;
+    return _.get(defaultSerie[hoverIndex], 'x');
   };
 
   render() {
@@ -24,7 +45,6 @@ class InteractivePlot extends PureComponent {
       hoverIndex,
       series,
       XYPlot,
-      tickFormatY,
       x,
       isDrawing,
       selectionStart,
@@ -35,28 +55,17 @@ class InteractivePlot extends PureComponent {
       return null;
     }
 
-    const hoveredPoints = this.getHoveredPoints(hoverIndex);
-    const defaultSerie = series[0].data;
-    const hoveredX = _.get(defaultSerie[hoverIndex], 'x');
-    const tooltipPoints = hoveredPoints.map(({ y, color }, i) => {
-      return {
-        color,
-        value: tickFormatY(y),
-        text: series[i].titleShort || series[i].title
-      };
-    });
-    const shouldShowTooltip = !_.isEmpty(hoveredPoints) && !isDrawing;
-    const shouldShowMark = !_.isEmpty(hoveredPoints) && !isDrawing;
+    const tooltipPoints = this.getTooltipPoints(hoverIndex);
+    const markPoints = this.getMarkPoints(hoverIndex);
+    const hoveredX = this.getHoveredX(hoverIndex);
 
     return (
       <XYPlot>
-        {shouldShowTooltip && (
+        {hoveredX && (
           <Tooltip tooltipPoints={tooltipPoints} x={hoveredX} y={0} />
         )}
 
-        {shouldShowMark && (
-          <MarkSeries data={hoveredPoints} colorType="literal" />
-        )}
+        {hoveredX && <MarkSeries data={markPoints} colorType="literal" />}
         {hoveredX && <VerticalGridLines tickValues={[hoveredX]} />}
 
         {isDrawing &&
