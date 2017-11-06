@@ -2,7 +2,7 @@ import React from 'react';
 import d3 from 'd3';
 import Histogram from './Histogram';
 import response from './response.json';
-import { getTimeFormatter } from '../formatters';
+import { getTimeFormatter, asRpm, getUnit } from '../formatters';
 
 const buckets = getFormattedBuckets(response.buckets, response.bucketSize);
 
@@ -34,6 +34,8 @@ export default class extends React.Component {
 
   render() {
     const xMax = d3.max(buckets, d => d.x);
+    const timeFormatter = getTimeFormatter(xMax);
+    const unit = getUnit(xMax);
     return (
       <div>
         <Histogram
@@ -43,10 +45,13 @@ export default class extends React.Component {
           onClick={selectedBucket => {
             this.setState({ transactionId: selectedBucket.transactionId });
           }}
-          formatXValue={getTimeFormatter(xMax)}
-          formatYValue={value => `${value} rpm`}
+          formatXValue={timeFormatter}
+          formatYValue={asRpm}
           formatTooltipHeader={(hoveredX0, hoveredX) =>
-            `${hoveredX0 / 1000} - ${hoveredX / 1000} ms`}
+            `${timeFormatter(hoveredX0, false)} - ${timeFormatter(
+              hoveredX,
+              false
+            )} ${unit}`}
           tooltipLegendTitle="Requests"
         />
 
@@ -54,7 +59,7 @@ export default class extends React.Component {
           xType="time"
           buckets={buckets}
           bucketSize={response.bucketSize}
-          formatYValue={value => `${value} occ.`}
+          formatYValue={value => `${value} err.`}
           tooltipLegendTitle="Occurences"
         />
       </div>

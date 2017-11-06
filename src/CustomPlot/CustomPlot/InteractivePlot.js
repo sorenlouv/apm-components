@@ -9,7 +9,7 @@ import Tooltip from '../../Tooltip';
 
 class InteractivePlot extends PureComponent {
   getMarkPoints = hoverIndex => {
-    if (hoverIndex == null) {
+    if (!this.props.series[0].data[hoverIndex]) {
       return [];
     }
 
@@ -24,7 +24,7 @@ class InteractivePlot extends PureComponent {
   };
 
   getTooltipPoints = hoverIndex => {
-    if (hoverIndex == null) {
+    if (!this.props.series[0].data[hoverIndex]) {
       return [];
     }
 

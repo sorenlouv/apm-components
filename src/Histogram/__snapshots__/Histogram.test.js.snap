@@ -67,7 +67,7 @@ exports[`Histogram Initially should have default markup 1`] = `
                 class=\\"rv-xy-plot__axis__tick__text\\"
                 style=\\"stroke-width: 1px;\\"
           >
-            0 test
+            0 ms
           </text>
         </g>
         <g transform=\\"translate(114.04603267757892, 0)\\"
@@ -88,7 +88,7 @@ exports[`Histogram Initially should have default markup 1`] = `
                 class=\\"rv-xy-plot__axis__tick__text\\"
                 style=\\"stroke-width: 1px;\\"
           >
-            500000 test
+            500 ms
           </text>
         </g>
         <g transform=\\"translate(228.09206535515784, 0)\\"
@@ -109,7 +109,7 @@ exports[`Histogram Initially should have default markup 1`] = `
                 class=\\"rv-xy-plot__axis__tick__text\\"
                 style=\\"stroke-width: 1px;\\"
           >
-            1000000 test
+            1,000 ms
           </text>
         </g>
         <g transform=\\"translate(342.13809803273676, 0)\\"
@@ -130,7 +130,7 @@ exports[`Histogram Initially should have default markup 1`] = `
                 class=\\"rv-xy-plot__axis__tick__text\\"
                 style=\\"stroke-width: 1px;\\"
           >
-            1500000 test
+            1,500 ms
           </text>
         </g>
         <g transform=\\"translate(456.1841307103157, 0)\\"
@@ -151,7 +151,7 @@ exports[`Histogram Initially should have default markup 1`] = `
                 class=\\"rv-xy-plot__axis__tick__text\\"
                 style=\\"stroke-width: 1px;\\"
           >
-            2000000 test
+            2,000 ms
           </text>
         </g>
         <g transform=\\"translate(570.2301633878945, 0)\\"
@@ -172,7 +172,7 @@ exports[`Histogram Initially should have default markup 1`] = `
                 class=\\"rv-xy-plot__axis__tick__text\\"
                 style=\\"stroke-width: 1px;\\"
           >
-            2500000 test
+            2,500 ms
           </text>
         </g>
         <g transform=\\"translate(684.2761960654735, 0)\\"
@@ -193,7 +193,7 @@ exports[`Histogram Initially should have default markup 1`] = `
                 class=\\"rv-xy-plot__axis__tick__text\\"
                 style=\\"stroke-width: 1px;\\"
           >
-            3000000 test
+            3,000 ms
           </text>
         </g>
       </g>
@@ -219,7 +219,7 @@ exports[`Histogram Initially should have default markup 1`] = `
                 transform=\\"translate(-8, 0)\\"
                 class=\\"rv-xy-plot__axis__tick__text\\"
           >
-            0 rpm
+            0.0 rpm
           </text>
         </g>
         <g transform=\\"translate(0, 30)\\"
@@ -255,7 +255,7 @@ exports[`Histogram Initially should have default markup 1`] = `
                 transform=\\"translate(-8, 0)\\"
                 class=\\"rv-xy-plot__axis__tick__text\\"
           >
-            55 rpm
+            55.0 rpm
           </text>
         </g>
       </g>
@@ -639,11 +639,11 @@ exports[`Histogram when hovering over a non-empty bucket should have correct mar
 "
 <div class=\\"rv-hint  rv-hint--horizontalAlign-right
      rv-hint--verticalAlign-bottom\\"
-     style=\\"left: 248.21428571428572px; top: 50px; position: absolute;\\"
+     style=\\"margin-left: 1%; left: 248.21428571428572px; top: 50px; position: absolute;\\"
 >
   <div class=\\"sc-htpNat jejoiB\\">
     <div class=\\"sc-bxivhb etAnDE\\">
-      811.076 - 869.01 ms
+      811 - 869 ms
     </div>
     <div class=\\"sc-ifAKCX gVdyMJ\\">
       <div class=\\"sc-EHOje hxHpbH\\">
@@ -660,7 +660,7 @@ exports[`Histogram when hovering over a non-empty bucket should have correct mar
           <!-- /react-text -->
         </div>
         <div class=\\"sc-gzVnrw zwJEr\\">
-          49
+          49.0
         </div>
       </div>
     </div>

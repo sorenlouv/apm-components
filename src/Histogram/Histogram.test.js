@@ -1,9 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import toDiffableHtml from 'diffable-html';
-import { HistogramWithoutHOC } from './Histogram';
+import d3 from 'd3';
+import { HistogramInner } from './Histogram';
 import { getFormattedBuckets } from './index';
 import response from './response.json';
+import { getTimeFormatter, asRpm, getUnit } from '../formatters';
 
 describe('Histogram', () => {
   let wrapper;
@@ -11,16 +13,23 @@ describe('Histogram', () => {
 
   beforeEach(() => {
     const buckets = getFormattedBuckets(response.buckets, response.bucketSize);
+    const xMax = d3.max(buckets, d => d.x);
+    const timeFormatter = getTimeFormatter(xMax);
+    const unit = getUnit(xMax);
+
     wrapper = mount(
-      <HistogramWithoutHOC
+      <HistogramInner
         buckets={buckets}
         bucketSize={response.bucketSize}
         transactionId="myTransactionId"
         onClick={onClick}
-        formatXValue={value => `${value} test`}
-        formatYValue={value => `${value} rpm`}
+        formatXValue={timeFormatter}
+        formatYValue={asRpm}
         formatTooltipHeader={(hoveredX0, hoveredX) =>
-          `${hoveredX0 / 1000} - ${hoveredX / 1000} ms`}
+          `${timeFormatter(hoveredX0, false)} - ${timeFormatter(
+            hoveredX,
+            false
+          )} ${unit}`}
         tooltipLegendTitle="Requests"
         width={800}
       />
@@ -66,9 +75,9 @@ describe('Histogram', () => {
       const tooltips = wrapper.find('Tooltip');
 
       expect(tooltips.length).toBe(1);
-      expect(tooltips.prop('header')).toBe('811.076 - 869.01 ms');
+      expect(tooltips.prop('header')).toBe('811 - 869 ms');
       expect(tooltips.prop('tooltipPoints')).toEqual([
-        { color: 'rgb(172, 189, 216)', text: 'Requests', value: 49 }
+        { color: 'rgb(172, 189, 216)', text: 'Requests', value: '49.0' }
       ]);
       expect(tooltips.prop('x')).toEqual(869010);
       expect(tooltips.prop('y')).toEqual(27.5);

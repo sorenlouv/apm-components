@@ -28,7 +28,7 @@ const XY_MARGIN = {
 
 const X_TICK_TOTAL = 10;
 
-export class HistogramWithoutHOC extends PureComponent {
+export class HistogramInner extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,11 +50,11 @@ export class HistogramWithoutHOC extends PureComponent {
     this.setState({ hoveredBucket: null });
   };
 
-  getChartData(items, transactionId) {
+  getChartData(items, selectedItem) {
     return items
       .map(item => ({
         ...item,
-        color: item.transactionId === transactionId ? colors.blue1 : undefined
+        color: item === selectedItem ? colors.blue1 : undefined
       }))
       .map(item => {
         const padding = (item.x - item.x0) / 20;
@@ -85,7 +85,7 @@ export class HistogramWithoutHOC extends PureComponent {
     const xMax = d3.max(buckets, d => d.x);
     const yMin = 0;
     const yMax = d3.max(buckets, d => d.y);
-    const chartData = this.getChartData(buckets, transactionId);
+    const chartData = this.getChartData(buckets, selectedBucket);
 
     const x = scaleLinear()
       .domain([xMin, xMax])
@@ -122,14 +122,12 @@ export class HistogramWithoutHOC extends PureComponent {
           tickTotal={X_TICK_TOTAL}
           tickFormat={formatXValue}
         />
-
         <YAxis
           tickSize={0}
           hideLine
           tickValues={yTickValues}
           tickFormat={formatYValue}
         />
-
         {this.props.onClick &&
           _.get(this.state.hoveredBucket, 'y') > 0 && (
             <SingleRect
@@ -143,11 +141,14 @@ export class HistogramWithoutHOC extends PureComponent {
 
         {shouldShowTooltip && (
           <Tooltip
+            style={{
+              marginLeft: '1%'
+            }}
             header={formatTooltipHeader(hoveredX0, hoveredX)}
             tooltipPoints={[
               {
                 color: barColor,
-                value: hoveredY,
+                value: formatYValue(hoveredY, false),
                 text: tooltipLegendTitle
               }
             ]}
@@ -155,7 +156,6 @@ export class HistogramWithoutHOC extends PureComponent {
             y={yDomain[1] / 2}
           />
         )}
-
         {selectedBucket && (
           <SingleRect
             x={x(selectedBucket.x0)}
@@ -166,7 +166,6 @@ export class HistogramWithoutHOC extends PureComponent {
             }}
           />
         )}
-
         <VerticalRectSeries
           colorType="literal"
           color="rgb(172, 189, 216)"
@@ -176,10 +175,8 @@ export class HistogramWithoutHOC extends PureComponent {
             ry: '2px'
           }}
         />
-
         {isTimeSeries &&
           hoveredX > 0 && <VerticalGridLines tickValues={[hoveredX]} />}
-
         <Voronoi
           extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
           nodes={this.props.buckets.map(item => ({
@@ -197,7 +194,7 @@ export class HistogramWithoutHOC extends PureComponent {
   }
 }
 
-HistogramWithoutHOC.propTypes = {
+HistogramInner.propTypes = {
   width: PropTypes.number.isRequired,
   transactionId: PropTypes.string,
   bucketSize: PropTypes.number.isRequired,
@@ -210,10 +207,10 @@ HistogramWithoutHOC.propTypes = {
   tooltipLegendTitle: PropTypes.string
 };
 
-HistogramWithoutHOC.defaultProps = {
+HistogramInner.defaultProps = {
   formatTooltipHeader: () => null,
   formatYValue: value => value,
   xType: 'linear'
 };
 
-export default makeWidthFlexible(HistogramWithoutHOC);
+export default makeWidthFlexible(HistogramInner);
