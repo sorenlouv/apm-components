@@ -142,7 +142,8 @@ export class HistogramInner extends PureComponent {
         {shouldShowTooltip && (
           <Tooltip
             style={{
-              marginLeft: '1%'
+              marginLeft: '1%',
+              marginRight: '1%'
             }}
             header={formatTooltipHeader(hoveredX0, hoveredX)}
             tooltipPoints={[

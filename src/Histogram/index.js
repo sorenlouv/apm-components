@@ -1,10 +1,10 @@
 import React from 'react';
 import d3 from 'd3';
 import Histogram from './Histogram';
-import response from './response.json';
-import { getTimeFormatter, asRpm, getUnit } from '../formatters';
+import responseTimeData from './data/responseTime.json';
+import errorOccurencesData from './data/errorOccurences.json';
 
-const buckets = getFormattedBuckets(response.buckets, response.bucketSize);
+import { getTimeFormatter, asRpm, getUnit } from '../formatters';
 
 export function getFormattedBuckets(buckets, bucketSize) {
   if (!buckets) {
@@ -33,14 +33,25 @@ export default class extends React.Component {
   }
 
   render() {
-    const xMax = d3.max(buckets, d => d.x);
+    const responseTimeBuckets = getFormattedBuckets(
+      responseTimeData.buckets,
+      responseTimeData.bucketSize
+    );
+
+    const xMax = d3.max(responseTimeBuckets, d => d.x);
     const timeFormatter = getTimeFormatter(xMax);
     const unit = getUnit(xMax);
+
+    const errorOccurencesBuckets = getFormattedBuckets(
+      errorOccurencesData.buckets,
+      errorOccurencesData.bucketSize
+    );
+
     return (
       <div>
         <Histogram
-          buckets={buckets}
-          bucketSize={response.bucketSize}
+          buckets={responseTimeBuckets}
+          bucketSize={responseTimeData.bucketSize}
           transactionId={this.state.transactionId}
           onClick={selectedBucket => {
             this.setState({ transactionId: selectedBucket.transactionId });
@@ -57,8 +68,8 @@ export default class extends React.Component {
 
         <Histogram
           xType="time"
-          buckets={buckets}
-          bucketSize={response.bucketSize}
+          buckets={errorOccurencesBuckets}
+          bucketSize={errorOccurencesData.bucketSize}
           formatYValue={value => `${value} err.`}
           tooltipLegendTitle="Occurences"
         />

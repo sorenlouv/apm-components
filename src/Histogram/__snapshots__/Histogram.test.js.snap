@@ -639,7 +639,7 @@ exports[`Histogram when hovering over a non-empty bucket should have correct mar
 "
 <div class=\\"rv-hint  rv-hint--horizontalAlign-right
      rv-hint--verticalAlign-bottom\\"
-     style=\\"margin-left: 1%; left: 248.21428571428572px; top: 50px; position: absolute;\\"
+     style=\\"margin-left: 1%; margin-right: 1%; left: 248.21428571428572px; top: 50px; position: absolute;\\"
 >
   <div class=\\"sc-htpNat jejoiB\\">
     <div class=\\"sc-bxivhb etAnDE\\">

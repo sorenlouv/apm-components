@@ -4,7 +4,7 @@ import toDiffableHtml from 'diffable-html';
 import d3 from 'd3';
 import { HistogramInner } from './Histogram';
 import { getFormattedBuckets } from './index';
-import response from './response.json';
+import response from './data/responseTime.json';
 import { getTimeFormatter, asRpm, getUnit } from '../formatters';
 
 describe('Histogram', () => {
