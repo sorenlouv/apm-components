@@ -10,12 +10,12 @@ import VoronoiPlot from '../CustomPlot/VoronoiPlot';
 import InteractivePlot from '../CustomPlot/InteractivePlot';
 
 describe('when response has data', () => {
-  let wrapper;
-  const onHover = jest.fn();
-  const onMouseLeave = jest.fn();
-  const onSelectionEnd = jest.fn();
+  let wrapper, onHover, onMouseLeave, onSelectionEnd;
 
   beforeEach(() => {
+    onHover = jest.fn();
+    onMouseLeave = jest.fn();
+    onSelectionEnd = jest.fn();
     wrapper = mount(
       <InnerCustomPlot
         series={getSeries({
@@ -179,6 +179,50 @@ describe('when response has data', () => {
     });
   });
 
+  describe('when dragging from left to right', () => {
+    beforeEach(() => {
+      wrapper
+        .find('.rv-voronoi__cell')
+        .at(10)
+        .simulate('mouseDown');
+
+      wrapper
+        .find('.rv-voronoi__cell')
+        .at(20)
+        .simulate('mouseOver')
+        .simulate('mouseUp');
+    });
+
+    it('should call onSelectionEnd', () => {
+      expect(onSelectionEnd).toHaveBeenCalledWith({
+        start: 1502283420000,
+        end: 1502284020000
+      });
+    });
+  });
+
+  describe('when dragging from right to left', () => {
+    beforeEach(() => {
+      wrapper
+        .find('.rv-voronoi__cell')
+        .at(20)
+        .simulate('mouseDown');
+
+      wrapper
+        .find('.rv-voronoi__cell')
+        .at(10)
+        .simulate('mouseOver')
+        .simulate('mouseUp');
+    });
+
+    it('should call onSelectionEnd', () => {
+      expect(onSelectionEnd).toHaveBeenCalledWith({
+        start: 1502283420000,
+        end: 1502284020000
+      });
+    });
+  });
+
   it('should call onMouseLeave when leaving the XY plot', () => {
     wrapper.find('VoronoiPlot svg.rv-xy-plot__inner').simulate('mouseLeave');
     expect(onMouseLeave).toHaveBeenCalledWith(expect.any(Object));
@@ -192,8 +236,8 @@ describe('when response has no data', () => {
   let wrapper;
   beforeEach(() => {
     const series = getSeries({
-      start: 801187200000,
-      end: 801273600000,
+      start: 1451606400000,
+      end: 1451610000000,
       chartsData: responseWithoutData,
       handler: getResponseTimeSeries
     });

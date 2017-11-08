@@ -2026,10 +2026,10 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  801190800000
+                  1451606400000
                 </text>
               </g>
-              <g transform=\\"translate(2.142857142857143, 0)\\"
+              <g transform=\\"translate(1.25, 0)\\"
                  class=\\"rv-xy-plot__axis__tick\\"
               >
                 <line x1=\\"0\\"
@@ -2044,10 +2044,10 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  801201600000
+                  1451606700000
                 </text>
               </g>
-              <g transform=\\"translate(4.285714285714286, 0)\\"
+              <g transform=\\"translate(2.5, 0)\\"
                  class=\\"rv-xy-plot__axis__tick\\"
               >
                 <line x1=\\"0\\"
@@ -2062,10 +2062,10 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  801212400000
+                  1451607000000
                 </text>
               </g>
-              <g transform=\\"translate(6.428571428571428, 0)\\"
+              <g transform=\\"translate(3.75, 0)\\"
                  class=\\"rv-xy-plot__axis__tick\\"
               >
                 <line x1=\\"0\\"
@@ -2080,10 +2080,10 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  801223200000
+                  1451607300000
                 </text>
               </g>
-              <g transform=\\"translate(8.571428571428571, 0)\\"
+              <g transform=\\"translate(5, 0)\\"
                  class=\\"rv-xy-plot__axis__tick\\"
               >
                 <line x1=\\"0\\"
@@ -2098,10 +2098,10 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  801234000000
+                  1451607600000
                 </text>
               </g>
-              <g transform=\\"translate(10.714285714285715, 0)\\"
+              <g transform=\\"translate(6.25, 0)\\"
                  class=\\"rv-xy-plot__axis__tick\\"
               >
                 <line x1=\\"0\\"
@@ -2116,10 +2116,10 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  801244800000
+                  1451607900000
                 </text>
               </g>
-              <g transform=\\"translate(12.857142857142856, 0)\\"
+              <g transform=\\"translate(7.5, 0)\\"
                  class=\\"rv-xy-plot__axis__tick\\"
               >
                 <line x1=\\"0\\"
@@ -2134,7 +2134,97 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  801255600000
+                  1451608200000
+                </text>
+              </g>
+              <g transform=\\"translate(8.75, 0)\\"
+                 class=\\"rv-xy-plot__axis__tick\\"
+              >
+                <line x1=\\"0\\"
+                      x2=\\"0\\"
+                      y1=\\"0\\"
+                      y2=\\"0\\"
+                      class=\\"rv-xy-plot__axis__tick__line\\"
+                >
+                </line>
+                <text text-anchor=\\"middle\\"
+                      dy=\\"0.72em\\"
+                      transform=\\"translate(0, 8)\\"
+                      class=\\"rv-xy-plot__axis__tick__text\\"
+                >
+                  1451608500000
+                </text>
+              </g>
+              <g transform=\\"translate(10, 0)\\"
+                 class=\\"rv-xy-plot__axis__tick\\"
+              >
+                <line x1=\\"0\\"
+                      x2=\\"0\\"
+                      y1=\\"0\\"
+                      y2=\\"0\\"
+                      class=\\"rv-xy-plot__axis__tick__line\\"
+                >
+                </line>
+                <text text-anchor=\\"middle\\"
+                      dy=\\"0.72em\\"
+                      transform=\\"translate(0, 8)\\"
+                      class=\\"rv-xy-plot__axis__tick__text\\"
+                >
+                  1451608800000
+                </text>
+              </g>
+              <g transform=\\"translate(11.25, 0)\\"
+                 class=\\"rv-xy-plot__axis__tick\\"
+              >
+                <line x1=\\"0\\"
+                      x2=\\"0\\"
+                      y1=\\"0\\"
+                      y2=\\"0\\"
+                      class=\\"rv-xy-plot__axis__tick__line\\"
+                >
+                </line>
+                <text text-anchor=\\"middle\\"
+                      dy=\\"0.72em\\"
+                      transform=\\"translate(0, 8)\\"
+                      class=\\"rv-xy-plot__axis__tick__text\\"
+                >
+                  1451609100000
+                </text>
+              </g>
+              <g transform=\\"translate(12.5, 0)\\"
+                 class=\\"rv-xy-plot__axis__tick\\"
+              >
+                <line x1=\\"0\\"
+                      x2=\\"0\\"
+                      y1=\\"0\\"
+                      y2=\\"0\\"
+                      class=\\"rv-xy-plot__axis__tick__line\\"
+                >
+                </line>
+                <text text-anchor=\\"middle\\"
+                      dy=\\"0.72em\\"
+                      transform=\\"translate(0, 8)\\"
+                      class=\\"rv-xy-plot__axis__tick__text\\"
+                >
+                  1451609400000
+                </text>
+              </g>
+              <g transform=\\"translate(13.75, 0)\\"
+                 class=\\"rv-xy-plot__axis__tick\\"
+              >
+                <line x1=\\"0\\"
+                      x2=\\"0\\"
+                      y1=\\"0\\"
+                      y2=\\"0\\"
+                      class=\\"rv-xy-plot__axis__tick__line\\"
+                >
+                </line>
+                <text text-anchor=\\"middle\\"
+                      dy=\\"0.72em\\"
+                      transform=\\"translate(0, 8)\\"
+                      class=\\"rv-xy-plot__axis__tick__text\\"
+                >
+                  1451609700000
                 </text>
               </g>
               <g transform=\\"translate(15, 0)\\"
@@ -2152,7 +2242,7 @@ exports[`when response has no data Initially should have correct markup 1`] = `
                       transform=\\"translate(0, 8)\\"
                       class=\\"rv-xy-plot__axis__tick__text\\"
                 >
-                  801266400000
+                  1451610000000
                 </text>
               </g>
             </g>
@@ -2243,7 +2333,7 @@ exports[`when response has no data Initially should have correct markup 1`] = `
         </svg>
       </div>
     </div>
-    <!-- react-empty: 53 -->
+    <!-- react-empty: 68 -->
   </div>
 </div>
 "
@@ -2255,35 +2345,55 @@ Object {
     Object {
       "data": Array [
         Object {
-          "x": 801190800000,
+          "x": 1451606400000,
           "y": 1,
         },
         Object {
-          "x": 801201600000,
+          "x": 1451606700000,
           "y": 1,
         },
         Object {
-          "x": 801212400000,
+          "x": 1451607000000,
           "y": 1,
         },
         Object {
-          "x": 801223200000,
+          "x": 1451607300000,
           "y": 1,
         },
         Object {
-          "x": 801234000000,
+          "x": 1451607600000,
           "y": 1,
         },
         Object {
-          "x": 801244800000,
+          "x": 1451607900000,
           "y": 1,
         },
         Object {
-          "x": 801255600000,
+          "x": 1451608200000,
           "y": 1,
         },
         Object {
-          "x": 801266400000,
+          "x": 1451608500000,
+          "y": 1,
+        },
+        Object {
+          "x": 1451608800000,
+          "y": 1,
+        },
+        Object {
+          "x": 1451609100000,
+          "y": 1,
+        },
+        Object {
+          "x": 1451609400000,
+          "y": 1,
+        },
+        Object {
+          "x": 1451609700000,
+          "y": 1,
+        },
+        Object {
+          "x": 1451610000000,
           "y": 1,
         },
       ],
