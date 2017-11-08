@@ -179,7 +179,31 @@ describe('when response has data', () => {
     });
   });
 
-  describe('when dragging from left to right', () => {
+  describe('when dragging without releasing', () => {
+    beforeEach(() => {
+      wrapper
+        .find('.rv-voronoi__cell')
+        .at(10)
+        .simulate('mouseDown');
+
+      wrapper
+        .find('.rv-voronoi__cell')
+        .at(20)
+        .simulate('mouseOver');
+    });
+
+    it('should display drag marker', () => {
+      expect(
+        toDiffableHtml(wrapper.find('DragMarker').html())
+      ).toMatchSnapshot();
+    });
+
+    it('should not call onSelectionEnd', () => {
+      expect(onSelectionEnd).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('when dragging from left to right and releasing', () => {
     beforeEach(() => {
       wrapper
         .find('.rv-voronoi__cell')
@@ -201,7 +225,7 @@ describe('when response has data', () => {
     });
   });
 
-  describe('when dragging from right to left', () => {
+  describe('when dragging from right to left and releasing', () => {
     beforeEach(() => {
       wrapper
         .find('.rv-voronoi__cell')
