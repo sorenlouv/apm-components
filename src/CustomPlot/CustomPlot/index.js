@@ -13,7 +13,7 @@ import VoronoiPlot from './VoronoiPlot';
 const XY_HEIGHT = 250;
 const XY_MARGIN = {
   top: 25,
-  left: 55,
+  left: 70,
   right: 15
 };
 
