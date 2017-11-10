@@ -5,17 +5,45 @@ import d3 from 'd3';
 import { scaleLinear } from 'd3-scale';
 import _ from 'lodash';
 import { XYPlot } from 'react-vis';
+import styled from 'styled-components';
 import Legend from '../../Legend/Legend';
 import StaticPlot from './StaticPlot';
 import InteractivePlot from './InteractivePlot';
 import VoronoiPlot from './VoronoiPlot';
+import { unit, units, fontSizes, px, colors } from '../../variables';
 
-const XY_HEIGHT = 250;
+const XY_HEIGHT = unit * 16;
 const XY_MARGIN = {
-  top: 25,
-  left: 70,
-  right: 15
+  top: unit,
+  left: unit * 5,
+  right: unit,
+  bottom: unit * 2
 };
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Title = styled.div`
+  font-size: ${fontSizes.large};
+`;
+
+const Legends = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const SeriesValue = styled.span`
+  margin-left: ${px(units.quarter)};
+  color: ${colors.black};
+  display: inline-block;
+`;
+
+const LegendContent = styled.span`
+  white-space: nowrap;
+  color: ${colors.gray3};
+`;
 
 const getXScale = _.memoize(
   (xMin, xMax, width) => {
@@ -145,7 +173,7 @@ export class InnerCustomPlot extends PureComponent {
   };
 
   render() {
-    const { series, width } = this.props;
+    const { chartTitle, series, width } = this.props;
     if (_.isEmpty(series)) {
       return null;
     }
@@ -164,17 +192,31 @@ export class InnerCustomPlot extends PureComponent {
 
     return (
       <div>
-        {series
-          .filter(serie => !serie.isEmpty)
-          .map((serie, i) => (
-            <Legend
-              key={i}
-              onClick={() => this.clickLegend(i)}
-              color={serie.color}
-              isDisabled={this.state.seriesVisibility[i]}
-              text={serie.title}
-            />
-          ))}
+        <Header>
+          <Title>{chartTitle}</Title>
+          <Legends>
+            {series.filter(serie => !serie.isEmpty).map((serie, i) => {
+              const text = (
+                <LegendContent>
+                  {serie.title}{' '}
+                  {serie.legendValue && (
+                    <SeriesValue>{serie.legendValue}</SeriesValue>
+                  )}
+                </LegendContent>
+              );
+              return (
+                <Legend
+                  key={i}
+                  onClick={() => this.clickLegend(i)}
+                  disabled={this.state.seriesVisibility[i]}
+                  text={text}
+                  color={serie.color}
+                />
+              );
+            })}
+          </Legends>
+        </Header>
+
         <div style={{ position: 'relative', height: XY_HEIGHT }}>
           <StaticPlot
             series={enabledSeries}
@@ -220,7 +262,6 @@ InnerCustomPlot.propTypes = {
   onMouseLeave: PropTypes.func.isRequired,
   onSelectionEnd: PropTypes.func.isRequired,
   hoverIndex: PropTypes.number,
-  tickFormatX: PropTypes.func,
   tickFormatY: PropTypes.func
 };
 
