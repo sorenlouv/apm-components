@@ -14,7 +14,7 @@ class InteractivePlot extends PureComponent {
     }
 
     return this.props.series.map(serie => {
-      const { x, y } = serie.data[hoverIndex];
+      const { x, y } = serie.data[hoverIndex] || {};
       return {
         x,
         y,
@@ -30,7 +30,7 @@ class InteractivePlot extends PureComponent {
 
     return this.props.series.map(serie => ({
       color: serie.color,
-      value: this.props.tickFormatY(serie.data[hoverIndex].y),
+      value: this.props.tickFormatY(_.get(serie.data[hoverIndex], 'y')),
       text: serie.titleShort || serie.title
     }));
   };

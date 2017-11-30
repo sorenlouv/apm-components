@@ -42,6 +42,20 @@ export const colors = {
   blue1: colorBlue1,
   blue2: colorBlue2,
 
+  // custom APM palette
+  apmBrown: '#461a0a',
+  apmPurple: '#490092',
+  apmBlue: '#3185fc',
+  apmBetaBlue: '#e5f1f5',
+  apmBetaDarkBlue: '#0078a5',
+  apmRed: '#920000',
+  apmRed2: '#db1374',
+  apmGreen: '#00b3a4',
+  apmPink: '#feb6db',
+  apmOrange: '#f98510',
+  apmTan: '#bfa180',
+  apmYellow: '#ecae23',
+
   // Semantic colors
   link: colorBlue2,
   linkHover: colorBlue1
@@ -49,7 +63,8 @@ export const colors = {
 
 // Fonts
 export const fontFamily = '"Open Sans", Helvetica, Arial, sans-serif';
-export const fontFamilyCode = 'Inconsolata, monospace, serif';
+export const fontFamilyCode =
+  '"SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace';
 
 // Font sizes
 export const fontSize = '14px';
@@ -61,3 +76,12 @@ export const fontSizes = {
   xlarge: '20px',
   xxlarge: '30px'
 };
+
+export function truncate(width) {
+  return `
+      max-width: ${width};
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    `;
+}

@@ -192,9 +192,9 @@ describe('when response has data', () => {
         .simulate('mouseOver');
     });
 
-    it('should display drag marker', () => {
+    it('should display SelectionMarker', () => {
       expect(
-        toDiffableHtml(wrapper.find('DragMarker').html())
+        toDiffableHtml(wrapper.find('SelectionMarker').html())
       ).toMatchSnapshot();
     });
 
