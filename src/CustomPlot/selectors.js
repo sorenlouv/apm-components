@@ -1,12 +1,11 @@
 import d3 from 'd3';
+import { zipObject, difference } from 'lodash';
 import { createSelector } from 'reselect';
-import {
-  getFormattedResponseTime,
-  getFormattedRequestsPerMinute
-} from './utils';
+import { colors } from '../variables';
+import { asMillisWithDefault, asDecimal, tpmUnit } from '../formatters';
 
-export const getResponseTimeSeries = createSelector(
-  data => data.responseTimes.dates,
+const getResponseTimeSeriesSelector = createSelector(
+  data => data.dates,
   data => data.responseTimes.avg,
   data => data.responseTimes.p95,
   data => data.responseTimes.p99,
@@ -14,98 +13,97 @@ export const getResponseTimeSeries = createSelector(
   _getResponseTimeSeries
 );
 
+const getRpmSeriesSelector = createSelector(
+  chartData => chartData.dates,
+  chartData => chartData.tpmBuckets,
+  (chartData, props) => props.transactionType,
+  _getRpmSeries
+);
+
+export function getResponseTimeSerieOrEmpty({ start, end, chartsData }) {
+  return chartsData.totalHits === 0
+    ? getEmptySerie(start, end)
+    : getResponseTimeSeriesSelector(chartsData);
+}
+
 function _getResponseTimeSeries(dates, avg, p95, p99, weightedAverage) {
   return [
     {
       title: 'Avg.',
-      data: getResponseTimeValues(dates, avg),
-      legendValue: `${getFormattedResponseTime(weightedAverage / 1000)}`,
+      data: getChartValues(dates, avg),
+      legendValue: `${asMillisWithDefault(weightedAverage)}`,
       type: 'area',
-      color: '#3185FC',
-      areaColor: 'rgba(49, 133, 252, 0.1)'
+      color: colors.apmBlue,
+      areaColor: 'rgba(49, 133, 252, 0.1)' // apmBlue
     },
     {
       title: '95th percentile',
       titleShort: '95th',
-      data: getResponseTimeValues(dates, p95),
+      data: getChartValues(dates, p95),
       type: 'area',
-      color: '#ECAE23',
-      areaColor: 'rgba(236, 174, 35, 0.1)'
+      color: colors.apmYellow,
+      areaColor: 'rgba(236, 174, 35, 0.1)' // apmYellow
     },
     {
       title: '99th percentile',
       titleShort: '99th',
-      data: getResponseTimeValues(dates, p99),
+      data: getChartValues(dates, p99),
       type: 'area',
-      color: '#F98510',
-      areaColor: 'rgba(249, 133, 16, 0.1)'
+      color: colors.apmOrange,
+      areaColor: 'rgba(249, 133, 16, 0.1)' // apmOrange
     }
   ];
 }
 
-export const getRpmSeries = createSelector(
-  chartData => chartData.rpmPerStatusClass,
-  chartData => chartData.rpmPerStatusClassAverage,
-  _getRpmSeries
-);
-
-export const getSeries = ({ start, end, chartsData, handler }) => {
+export function getRpmSeriesOrEmpty({
+  start,
+  end,
+  chartsData,
+  transactionType
+}) {
   return chartsData.totalHits === 0
     ? getEmptySerie(start, end)
-    : handler(chartsData);
-};
-
-function _getRpmSeries(rpmPerStatusClass, rpmPerStatusClassAverage) {
-  return [
-    {
-      title: '2xx',
-      data: getRpmValues(rpmPerStatusClass.dates, rpmPerStatusClass['2xx']),
-      legendValue: `${getFormattedRequestsPerMinute(
-        rpmPerStatusClassAverage['2xx']
-      )}`,
-      type: 'line',
-      color: '#3185FC'
-    },
-    {
-      title: '3xx',
-      data: getRpmValues(rpmPerStatusClass.dates, rpmPerStatusClass['3xx']),
-      legendValue: `${getFormattedRequestsPerMinute(
-        rpmPerStatusClassAverage['3xx']
-      )}`,
-      type: 'line',
-      color: '#ECAE23'
-    },
-    {
-      title: '4xx',
-      data: getRpmValues(rpmPerStatusClass.dates, rpmPerStatusClass['4xx']),
-      legendValue: `${getFormattedRequestsPerMinute(
-        rpmPerStatusClassAverage['4xx']
-      )}`,
-      type: 'line',
-      color: '#00B3A4'
-    },
-    {
-      title: '5xx',
-      data: getRpmValues(rpmPerStatusClass.dates, rpmPerStatusClass['5xx']),
-      legendValue: `${getFormattedRequestsPerMinute(
-        rpmPerStatusClassAverage['5xx']
-      )}`,
-      type: 'line',
-      color: '#DB1374'
-    }
-  ];
+    : getRpmSeriesSelector(chartsData, { transactionType });
 }
 
-function getResponseTimeValues(dates = [], yValues = []) {
-  return dates.map((x, i) => ({
-    x: new Date(x).getTime(),
-    y: yValues[i] / 1000 // convert to ms
-  }));
+function _getRpmSeries(dates, tpmBuckets, transactionType) {
+  const getColor = getColorByKey(tpmBuckets.map(({ key }) => key));
+
+  return tpmBuckets.map(bucket => {
+    return {
+      title: bucket.key,
+      data: getChartValues(dates, bucket.values),
+      legendValue: `${asDecimal(bucket.avg)} ${tpmUnit(transactionType)}`,
+      type: 'line',
+      color: getColor(bucket.key)
+    };
+  });
 }
 
-function getRpmValues(dates = [], yValues = []) {
+function getColorByKey(keys) {
+  const assignedColors = {
+    'HTTP 2xx': colors.apmGreen,
+    'HTTP 3xx': colors.apmYellow,
+    'HTTP 4xx': colors.apmOrange,
+    'HTTP 5xx': colors.apmRed2
+  };
+
+  const unknownKeys = difference(keys, Object.keys(assignedColors));
+  const unassignedColors = zipObject(unknownKeys, [
+    colors.apmBlue,
+    colors.apmPurple,
+    colors.apmPink,
+    colors.apmTan,
+    colors.apmRed,
+    colors.apmBrown
+  ]);
+
+  return key => assignedColors[key] || unassignedColors[key];
+}
+
+function getChartValues(dates = [], yValues = []) {
   return dates.map((x, i) => ({
-    x: new Date(x).getTime(),
+    x,
     y: yValues[i]
   }));
 }

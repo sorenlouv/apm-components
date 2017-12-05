@@ -4,7 +4,7 @@ import Histogram from './Histogram';
 import responseTimeData from './data/responseTime.json';
 import errorOccurencesData from './data/errorOccurences.json';
 
-import { getTimeFormatter, asRpm, getUnit } from '../formatters';
+import { getTimeFormatter, asInteger } from '../formatters';
 
 export function getFormattedBuckets(buckets, bucketSize) {
   if (!buckets) {
@@ -37,7 +37,6 @@ export default class extends React.Component {
 
     const xMax = d3.max(responseTimeBuckets, d => d.x);
     const timeFormatter = getTimeFormatter(xMax);
-    const unit = getUnit(xMax);
 
     const errorOccurencesBuckets = getFormattedBuckets(
       errorOccurencesData.buckets,
@@ -54,12 +53,9 @@ export default class extends React.Component {
             this.setState({ transactionId: selectedBucket.transactionId });
           }}
           formatXValue={timeFormatter}
-          formatYValue={asRpm}
+          formatYValue={asInteger}
           formatTooltipHeader={(hoveredX0, hoveredX) =>
-            `${timeFormatter(hoveredX0, false)} - ${timeFormatter(
-              hoveredX,
-              false
-            )} ${unit}`}
+            `${timeFormatter(hoveredX0, false)} - ${timeFormatter(hoveredX)}`}
           tooltipLegendTitle="Requests"
         />
 

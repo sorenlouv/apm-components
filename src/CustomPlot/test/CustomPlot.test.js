@@ -5,12 +5,15 @@ import toDiffableHtml from 'diffable-html';
 import { InnerCustomPlot } from '../CustomPlot/';
 import responseWithData from './responseWithData.json';
 import responseWithoutData from './responseWithoutData.json';
-import { getResponseTimeSeries, getSeries } from '../selectors';
+import { getResponseTimeSerieOrEmpty } from '../selectors';
 import VoronoiPlot from '../CustomPlot/VoronoiPlot';
 import InteractivePlot from '../CustomPlot/InteractivePlot';
 
 describe('when response has data', () => {
-  let wrapper, onHover, onMouseLeave, onSelectionEnd;
+  let wrapper;
+  let onHover;
+  let onMouseLeave;
+  let onSelectionEnd;
 
   beforeEach(() => {
     onHover = jest.fn();
@@ -18,9 +21,8 @@ describe('when response has data', () => {
     onSelectionEnd = jest.fn();
     wrapper = mount(
       <InnerCustomPlot
-        series={getSeries({
-          chartsData: responseWithData,
-          handler: getResponseTimeSeries
+        series={getResponseTimeSerieOrEmpty({
+          chartsData: responseWithData
         })}
         onHover={onHover}
         onMouseLeave={onMouseLeave}
@@ -259,11 +261,10 @@ describe('when response has no data', () => {
   const onSelectionEnd = jest.fn();
   let wrapper;
   beforeEach(() => {
-    const series = getSeries({
+    const series = getResponseTimeSerieOrEmpty({
       start: 1451606400000,
       end: 1451610000000,
-      chartsData: responseWithoutData,
-      handler: getResponseTimeSeries
+      chartsData: responseWithoutData
     });
 
     wrapper = mount(

@@ -5,7 +5,7 @@ import d3 from 'd3';
 import { HistogramInner } from './Histogram';
 import { getFormattedBuckets } from './index';
 import response from './data/responseTime.json';
-import { getTimeFormatter, asRpm, getUnit } from '../formatters';
+import { getTimeFormatter, asDecimal, timeUnit } from '../formatters';
 
 describe('Histogram', () => {
   let wrapper;
@@ -15,7 +15,7 @@ describe('Histogram', () => {
     const buckets = getFormattedBuckets(response.buckets, response.bucketSize);
     const xMax = d3.max(buckets, d => d.x);
     const timeFormatter = getTimeFormatter(xMax);
-    const unit = getUnit(xMax);
+    const unit = timeUnit(xMax);
 
     wrapper = mount(
       <HistogramInner
@@ -24,7 +24,7 @@ describe('Histogram', () => {
         transactionId="myTransactionId"
         onClick={onClick}
         formatXValue={timeFormatter}
-        formatYValue={asRpm}
+        formatYValue={asDecimal}
         formatTooltipHeader={(hoveredX0, hoveredX) =>
           `${timeFormatter(hoveredX0, false)} - ${timeFormatter(
             hoveredX,

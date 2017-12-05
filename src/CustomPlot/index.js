@@ -2,7 +2,7 @@ import React from 'react';
 import CustomPlot from './CustomPlot';
 import response from './test/responseWithData.json';
 // import Perf from 'react-addons-perf';
-import { getResponseTimeSeries, getRpmSeries, getSeries } from './selectors';
+import { getResponseTimeSerieOrEmpty, getRpmSeriesOrEmpty } from './selectors';
 
 // Perf.start();
 // setTimeout(() => {
@@ -21,13 +21,12 @@ class TwoCustomPlots extends React.Component {
     // Simulate http latency
     setTimeout(() => {
       this.setState({
-        responseTimeSeries: getSeries({
-          chartsData: response,
-          handler: getResponseTimeSeries
+        responseTimeSeries: getResponseTimeSerieOrEmpty({
+          chartsData: response
         }),
-        rpmSeries: getSeries({
+        rpmSeries: getRpmSeriesOrEmpty({
           chartsData: response,
-          handler: getRpmSeries
+          transactionType: 'requests'
         })
       });
     }, 50);
