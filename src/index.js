@@ -2,13 +2,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Histogram from './Histogram';
-import PerfTest from './PerfTest';
+import SimpleHistogram from './SimpleHistogram';
 import CustomPlot from './CustomPlot';
 import Timeline from './Timeline';
 import Legend from './Legend';
 import EmptyPlot from './EmptyPlot';
 import Modal from './Modal';
 import './index.css';
-import Perf from 'react-addons-perf';
 
-ReactDOM.render(<CustomPlot />, document.getElementById('root'));
+ReactDOM.render(<SimpleHistogram />, document.getElementById('root'));

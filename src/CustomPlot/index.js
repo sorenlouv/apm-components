@@ -1,14 +1,9 @@
 import React from 'react';
 import CustomPlot from './CustomPlot';
 import response from './test/responseWithData.json';
-// import Perf from 'react-addons-perf';
+
 import { getResponseTimeSerieOrEmpty, getRpmSeriesOrEmpty } from './selectors';
 
-// Perf.start();
-// setTimeout(() => {
-//   Perf.stop();
-//   Perf.printWasted();
-// }, 5000);
 
 class TwoCustomPlots extends React.Component {
   state = {
@@ -32,14 +27,6 @@ class TwoCustomPlots extends React.Component {
     }, 50);
   }
 
-  // componentDidMount() {
-  //   const interval = setInterval(() => {
-  //     this.setState({
-  //       hoverIndex: Math.floor(Math.random() * 30) + 0
-  //     });
-  //   }, 10);
-  //   setTimeout(() => clearInterval(interval), 5000);
-  // }
 
   onHover = hoverIndex => this.setState({ hoverIndex });
   onMouseLeave = () => this.setState({ hoverIndex: null });
