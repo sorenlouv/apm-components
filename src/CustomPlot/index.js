@@ -4,7 +4,6 @@ import response from './test/responseWithData.json';
 
 import { getResponseTimeSerieOrEmpty, getRpmSeriesOrEmpty } from './selectors';
 
-
 class TwoCustomPlots extends React.Component {
   state = {
     hoverIndex: null,
@@ -26,7 +25,6 @@ class TwoCustomPlots extends React.Component {
       });
     }, 50);
   }
-
 
   onHover = hoverIndex => this.setState({ hoverIndex });
   onMouseLeave = () => this.setState({ hoverIndex: null });

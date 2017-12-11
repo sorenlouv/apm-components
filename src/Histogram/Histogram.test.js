@@ -29,7 +29,8 @@ describe('Histogram', () => {
           `${timeFormatter(hoveredX0, false)} - ${timeFormatter(
             hoveredX,
             false
-          )} ${unit}`}
+          )} ${unit}`
+        }
         tooltipLegendTitle="Requests"
         width={800}
       />

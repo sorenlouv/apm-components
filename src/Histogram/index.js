@@ -21,7 +21,7 @@ export function getFormattedBuckets(buckets, bucketSize) {
   });
 }
 
-export default class extends React.Component {
+export default class HistogramWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -55,7 +55,8 @@ export default class extends React.Component {
           formatXValue={timeFormatter}
           formatYValue={asInteger}
           formatTooltipHeader={(hoveredX0, hoveredX) =>
-            `${timeFormatter(hoveredX0, false)} - ${timeFormatter(hoveredX)}`}
+            `${timeFormatter(hoveredX0, false)} - ${timeFormatter(hoveredX)}`
+          }
           tooltipLegendTitle="Requests"
         />
 

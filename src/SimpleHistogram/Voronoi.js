@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {voronoi} from 'd3-voronoi';
+import { voronoi } from 'd3-voronoi';
 
 const NOOP = f => f;
 
@@ -41,7 +41,8 @@ function Voronoi({
             pointerEvents: 'all',
             ...polygonStyle
           }}
-          key={i} />
+          key={i}
+        />
       ))}
     </g>
   );
@@ -63,9 +64,7 @@ Voronoi.defaultProps = {
 
 Voronoi.propTypes = {
   className: PropTypes.string,
-  extent: PropTypes.arrayOf(
-    PropTypes.arrayOf(PropTypes.number)
-  ).isRequired,
+  extent: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
   nodes: PropTypes.arrayOf(PropTypes.object).isRequired,
   onBlur: PropTypes.func,
   onClick: PropTypes.func,

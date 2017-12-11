@@ -1,5 +1,6 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import Modal from './Modal'; // eslint-disable-line
+import Modal from './Modal';
 
 export default class ModalView extends React.Component {
   state = { isOpen: true };

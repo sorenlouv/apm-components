@@ -1,3 +1,4 @@
+/* eslint-disable*/
 import React, { PureComponent } from 'react';
 import { makePure } from './utils';
 

@@ -30,10 +30,10 @@ const match = matchPath('/users/123', {
   strict: false
 });
 
-export default () => {
+export default function Breadcrumbs() {
   return (
     <Router>
       <Route {...match} />
     </Router>
   );
-};
+}
