@@ -9,10 +9,11 @@
   },
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
-  "plugins": ["react", "prettier"],
   "rules": {
+    "no-console": "off",
     "react/prop-types": "off",
     "prettier/prettier": [
       "error",
@@ -23,5 +24,11 @@
     ],
     "no-unused-vars": ["error", { "ignoreRestSiblings": true }]
   },
-  "extends": ["plugin:react/recommended", "prettier", "prettier/react"]
+  "plugins": ["react", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/react"
+  ]
 }
