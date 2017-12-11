@@ -57,7 +57,7 @@ export default function TimelineWrapper() {
               { start: 90, duration: 10 }
             ].map(({ start, duration }, i) => {
               return (
-                <TraceContainer>
+                <TraceContainer key={i}>
                   <TraceBar
                     style={{ left: `${start}%`, width: `${duration}%` }}
                   />
