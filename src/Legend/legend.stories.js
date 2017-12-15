@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf, linkTo } from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import { colors } from '../variables';
 import Legend from './Legend';
 

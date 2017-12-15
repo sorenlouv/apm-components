@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf, linkTo } from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import CustomPlot from './CustomPlot';
 import response from './test/responseWithData.json';
 

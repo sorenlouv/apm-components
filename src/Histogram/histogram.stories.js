@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf, linkTo } from '@storybook/react';
+import { storiesOf } from '@storybook/react';
 import d3 from 'd3';
 import Histogram from './Histogram';
 import responseTimeData from './data/responseTime.json';
