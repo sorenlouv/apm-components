@@ -1,4 +1,5 @@
 import React from 'react';
+import { storiesOf, linkTo } from '@storybook/react';
 import d3 from 'd3';
 import Histogram from './Histogram';
 import responseTimeData from './data/responseTime.json';
@@ -21,7 +22,7 @@ export function getFormattedBuckets(buckets, bucketSize) {
   });
 }
 
-export default class HistogramWrapper extends React.Component {
+class HistogramWrapper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,3 +72,7 @@ export default class HistogramWrapper extends React.Component {
     );
   }
 }
+
+storiesOf('HistogramWrapper', module).add('initial playground', () => (
+  <HistogramWrapper />
+));

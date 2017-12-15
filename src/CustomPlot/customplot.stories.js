@@ -1,4 +1,5 @@
 import React from 'react';
+import { storiesOf, linkTo } from '@storybook/react';
 import CustomPlot from './CustomPlot';
 import response from './test/responseWithData.json';
 
@@ -59,4 +60,6 @@ class TwoCustomPlots extends React.Component {
   }
 }
 
-export default TwoCustomPlots;
+storiesOf('CustomPlot', module).add('initial playground', () => (
+  <TwoCustomPlots />
+));
