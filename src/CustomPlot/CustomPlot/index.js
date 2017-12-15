@@ -6,13 +6,12 @@ import { scaleLinear } from 'd3-scale';
 import _ from 'lodash';
 import { XYPlot } from 'react-vis';
 import { createSelector } from 'reselect';
-import styled from 'styled-components';
 
-import Legend from '../../Legend/Legend';
+import Legends from './Legends';
 import StaticPlot from './StaticPlot';
 import InteractivePlot from './InteractivePlot';
 import VoronoiPlot from './VoronoiPlot';
-import { unit, units, fontSizes, px, colors, truncate } from '../../variables';
+import { unit } from '../../variables';
 
 const VISIBLE_SERIES = 5;
 const XY_HEIGHT = unit * 16;
@@ -22,33 +21,6 @@ const XY_MARGIN = {
   right: unit,
   bottom: unit * 2
 };
-
-const Title = styled.div`
-  font-size: ${fontSizes.large};
-`;
-
-const Legends = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-const LegendContent = styled.span`
-  white-space: nowrap;
-  color: ${colors.gray3};
-  display: flex;
-`;
-
-const TruncatedLabel = styled.span`
-  display: inline-block;
-  ${truncate(px(units.half * 10))};
-`;
-
-const SeriesValue = styled.span`
-  margin-left: ${px(units.quarter)};
-  color: ${colors.black};
-  display: inline-block;
-`;
 
 const getXScale = _.memoize(
   (xMin, xMax, width) => {
@@ -203,37 +175,14 @@ export class InnerCustomPlot extends PureComponent {
 
     return (
       <div>
-        <div>
-          <Title>{chartTitle}</Title>
-          <Legends>
-            {series.filter(serie => !serie.isEmpty).map((serie, i) => {
-              const text = (
-                <LegendContent>
-                  {truncateLegends ? (
-                    <TruncatedLabel title={serie.title}>
-                      {serie.title}
-                    </TruncatedLabel>
-                  ) : (
-                    serie.title
-                  )}
-                  {serie.legendValue && (
-                    <SeriesValue>{serie.legendValue}</SeriesValue>
-                  )}
-                </LegendContent>
-              );
-              return (
-                <Legend
-                  key={i}
-                  onClick={() => this.clickLegend(i)}
-                  disabled={this.state.seriesVisibility[i]}
-                  text={text}
-                  color={serie.color}
-                />
-              );
-            })}
-            <MoreSeries hiddenSeries={hiddenSeries} />
-          </Legends>
-        </div>
+        <Legends
+          chartTitle={chartTitle}
+          truncateLegends={truncateLegends}
+          series={series}
+          hiddenSeries={hiddenSeries}
+          clickLegend={this.clickLegend}
+          seriesVisibility={this.state.seriesVisibility}
+        />
 
         <div style={{ position: 'relative', height: XY_HEIGHT }}>
           <StaticPlot
@@ -290,15 +239,3 @@ InnerCustomPlot.defaultProps = {
 };
 
 export default makeWidthFlexible(InnerCustomPlot);
-
-const MoreSeriesContainer = styled.div`
-  font-size: ${fontSizes.small};
-  color: ${colors.gray3};
-`;
-function MoreSeries({ hiddenSeries }) {
-  if (hiddenSeries <= 0) {
-    return null;
-  }
-
-  return <MoreSeriesContainer>(+{hiddenSeries})</MoreSeriesContainer>;
-}

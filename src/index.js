@@ -10,4 +10,4 @@ import EmptyPlot from './EmptyPlot';
 import Modal from './Modal';
 import './index.css';
 
-ReactDOM.render(<SimpleHistogram />, document.getElementById('root'));
+ReactDOM.render(<CustomPlot />, document.getElementById('root'));
