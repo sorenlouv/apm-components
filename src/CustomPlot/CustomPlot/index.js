@@ -8,7 +8,7 @@ import StaticPlot from './StaticPlot';
 import InteractivePlot from './InteractivePlot';
 import VoronoiPlot from './VoronoiPlot';
 import { createSelector } from 'reselect';
-import { getSharedPlot } from './reactVisUtils';
+import getSharedPlot from './getSharedPlot';
 
 const VISIBLE_SERIES_COUNT = 5;
 

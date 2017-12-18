@@ -26,10 +26,6 @@ const getYScale = (yMin, yMax) => {
     .nice();
 };
 
-const getYTickValues = yMaxNice => {
-  yMaxNice = yMaxNice || 1000;
-  return [0, yMaxNice / 2, yMaxNice];
-};
 const getXYPlot = (xScale, yScale, width) => {
   function XYPlotWrapper(props) {
     return (
@@ -51,7 +47,7 @@ const getXYPlot = (xScale, yScale, width) => {
   return XYPlotWrapper;
 };
 
-export function getSharedPlot(series, width) {
+export default function getSharedPlot(series, width) {
   const allCoordinates = _.flatten(series.map(serie => serie.data));
   const xMin = d3.min(allCoordinates, d => d.x);
   const xMax = d3.max(allCoordinates, d => d.x);
@@ -60,10 +56,13 @@ export function getSharedPlot(series, width) {
   const xScale = getXScale(xMin, xMax, width);
   const yScale = getYScale(yMin, yMax);
 
+  const yMaxNice = yScale.domain()[1];
+  const yTickValues = [0, yMaxNice / 2, yMaxNice];
+
   return {
     x: xScale,
     y: yScale,
-    yTickValues: getYTickValues(yScale.domain()[1]),
+    yTickValues,
     XYPlot: getXYPlot(xScale, yScale, width),
     XY_MARGIN,
     XY_HEIGHT,
