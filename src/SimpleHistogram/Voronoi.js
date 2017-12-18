@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { voronoi } from 'd3-voronoi';
+import {voronoi} from 'd3-voronoi';
 
 const NOOP = f => f;
 
@@ -16,8 +16,7 @@ function Voronoi({
   polygonStyle,
   style,
   x,
-  y,
-  cellClassName
+  y
 }) {
   // Create a voronoi with each node center points
   const voronoiInstance = voronoi()
@@ -29,7 +28,7 @@ function Voronoi({
     <g className={`${className} rv-voronoi`} style={style}>
       {voronoiInstance.polygons(nodes).map((d, i) => (
         <path
-          className={`rv-voronoi__cell ${cellClassName(d.data)}`}
+          className={`rv-voronoi__cell ${d.data.className || ''}`}
           d={`M${d.join('L')}Z`}
           onClick={() => onClick(d.data)}
           onMouseUp={() => onMouseUp(d.data)}
@@ -39,10 +38,10 @@ function Voronoi({
           fill="none"
           style={{
             pointerEvents: 'all',
-            ...polygonStyle
+            ...polygonStyle,
+            ...d.data.style
           }}
-          key={i}
-        />
+          key={i} />
       ))}
     </g>
   );
@@ -58,22 +57,22 @@ Voronoi.defaultProps = {
   onMouseDown: NOOP,
   onMouseUp: NOOP,
   x: d => d.x,
-  y: d => d.y,
-  cellClassName: () => ''
+  y: d => d.y
 };
 
 Voronoi.propTypes = {
   className: PropTypes.string,
-  extent: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  extent: PropTypes.arrayOf(
+    PropTypes.arrayOf(PropTypes.number)
+  ).isRequired,
   nodes: PropTypes.arrayOf(PropTypes.object).isRequired,
   onBlur: PropTypes.func,
   onClick: PropTypes.func,
+  onHover: PropTypes.func,
   onMouseDown: PropTypes.func,
   onMouseUp: PropTypes.func,
-  onHover: PropTypes.func,
   x: PropTypes.func,
-  y: PropTypes.func,
-  cellClassName: PropTypes.func
+  y: PropTypes.func
 };
 
 export default Voronoi;
