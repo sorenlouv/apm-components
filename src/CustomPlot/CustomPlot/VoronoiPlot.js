@@ -6,7 +6,8 @@ import { Voronoi } from 'react-vis';
 
 class VoronoiPlot extends PureComponent {
   render() {
-    const { width, series, XY_MARGIN, XY_HEIGHT, XYPlot, x } = this.props;
+    const { series, sharedPlot } = this.props;
+    const { XYPlot, XY_MARGIN, XY_HEIGHT, XY_WIDTH, x } = sharedPlot;
     const defaultSerie = _.get(series, '[0]');
     const defaultSerieData = _.get(defaultSerie, 'data');
     if (!defaultSerieData || defaultSerie.isEmpty) {
@@ -16,7 +17,7 @@ class VoronoiPlot extends PureComponent {
     return (
       <XYPlot onMouseLeave={this.props.onMouseLeave}>
         <Voronoi
-          extent={[[XY_MARGIN.left, XY_MARGIN.top], [width, XY_HEIGHT]]}
+          extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
           nodes={defaultSerieData}
           onHover={this.props.onHover}
           onMouseDown={this.props.onMouseDown}
@@ -32,14 +33,10 @@ class VoronoiPlot extends PureComponent {
 export default VoronoiPlot;
 
 VoronoiPlot.propTypes = {
-  width: PropTypes.number.isRequired,
-  series: PropTypes.array.isRequired,
-  XY_MARGIN: PropTypes.object.isRequired,
-  XY_HEIGHT: PropTypes.number.isRequired,
-  XYPlot: PropTypes.func.isRequired,
-  x: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired,
-  onMouseLeave: PropTypes.func.isRequired,
   onMouseDown: PropTypes.func.isRequired,
-  onMouseUp: PropTypes.func.isRequired
+  onMouseLeave: PropTypes.func.isRequired,
+  onMouseUp: PropTypes.func.isRequired,
+  series: PropTypes.array.isRequired,
+  sharedPlot: PropTypes.object.isRequired
 };

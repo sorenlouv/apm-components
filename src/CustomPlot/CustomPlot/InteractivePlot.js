@@ -42,10 +42,9 @@ class InteractivePlot extends PureComponent {
 
   render() {
     const {
+      sharedPlot,
       hoverIndex,
       series,
-      XYPlot,
-      x,
       isDrawing,
       selectionStart,
       selectionEnd
@@ -58,6 +57,7 @@ class InteractivePlot extends PureComponent {
     const tooltipPoints = this.getTooltipPoints(hoverIndex);
     const markPoints = this.getMarkPoints(hoverIndex);
     const hoveredX = this.getHoveredX(hoverIndex);
+    const { XYPlot, x } = sharedPlot;
 
     return (
       <XYPlot>
@@ -79,13 +79,12 @@ class InteractivePlot extends PureComponent {
 
 InteractivePlot.propTypes = {
   hoverIndex: PropTypes.number,
-  series: PropTypes.array.isRequired,
-  XYPlot: PropTypes.func.isRequired,
-  tickFormatY: PropTypes.func.isRequired,
-  x: PropTypes.func.isRequired,
   isDrawing: PropTypes.bool.isRequired,
+  selectionEnd: PropTypes.number,
   selectionStart: PropTypes.number,
-  selectionEnd: PropTypes.number
+  series: PropTypes.array.isRequired,
+  sharedPlot: PropTypes.object.isRequired,
+  tickFormatY: PropTypes.func.isRequired
 };
 
 export default InteractivePlot;

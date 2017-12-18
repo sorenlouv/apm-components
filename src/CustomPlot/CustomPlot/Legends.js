@@ -1,6 +1,7 @@
 import React from 'react';
 import Legend from '../../Legend/Legend';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { units, fontSizes, px, colors, truncate } from '../../variables';
 
 const Title = styled.div`
@@ -35,21 +36,21 @@ const MoreSeriesContainer = styled.div`
   color: ${colors.gray3};
 `;
 
-function MoreSeries({ hiddenSeries }) {
-  if (hiddenSeries <= 0) {
+function MoreSeries({ hiddenSeriesCount }) {
+  if (hiddenSeriesCount <= 0) {
     return null;
   }
 
-  return <MoreSeriesContainer>(+{hiddenSeries})</MoreSeriesContainer>;
+  return <MoreSeriesContainer>(+{hiddenSeriesCount})</MoreSeriesContainer>;
 }
 
 export default function Legends({
   chartTitle,
-  truncateLegends,
-  series,
-  hiddenSeries,
   clickLegend,
-  seriesVisibility
+  hiddenSeriesCount,
+  series,
+  seriesEnabledState,
+  truncateLegends
 }) {
   return (
     <div>
@@ -74,14 +75,23 @@ export default function Legends({
             <Legend
               key={i}
               onClick={() => clickLegend(i)}
-              disabled={seriesVisibility[i]}
+              disabled={seriesEnabledState[i]}
               text={text}
               color={serie.color}
             />
           );
         })}
-        <MoreSeries hiddenSeries={hiddenSeries} />
+        <MoreSeries hiddenSeriesCount={hiddenSeriesCount} />
       </Container>
     </div>
   );
 }
+
+Legends.propTypes = {
+  chartTitle: PropTypes.string,
+  clickLegend: PropTypes.func.isRequired,
+  hiddenSeriesCount: PropTypes.number.isRequired,
+  series: PropTypes.array.isRequired,
+  seriesEnabledState: PropTypes.array.isRequired,
+  truncateLegends: PropTypes.bool.isRequired
+};

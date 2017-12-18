@@ -43,13 +43,8 @@ class StaticPlot extends PureComponent {
   }
 
   render() {
-    const {
-      series,
-      tickFormatX,
-      tickFormatY,
-      XYPlot,
-      yTickValues
-    } = this.props;
+    const { series, tickFormatX, tickFormatY, sharedPlot } = this.props;
+    const { yTickValues, XYPlot } = sharedPlot;
 
     const filteredSeries = series
       .filter(serie => !serie.isEmpty)
@@ -76,8 +71,7 @@ export default StaticPlot;
 
 StaticPlot.propTypes = {
   series: PropTypes.array.isRequired,
+  sharedPlot: PropTypes.object.isRequired,
   tickFormatX: PropTypes.func,
-  tickFormatY: PropTypes.func.isRequired,
-  XYPlot: PropTypes.func.isRequired,
-  yTickValues: PropTypes.array.isRequired
+  tickFormatY: PropTypes.func.isRequired
 };
