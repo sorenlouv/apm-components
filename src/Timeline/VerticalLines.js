@@ -4,7 +4,14 @@ import { colors } from '../variables';
 
 export default class VerticalLines extends PureComponent {
   render() {
-    const { width, height, margins, xDomain, tickValues, xMax } = this.props;
+    const {
+      width,
+      height,
+      margins,
+      xDomain,
+      tickValues,
+      xMax
+    } = this.props.sharedPlot;
 
     return (
       <div
