@@ -1,9 +1,10 @@
-import { XYPlot } from 'react-vis';
-import React from 'react';
-import d3 from 'd3';
-import { scaleLinear } from 'd3-scale';
 import _ from 'lodash';
+import { scaleLinear } from 'd3-scale';
+import { XYPlot } from 'react-vis';
+import d3 from 'd3';
 import PropTypes from 'prop-types';
+import React from 'react';
+
 import { unit } from '../../variables';
 
 const XY_HEIGHT = unit * 16;

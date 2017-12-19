@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Perf from 'react-addons-perf';
 import { XYPlot, XAxis, LineSeries, MarkSeries } from 'react-vis';
-import 'react-vis/dist/style.css';
 
 const data = [
   { x: 1502282820000, y: 0 },

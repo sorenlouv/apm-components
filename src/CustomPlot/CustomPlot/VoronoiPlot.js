@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
 import _ from 'lodash';
-import PropTypes from 'prop-types';
-import 'react-vis/dist/style.css';
 import { Voronoi } from 'react-vis';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+
 import { SharedPlot } from './plotUtils';
 
 class VoronoiPlot extends PureComponent {

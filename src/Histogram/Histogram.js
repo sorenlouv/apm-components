@@ -6,7 +6,7 @@ import { scaleLinear } from 'd3-scale';
 import styled from 'styled-components';
 import SingleRect from './SingleRect';
 import Tooltip from '../Tooltip';
-import 'react-vis/dist/style.css';
+
 import {
   XYPlot,
   XAxis,

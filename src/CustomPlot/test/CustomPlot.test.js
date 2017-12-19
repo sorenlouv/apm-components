@@ -1,7 +1,8 @@
-import React from 'react';
 import { mount } from 'enzyme';
 import moment from 'moment';
+import React from 'react';
 import toDiffableHtml from 'diffable-html';
+
 import { InnerCustomPlot } from '../CustomPlot/';
 import responseWithData from './responseWithData.json';
 import responseWithoutData from './responseWithoutData.json';

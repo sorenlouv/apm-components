@@ -2,7 +2,6 @@
 import React, { PureComponent } from 'react';
 import { makePure } from './utils';
 
-import 'react-vis/dist/style.css';
 import data from './data.json';
 import { XYPlot, XAxis, LineSeries, MarkSeries } from 'react-vis';
 

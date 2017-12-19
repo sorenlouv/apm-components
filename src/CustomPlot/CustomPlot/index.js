@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import _ from 'lodash';
 import { makeWidthFlexible } from 'react-vis';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import React, { PureComponent } from 'react';
 
 import Legends from './Legends';
 import StaticPlot from './StaticPlot';
@@ -12,7 +12,7 @@ import { getPlotValues } from './plotUtils';
 
 const VISIBLE_SERIES_COUNT = 5;
 
-export class InnerCustomPlot extends Component {
+export class InnerCustomPlot extends PureComponent {
   state = {
     seriesEnabledState: [],
     isDrawing: false,

@@ -1,9 +1,8 @@
-import React, { PureComponent } from 'react';
 import _ from 'lodash';
-import 'react-vis/dist/style.css';
-import PropTypes from 'prop-types';
-import SelectionMarker from './SelectionMarker';
 import { SharedPlot } from './plotUtils';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import SelectionMarker from './SelectionMarker';
 
 import { MarkSeries, VerticalGridLines } from 'react-vis';
 import Tooltip from '../../Tooltip';

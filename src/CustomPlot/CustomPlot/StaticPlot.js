@@ -1,8 +1,4 @@
-import React, { PureComponent } from 'react';
 import _ from 'lodash';
-import PropTypes from 'prop-types';
-import 'react-vis/dist/style.css';
-import StatusText from './StatusText';
 import {
   XAxis,
   YAxis,
@@ -10,6 +6,10 @@ import {
   LineSeries,
   AreaSeries
 } from 'react-vis';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+
+import StatusText from './StatusText';
 import { SharedPlot } from './plotUtils';
 
 const X_TICK_TOTAL = 7;

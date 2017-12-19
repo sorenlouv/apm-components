@@ -1,7 +1,8 @@
-import React from 'react';
-import Legend from '../../Legend/Legend';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
+
+import Legend from '../../Legend/Legend';
 import { units, fontSizes, px, colors, truncate } from '../../variables';
 
 const Title = styled.div`

@@ -3,6 +3,7 @@ import StoryRouter from 'storybook-router';
 import React from 'react';
 
 import './storybook.css';
+import 'react-vis/dist/style.css';
 
 const requireStory = require.context(`../src`, true, /\.stories\.js$/);
 

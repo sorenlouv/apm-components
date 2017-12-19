@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import 'react-vis/dist/style.css';
 import { makeWidthFlexible } from 'react-vis';
 import { createSelector } from 'reselect';
 import { getPlotValues } from './plotUtils';
