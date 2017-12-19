@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { scaleLinear } from 'd3-scale';
 import styled from 'styled-components';
 import SingleRect from './SingleRect';
-import Tooltip from '../Tooltip';
+import Tooltip from '../../Tooltip';
 
 import {
   XYPlot,
@@ -17,7 +17,7 @@ import {
   makeWidthFlexible,
   VerticalGridLines
 } from 'react-vis';
-import { unit, colors } from '../variables';
+import { unit, colors } from '../../variables';
 
 const barColor = 'rgb(172, 189, 216)';
 const XY_HEIGHT = unit * 8;

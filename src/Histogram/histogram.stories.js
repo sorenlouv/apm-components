@@ -4,7 +4,7 @@ import d3 from 'd3';
 import Histogram from './Histogram';
 import responseTimeData from './data/responseTime.json';
 import errorOccurencesData from './data/errorOccurences.json';
-import getFormattedBuckets from './getFormattedBuckets';
+import getFormattedBuckets from './Histogram/getFormattedBuckets';
 import { getTimeFormatter, asInteger } from '../formatters';
 
 class HistogramWrapper extends React.Component {
