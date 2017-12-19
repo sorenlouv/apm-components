@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 import 'react-vis/dist/style.css';
 import { makeWidthFlexible } from 'react-vis';
 import { createSelector } from 'reselect';
-import getSharedPlot from './getSharedPlot';
+import { getPlotValues } from './plotUtils';
 import TimelineAxis from './TimelineAxis';
 import VerticalLines from './VerticalLines';
 
 class Timeline extends PureComponent {
-  getSharedPlot = createSelector(
+  getPlotValues = createSelector(
     state => state.duration,
     state => state.height,
     state => state.margins,
     state => state.width,
-    getSharedPlot
+    getPlotValues
   );
 
   render() {
@@ -24,12 +24,12 @@ class Timeline extends PureComponent {
       return null;
     }
 
-    const sharedPlot = this.getSharedPlot(this.props);
+    const plotValues = this.getPlotValues(this.props);
 
     return (
       <div>
-        <TimelineAxis sharedPlot={sharedPlot} header={header} />
-        <VerticalLines sharedPlot={sharedPlot} />
+        <TimelineAxis plotValues={plotValues} header={header} />
+        <VerticalLines plotValues={plotValues} />
       </div>
     );
   }

@@ -8,7 +8,7 @@ import StaticPlot from './StaticPlot';
 import InteractivePlot from './InteractivePlot';
 import VoronoiPlot from './VoronoiPlot';
 import { createSelector } from 'reselect';
-import getSharedPlot from './getSharedPlot';
+import { getPlotValues } from './plotUtils';
 
 const VISIBLE_SERIES_COUNT = 5;
 
@@ -27,10 +27,10 @@ export class InnerCustomPlot extends Component {
       visibleSeries.filter((serie, i) => !seriesEnabledState[i])
   );
 
-  getSharedPlot = createSelector(
+  getPlotValues = createSelector(
     state => state.series,
     state => state.width,
-    getSharedPlot
+    getPlotValues
   );
 
   getVisibleSeries = createSelector(
@@ -100,7 +100,7 @@ export class InnerCustomPlot extends Component {
       visibleSeries,
       seriesEnabledState: this.state.seriesEnabledState
     });
-    const sharedPlot = this.getSharedPlot({ series: enabledSeries, width });
+    const plotValues = this.getPlotValues({ series: enabledSeries, width });
 
     return (
       <div>
@@ -113,16 +113,16 @@ export class InnerCustomPlot extends Component {
           seriesEnabledState={this.state.seriesEnabledState}
         />
 
-        <div style={{ position: 'relative', height: sharedPlot.XY_HEIGHT }}>
+        <div style={{ position: 'relative', height: plotValues.XY_HEIGHT }}>
           <StaticPlot
-            sharedPlot={sharedPlot}
+            plotValues={plotValues}
             series={enabledSeries}
             tickFormatY={this.props.tickFormatY}
             tickFormatX={this.props.tickFormatX}
           />
 
           <InteractivePlot
-            sharedPlot={sharedPlot}
+            plotValues={plotValues}
             hoverIndex={this.props.hoverIndex}
             series={enabledSeries}
             tickFormatY={this.props.tickFormatY}
@@ -132,7 +132,7 @@ export class InnerCustomPlot extends Component {
           />
 
           <VoronoiPlot
-            sharedPlot={sharedPlot}
+            plotValues={plotValues}
             series={enabledSeries}
             onHover={this.onHover}
             onMouseLeave={this.onMouseLeave}

@@ -3,11 +3,12 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import 'react-vis/dist/style.css';
 import { Voronoi } from 'react-vis';
+import { SharedPlot } from './plotUtils';
 
 class VoronoiPlot extends PureComponent {
   render() {
-    const { series, sharedPlot } = this.props;
-    const { XYPlot, XY_MARGIN, XY_HEIGHT, XY_WIDTH, x } = sharedPlot;
+    const { series, plotValues } = this.props;
+    const { XY_MARGIN, XY_HEIGHT, XY_WIDTH, x } = plotValues;
     const defaultSerie = _.get(series, '[0]');
     const defaultSerieData = _.get(defaultSerie, 'data');
     if (!defaultSerieData || defaultSerie.isEmpty) {
@@ -15,7 +16,10 @@ class VoronoiPlot extends PureComponent {
     }
 
     return (
-      <XYPlot sharedPlot={sharedPlot} onMouseLeave={this.props.onMouseLeave}>
+      <SharedPlot
+        plotValues={plotValues}
+        onMouseLeave={this.props.onMouseLeave}
+      >
         <Voronoi
           extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
           nodes={defaultSerieData}
@@ -25,7 +29,7 @@ class VoronoiPlot extends PureComponent {
           x={d => x(d.x)}
           y={() => 0}
         />
-      </XYPlot>
+      </SharedPlot>
     );
   }
 }
@@ -38,5 +42,5 @@ VoronoiPlot.propTypes = {
   onMouseLeave: PropTypes.func.isRequired,
   onMouseUp: PropTypes.func.isRequired,
   series: PropTypes.array.isRequired,
-  sharedPlot: PropTypes.object.isRequired
+  plotValues: PropTypes.object.isRequired
 };

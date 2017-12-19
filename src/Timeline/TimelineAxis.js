@@ -16,8 +16,8 @@ const getTickFormat = _.memoize(
 const getXAxisTickValues = (tickValues, xMax) =>
   _.last(tickValues) * 1.05 > xMax ? tickValues.slice(0, -1) : tickValues;
 
-function TimelineAxis({ header, sharedPlot }) {
-  const { margins, tickValues, width, xDomain, xMax, xScale } = sharedPlot;
+function TimelineAxis({ header, plotValues }) {
+  const { margins, tickValues, width, xDomain, xMax, xScale } = plotValues;
   const tickFormat = getTickFormat(xMax);
   const xAxisTickValues = getXAxisTickValues(tickValues, xMax);
 

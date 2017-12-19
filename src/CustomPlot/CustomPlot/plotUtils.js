@@ -27,32 +27,7 @@ const getYScale = (yMin, yMax) => {
     .nice();
 };
 
-function XYPlotWrapper(props) {
-  return (
-    <div style={{ position: 'absolute', top: 0, left: 0 }}>
-      <XYPlot
-        dontCheckIfEmpty
-        height={XY_HEIGHT}
-        margin={XY_MARGIN}
-        xType="time"
-        width={props.sharedPlot.XY_WIDTH}
-        xDomain={props.sharedPlot.x.domain()}
-        yDomain={props.sharedPlot.y.domain()}
-        {...props}
-      />
-    </div>
-  );
-}
-
-XYPlotWrapper.propTypes = {
-  sharedPlot: PropTypes.shape({
-    x: PropTypes.func.isRequired,
-    y: PropTypes.func.isRequired,
-    XY_WIDTH: PropTypes.number.isRequired
-  })
-};
-
-export default function getSharedPlot(series, width) {
+export function getPlotValues(series, width) {
   const allCoordinates = _.flatten(series.map(serie => serie.data));
   const xMin = d3.min(allCoordinates, d => d.x);
   const xMax = d3.max(allCoordinates, d => d.x);
@@ -68,9 +43,33 @@ export default function getSharedPlot(series, width) {
     x: xScale,
     y: yScale,
     yTickValues,
-    XYPlot: XYPlotWrapper,
     XY_MARGIN,
     XY_HEIGHT,
     XY_WIDTH: width
   };
 }
+
+export function SharedPlot({ plotValues, ...props }) {
+  return (
+    <div style={{ position: 'absolute', top: 0, left: 0 }}>
+      <XYPlot
+        dontCheckIfEmpty
+        height={XY_HEIGHT}
+        margin={XY_MARGIN}
+        xType="time"
+        width={plotValues.XY_WIDTH}
+        xDomain={plotValues.x.domain()}
+        yDomain={plotValues.y.domain()}
+        {...props}
+      />
+    </div>
+  );
+}
+
+SharedPlot.propTypes = {
+  plotValues: PropTypes.shape({
+    x: PropTypes.func.isRequired,
+    y: PropTypes.func.isRequired,
+    XY_WIDTH: PropTypes.number.isRequired
+  }).isRequired
+};

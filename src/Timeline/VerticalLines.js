@@ -11,7 +11,7 @@ export default class VerticalLines extends PureComponent {
       xDomain,
       tickValues,
       xMax
-    } = this.props.sharedPlot;
+    } = this.props.plotValues;
 
     return (
       <div

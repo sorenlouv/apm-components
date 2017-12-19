@@ -10,6 +10,7 @@ import {
   LineSeries,
   AreaSeries
 } from 'react-vis';
+import { SharedPlot } from './plotUtils';
 
 const X_TICK_TOTAL = 7;
 class StaticPlot extends PureComponent {
@@ -45,8 +46,8 @@ class StaticPlot extends PureComponent {
   }
 
   render() {
-    const { series, tickFormatX, tickFormatY, sharedPlot } = this.props;
-    const { yTickValues, XYPlot } = sharedPlot;
+    const { series, tickFormatX, tickFormatY, plotValues } = this.props;
+    const { yTickValues } = plotValues;
 
     const filteredSeries = series
       .filter(serie => !serie.isEmpty)
@@ -54,7 +55,7 @@ class StaticPlot extends PureComponent {
       .map(this.getSerie);
 
     return (
-      <XYPlot sharedPlot={sharedPlot}>
+      <SharedPlot plotValues={plotValues}>
         <HorizontalGridLines tickValues={yTickValues} />
         <XAxis tickSize={0} tickTotal={X_TICK_TOTAL} tickFormat={tickFormatX} />
         <YAxis tickSize={0} tickValues={yTickValues} tickFormat={tickFormatY} />
@@ -64,7 +65,7 @@ class StaticPlot extends PureComponent {
         ) : (
           filteredSeries
         )}
-      </XYPlot>
+      </SharedPlot>
     );
   }
 }
@@ -73,7 +74,7 @@ export default StaticPlot;
 
 StaticPlot.propTypes = {
   series: PropTypes.array.isRequired,
-  sharedPlot: PropTypes.object.isRequired,
+  plotValues: PropTypes.object.isRequired,
   tickFormatX: PropTypes.func,
   tickFormatY: PropTypes.func.isRequired
 };

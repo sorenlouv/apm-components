@@ -3,6 +3,7 @@ import _ from 'lodash';
 import 'react-vis/dist/style.css';
 import PropTypes from 'prop-types';
 import SelectionMarker from './SelectionMarker';
+import { SharedPlot } from './plotUtils';
 
 import { MarkSeries, VerticalGridLines } from 'react-vis';
 import Tooltip from '../../Tooltip';
@@ -42,7 +43,7 @@ class InteractivePlot extends PureComponent {
 
   render() {
     const {
-      sharedPlot,
+      plotValues,
       hoverIndex,
       series,
       isDrawing,
@@ -57,10 +58,10 @@ class InteractivePlot extends PureComponent {
     const tooltipPoints = this.getTooltipPoints(hoverIndex);
     const markPoints = this.getMarkPoints(hoverIndex);
     const hoveredX = this.getHoveredX(hoverIndex);
-    const { XYPlot, x } = sharedPlot;
+    const { x } = plotValues;
 
     return (
-      <XYPlot sharedPlot={sharedPlot}>
+      <SharedPlot plotValues={plotValues}>
         {hoveredX && (
           <Tooltip tooltipPoints={tooltipPoints} x={hoveredX} y={0} />
         )}
@@ -72,7 +73,7 @@ class InteractivePlot extends PureComponent {
           selectionEnd !== null && (
             <SelectionMarker start={x(selectionStart)} end={x(selectionEnd)} />
           )}
-      </XYPlot>
+      </SharedPlot>
     );
   }
 }
@@ -83,7 +84,7 @@ InteractivePlot.propTypes = {
   selectionEnd: PropTypes.number,
   selectionStart: PropTypes.number,
   series: PropTypes.array.isRequired,
-  sharedPlot: PropTypes.object.isRequired,
+  plotValues: PropTypes.object.isRequired,
   tickFormatY: PropTypes.func.isRequired
 };
 
