@@ -4,23 +4,8 @@ import d3 from 'd3';
 import Histogram from './Histogram';
 import responseTimeData from './data/responseTime.json';
 import errorOccurencesData from './data/errorOccurences.json';
-
+import getFormattedBuckets from './getFormattedBuckets';
 import { getTimeFormatter, asInteger } from '../formatters';
-
-export function getFormattedBuckets(buckets, bucketSize) {
-  if (!buckets) {
-    return null;
-  }
-
-  return buckets.map(({ count, key, transactionId }) => {
-    return {
-      transactionId,
-      x0: key,
-      x: key + bucketSize,
-      y: count
-    };
-  });
-}
 
 class HistogramWrapper extends React.Component {
   constructor(props) {
