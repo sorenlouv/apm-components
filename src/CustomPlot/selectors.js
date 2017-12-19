@@ -20,7 +20,7 @@ const getRpmSeriesSelector = createSelector(
   _getRpmSeries
 );
 
-export function getResponseTimeSerieOrEmpty({ start, end, chartsData }) {
+export function getResponseTimeSeriesOrEmpty({ start, end, chartsData }) {
   return chartsData.totalHits === 0
     ? getEmptySerie(start, end)
     : getResponseTimeSeriesSelector(chartsData);

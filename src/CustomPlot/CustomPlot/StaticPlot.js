@@ -18,6 +18,7 @@ class StaticPlot extends PureComponent {
       case 'line':
         return (
           <LineSeries
+            animation
             key={serie.title}
             xType="time"
             curve={'curveMonotoneX'}
@@ -28,6 +29,7 @@ class StaticPlot extends PureComponent {
       case 'area':
         return (
           <AreaSeries
+            animation
             key={serie.title}
             xType="time"
             curve={'curveMonotoneX'}
@@ -43,13 +45,8 @@ class StaticPlot extends PureComponent {
   }
 
   render() {
-    const {
-      series,
-      tickFormatX,
-      tickFormatY,
-      XYPlot,
-      yTickValues
-    } = this.props;
+    const { series, tickFormatX, tickFormatY, sharedPlot } = this.props;
+    const { yTickValues, XYPlot } = sharedPlot;
 
     const filteredSeries = series
       .filter(serie => !serie.isEmpty)
@@ -57,7 +54,7 @@ class StaticPlot extends PureComponent {
       .map(this.getSerie);
 
     return (
-      <XYPlot>
+      <XYPlot sharedPlot={sharedPlot}>
         <HorizontalGridLines tickValues={yTickValues} />
         <XAxis tickSize={0} tickTotal={X_TICK_TOTAL} tickFormat={tickFormatX} />
         <YAxis tickSize={0} tickValues={yTickValues} tickFormat={tickFormatY} />
@@ -76,8 +73,7 @@ export default StaticPlot;
 
 StaticPlot.propTypes = {
   series: PropTypes.array.isRequired,
+  sharedPlot: PropTypes.object.isRequired,
   tickFormatX: PropTypes.func,
-  tickFormatY: PropTypes.func.isRequired,
-  XYPlot: PropTypes.func.isRequired,
-  yTickValues: PropTypes.array.isRequired
+  tickFormatY: PropTypes.func.isRequired
 };

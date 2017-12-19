@@ -3,7 +3,17 @@ import { storiesOf } from '@storybook/react';
 import CustomPlot from './CustomPlot';
 import response from './test/responseWithData.json';
 
-import { getResponseTimeSerieOrEmpty, getRpmSeriesOrEmpty } from './selectors';
+import { getResponseTimeSeriesOrEmpty, getRpmSeriesOrEmpty } from './selectors';
+
+const reduxStore = {
+  responseTimeSeries: getResponseTimeSeriesOrEmpty({
+    chartsData: response
+  }),
+  rpmSeries: getRpmSeriesOrEmpty({
+    chartsData: response,
+    transactionType: 'requests'
+  })
+};
 
 class TwoCustomPlots extends React.Component {
   state = {
@@ -14,17 +24,7 @@ class TwoCustomPlots extends React.Component {
 
   componentDidMount() {
     // Simulate http latency
-    setTimeout(() => {
-      this.setState({
-        responseTimeSeries: getResponseTimeSerieOrEmpty({
-          chartsData: response
-        }),
-        rpmSeries: getRpmSeriesOrEmpty({
-          chartsData: response,
-          transactionType: 'requests'
-        })
-      });
-    }, 50);
+    setTimeout(() => this.setState(reduxStore), 50);
   }
 
   onHover = hoverIndex => this.setState({ hoverIndex });
@@ -39,20 +39,20 @@ class TwoCustomPlots extends React.Component {
     return (
       <div>
         <CustomPlot
-          series={this.state.responseTimeSeries}
+          hoverIndex={this.state.hoverIndex}
           onHover={this.onHover}
           onMouseLeave={this.onMouseLeave}
           onSelectionEnd={this.onSelectionEnd}
-          hoverIndex={this.state.hoverIndex}
+          series={this.state.responseTimeSeries}
           tickFormatY={this.getResponseTimeTickFormat}
         />
 
         <CustomPlot
-          series={this.state.rpmSeries}
+          hoverIndex={this.state.hoverIndex}
           onHover={this.onHover}
           onMouseLeave={this.onMouseLeave}
           onSelectionEnd={this.onSelectionEnd}
-          hoverIndex={this.state.hoverIndex}
+          series={this.state.rpmSeries}
           tickFormatY={this.getRPMTickFormat}
         />
       </div>
