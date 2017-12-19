@@ -1,7 +1,5 @@
-/* eslint-env node */
 import { configure, addDecorator } from '@storybook/react';
 import StoryRouter from 'storybook-router';
-
 import React from 'react';
 
 import './storybook.css';
