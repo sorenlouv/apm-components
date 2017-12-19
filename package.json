@@ -20,12 +20,16 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "storybook": "start-storybook -p 6006",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
     "format": "prettier \"./src/**/*.js\" --write"
   },
   "devDependencies": {
+    "@storybook/addon-centered": "^3.2.7",
+    "@storybook/react": "^3.2.16",
+
     "diffable-html": "^2.1.0",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.1",
@@ -35,6 +39,7 @@
     "eslint-plugin-prettier": "2.4.0",
     "eslint-plugin-react": "^7.5.1",
     "prettier": "1.9.2",
-    "react-test-renderer": "^16.2.0"
+    "react-test-renderer": "^16.2.0",
+    "storybook-router": "^0.3.2"
   }
 }
