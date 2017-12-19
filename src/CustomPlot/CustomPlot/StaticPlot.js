@@ -18,6 +18,7 @@ class StaticPlot extends PureComponent {
       case 'line':
         return (
           <LineSeries
+            animation
             key={serie.title}
             xType="time"
             curve={'curveMonotoneX'}
@@ -28,6 +29,7 @@ class StaticPlot extends PureComponent {
       case 'area':
         return (
           <AreaSeries
+            animation
             key={serie.title}
             xType="time"
             curve={'curveMonotoneX'}
@@ -52,7 +54,7 @@ class StaticPlot extends PureComponent {
       .map(this.getSerie);
 
     return (
-      <XYPlot>
+      <XYPlot sharedPlot={sharedPlot}>
         <HorizontalGridLines tickValues={yTickValues} />
         <XAxis tickSize={0} tickTotal={X_TICK_TOTAL} tickFormat={tickFormatX} />
         <YAxis tickSize={0} tickValues={yTickValues} tickFormat={tickFormatY} />

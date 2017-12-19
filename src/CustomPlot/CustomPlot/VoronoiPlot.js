@@ -15,7 +15,7 @@ class VoronoiPlot extends PureComponent {
     }
 
     return (
-      <XYPlot onMouseLeave={this.props.onMouseLeave}>
+      <XYPlot sharedPlot={sharedPlot} onMouseLeave={this.props.onMouseLeave}>
         <Voronoi
           extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
           nodes={defaultSerieData}

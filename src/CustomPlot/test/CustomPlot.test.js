@@ -39,7 +39,7 @@ describe('when response has data', () => {
 
   describe('Initially', () => {
     it('should have 3 enabled series', () => {
-      expect(wrapper.find('AreaSeries').length).toBe(4);
+      expect(wrapper.find('AreaSeries Animation').length).toBe(3);
     });
 
     it('should have 3 legends ', () => {
@@ -86,7 +86,7 @@ describe('when response has data', () => {
       });
 
       it('should have 2 enabled series', () => {
-        expect(wrapper.find('AreaSeries').length).toBe(2);
+        expect(wrapper.find('AreaSeries Animation').length).toBe(2);
       });
 
       it('should add disabled prop to Legends', () => {

@@ -60,7 +60,7 @@ class InteractivePlot extends PureComponent {
     const { XYPlot, x } = sharedPlot;
 
     return (
-      <XYPlot>
+      <XYPlot sharedPlot={sharedPlot}>
         {hoveredX && (
           <Tooltip tooltipPoints={tooltipPoints} x={hoveredX} y={0} />
         )}

@@ -3,6 +3,7 @@ import React from 'react';
 import d3 from 'd3';
 import { scaleLinear } from 'd3-scale';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 import { unit } from '../../variables';
 
 const XY_HEIGHT = unit * 16;
@@ -26,25 +27,29 @@ const getYScale = (yMin, yMax) => {
     .nice();
 };
 
-const getXYPlot = (xScale, yScale, width) => {
-  function XYPlotWrapper(props) {
-    return (
-      <div style={{ position: 'absolute', top: 0, left: 0 }}>
-        <XYPlot
-          dontCheckIfEmpty
-          width={width}
-          height={XY_HEIGHT}
-          margin={XY_MARGIN}
-          xType="time"
-          xDomain={xScale.domain()}
-          yDomain={yScale.domain()}
-          {...props}
-        />
-      </div>
-    );
-  }
+function XYPlotWrapper(props) {
+  return (
+    <div style={{ position: 'absolute', top: 0, left: 0 }}>
+      <XYPlot
+        dontCheckIfEmpty
+        height={XY_HEIGHT}
+        margin={XY_MARGIN}
+        xType="time"
+        width={props.sharedPlot.XY_WIDTH}
+        xDomain={props.sharedPlot.x.domain()}
+        yDomain={props.sharedPlot.y.domain()}
+        {...props}
+      />
+    </div>
+  );
+}
 
-  return XYPlotWrapper;
+XYPlotWrapper.propTypes = {
+  sharedPlot: PropTypes.shape({
+    x: PropTypes.func.isRequired,
+    y: PropTypes.func.isRequired,
+    XY_WIDTH: PropTypes.number.isRequired
+  })
 };
 
 export default function getSharedPlot(series, width) {
@@ -63,7 +68,7 @@ export default function getSharedPlot(series, width) {
     x: xScale,
     y: yScale,
     yTickValues,
-    XYPlot: getXYPlot(xScale, yScale, width),
+    XYPlot: XYPlotWrapper,
     XY_MARGIN,
     XY_HEIGHT,
     XY_WIDTH: width
