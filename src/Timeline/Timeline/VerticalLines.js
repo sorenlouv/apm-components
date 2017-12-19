@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { XYPlot, VerticalGridLines } from 'react-vis';
-import { colors } from '../variables';
+import { colors } from '../../variables';
 
 export default class VerticalLines extends PureComponent {
   render() {
