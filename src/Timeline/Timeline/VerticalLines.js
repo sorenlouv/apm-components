@@ -28,10 +28,13 @@ export default class VerticalLines extends PureComponent {
           margin={margins}
           xDomain={xDomain}
         >
-          <VerticalGridLines tickValues={tickValues} />
+          <VerticalGridLines
+            tickValues={tickValues}
+            style={{ stroke: colors.gray5 }}
+          />
           <VerticalGridLines
             tickValues={[xMax]}
-            style={{ stroke: colors.gray2 }}
+            style={{ stroke: colors.gray3 }}
           />
         </XYPlot>
       </div>

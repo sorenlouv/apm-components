@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { Sticky } from 'react-sticky';
 import { XYPlot, XAxis } from 'react-vis';
 import LastTickValue from './LastTickValue';
-import { colors } from '../../variables';
+import { px, colors } from '../../variables';
 
 const tickFormatSeconds = value => `${value / 1000} s`;
 const tickFormatMilliSeconds = value => `${value} ms`;
@@ -29,8 +29,8 @@ function TimelineAxis({ header, plotValues }) {
             style={{
               position: 'absolute',
               backgroundColor: colors.white,
-              borderBottom: `1px solid ${colors.black}`,
-              height: margins.top,
+              borderBottom: `1px solid ${colors.gray3}`,
+              height: px(margins.top),
               zIndex: 2,
               ...style
             }}
@@ -53,6 +53,9 @@ function TimelineAxis({ header, plotValues }) {
                 tickSize={0}
                 tickValues={xAxisTickValues}
                 tickFormat={tickFormat}
+                style={{
+                  text: { fill: colors.gray3 }
+                }}
               />
 
               <LastTickValue x={xScale(xMax)} value={tickFormat(xMax)} />
