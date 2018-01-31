@@ -57,12 +57,17 @@ class InteractivePlot extends PureComponent {
     const tooltipPoints = this.getTooltipPoints(hoverIndex);
     const markPoints = this.getMarkPoints(hoverIndex);
     const hoveredX = this.getHoveredX(hoverIndex);
-    const { x } = plotValues;
+    const { x, yTickValues } = plotValues;
+    const yValueMiddle = yTickValues[1];
 
     return (
       <SharedPlot plotValues={plotValues}>
         {hoveredX && (
-          <Tooltip tooltipPoints={tooltipPoints} x={hoveredX} y={0} />
+          <Tooltip
+            tooltipPoints={tooltipPoints}
+            x={hoveredX}
+            y={yValueMiddle}
+          />
         )}
 
         {hoveredX && <MarkSeries data={markPoints} colorType="literal" />}

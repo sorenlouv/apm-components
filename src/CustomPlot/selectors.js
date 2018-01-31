@@ -1,8 +1,27 @@
 import d3 from 'd3';
-import { zipObject, difference } from 'lodash';
+import { zipObject, difference, memoize } from 'lodash';
 import { createSelector } from 'reselect';
 import { colors } from '../variables';
 import { asMillisWithDefault, asDecimal, tpmUnit } from '../formatters';
+
+const getEmptySerie = memoize(
+  (start = Date.now() - 3600000, end = Date.now()) => {
+    const dates = d3.time
+      .scale()
+      .domain([new Date(start), new Date(end)])
+      .ticks();
+
+    return [
+      {
+        data: dates.map(x => ({
+          x: x.getTime(),
+          y: 1
+        }))
+      }
+    ];
+  },
+  (...args) => args.join('_')
+);
 
 const getResponseTimeSeriesSelector = createSelector(
   data => data.dates,
@@ -106,21 +125,4 @@ function getChartValues(dates = [], yValues = []) {
     x,
     y: yValues[i]
   }));
-}
-
-export function getEmptySerie(start = Date.now() - 3600000, end = Date.now()) {
-  const dates = d3.time
-    .scale()
-    .domain([new Date(start), new Date(end)])
-    .ticks();
-
-  return [
-    {
-      isEmpty: true,
-      data: dates.map(x => ({
-        x: x.getTime(),
-        y: 1
-      }))
-    }
-  ];
 }

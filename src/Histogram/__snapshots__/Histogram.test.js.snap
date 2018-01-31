@@ -15,14 +15,14 @@ exports[`Histogram Initially should have default markup 1`] = `
     className="rv-xy-plot "
     style={
       Object {
-        "height": "128px",
+        "height": "160px",
         "width": "800px",
       }
     }
   >
     <svg
       className="rv-xy-plot__inner"
-      height={128}
+      height={160}
       onClick={[Function]}
       onDoubleClick={[Function]}
       onMouseDown={[Function]}
@@ -40,15 +40,15 @@ exports[`Histogram Initially should have default markup 1`] = `
           className="rv-xy-plot__grid-lines__line"
           x1={0}
           x2={704}
-          y1={80}
-          y2={80}
+          y1={112}
+          y2={112}
         />
         <line
           className="rv-xy-plot__grid-lines__line"
           x1={0}
           x2={704}
-          y1={40}
-          y2={40}
+          y1={56}
+          y2={56}
         />
         <line
           className="rv-xy-plot__grid-lines__line"
@@ -65,7 +65,7 @@ exports[`Histogram Initially should have default markup 1`] = `
             "strokeWidth": "1px",
           }
         }
-        transform="translate(80,96)"
+        transform="translate(80,128)"
       >
         <line
           className="rv-xy-plot__axis__line"
@@ -342,7 +342,7 @@ exports[`Histogram Initially should have default markup 1`] = `
           <g
             className="rv-xy-plot__axis__tick"
             style={Object {}}
-            transform="translate(0, 80)"
+            transform="translate(0, 112)"
           >
             <line
               className="rv-xy-plot__axis__tick__line"
@@ -359,13 +359,13 @@ exports[`Histogram Initially should have default markup 1`] = `
               textAnchor="end"
               transform="translate(-8, 0)"
             >
-              0.0
+              0 req.
             </text>
           </g>
           <g
             className="rv-xy-plot__axis__tick"
             style={Object {}}
-            transform="translate(0, 40)"
+            transform="translate(0, 56)"
           >
             <line
               className="rv-xy-plot__axis__tick__line"
@@ -382,7 +382,7 @@ exports[`Histogram Initially should have default markup 1`] = `
               textAnchor="end"
               transform="translate(-8, 0)"
             >
-              27.5
+              27.5 req.
             </text>
           </g>
           <g
@@ -405,7 +405,7 @@ exports[`Histogram Initially should have default markup 1`] = `
               textAnchor="end"
               transform="translate(-8, 0)"
             >
-              55.0
+              55 req.
             </text>
           </g>
         </g>
@@ -422,16 +422,16 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571433}
           x={1.2571428571428571}
-          y={80}
+          y={112}
         />
         <rect
           height={0}
@@ -441,16 +441,16 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571433}
           x={26.4}
-          y={80}
+          y={112}
         />
         <rect
           height={0}
@@ -460,16 +460,16 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.62857142857142}
           x={51.542857142857144}
-          y={80}
+          y={112}
         />
         <rect
           height={0}
@@ -479,16 +479,16 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571433}
           x={76.68571428571428}
-          y={80}
+          y={112}
         />
         <rect
           height={0}
@@ -498,187 +498,187 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571405}
           x={101.82857142857144}
-          y={80}
+          y={112}
         />
         <rect
-          height={11.63636363636364}
+          height={16.290909090909082}
           onClick={[Function]}
           onContextMenu={[Function]}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.62857142857142}
           x={126.97142857142858}
-          y={68.36363636363636}
+          y={95.70909090909092}
         />
         <rect
-          height={33.45454545454545}
+          height={46.83636363636364}
           onClick={[Function]}
           onContextMenu={[Function]}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571405}
           x={152.11428571428573}
-          y={46.54545454545455}
+          y={65.16363636363636}
         />
         <rect
-          height={71.27272727272727}
+          height={99.78181818181818}
           onClick={[Function]}
           onContextMenu={[Function]}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571405}
           x={177.25714285714287}
-          y={8.727272727272734}
+          y={12.218181818181819}
         />
         <rect
-          height={74.18181818181819}
+          height={103.85454545454544}
           onClick={[Function]}
           onContextMenu={[Function]}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571377}
           x={202.40000000000003}
-          y={5.818181818181813}
+          y={8.145454545454555}
         />
         <rect
-          height={66.9090909090909}
+          height={93.67272727272727}
           onClick={[Function]}
           onContextMenu={[Function]}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571462}
           x={227.54285714285712}
-          y={13.090909090909093}
+          y={18.327272727272728}
         />
         <rect
-          height={18.909090909090907}
+          height={26.47272727272727}
           onClick={[Function]}
           onContextMenu={[Function]}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.62857142857149}
           x={252.68571428571425}
-          y={61.09090909090909}
+          y={85.52727272727273}
         />
         <rect
-          height={10.181818181818187}
+          height={14.25454545454545}
           onClick={[Function]}
           onContextMenu={[Function]}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.62857142857149}
           x={277.8285714285714}
-          y={69.81818181818181}
+          y={97.74545454545455}
         />
         <rect
-          height={7.4181818181818215}
+          height={8.145454545454541}
           onClick={[Function]}
           onContextMenu={[Function]}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.62857142857149}
           x={302.97142857142853}
-          y={72.58181818181818}
+          y={103.85454545454546}
         />
         <rect
-          height={7.4181818181818215}
+          height={6.109090909090909}
           onClick={[Function]}
           onContextMenu={[Function]}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571433}
           x={328.1142857142857}
-          y={72.58181818181818}
+          y={105.89090909090909}
         />
         <rect
           height={0}
@@ -688,35 +688,35 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571433}
           x={353.25714285714287}
-          y={80}
+          y={112}
         />
         <rect
-          height={7.4181818181818215}
+          height={8.145454545454541}
           onClick={[Function]}
           onContextMenu={[Function]}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571433}
           x={378.4}
-          y={72.58181818181818}
+          y={103.85454545454546}
         />
         <rect
           height={0}
@@ -726,16 +726,16 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571547}
           x={403.5428571428571}
-          y={80}
+          y={112}
         />
         <rect
           height={0}
@@ -745,35 +745,35 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.62857142857149}
           x={428.68571428571425}
-          y={80}
+          y={112}
         />
         <rect
-          height={7.4181818181818215}
+          height={2.077090909090913}
           onClick={[Function]}
           onContextMenu={[Function]}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571547}
           x={453.82857142857137}
-          y={72.58181818181818}
+          y={109.92290909090909}
         />
         <rect
           height={0}
@@ -783,16 +783,16 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571433}
           x={478.9714285714286}
-          y={80}
+          y={112}
         />
         <rect
           height={0}
@@ -802,16 +802,16 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571433}
           x={504.1142857142857}
-          y={80}
+          y={112}
         />
         <rect
           height={0}
@@ -821,16 +821,16 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571377}
           x={529.2571428571429}
-          y={80}
+          y={112}
         />
         <rect
           height={0}
@@ -840,16 +840,16 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.62857142857149}
           x={554.4}
-          y={80}
+          y={112}
         />
         <rect
           height={0}
@@ -859,54 +859,54 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.62857142857149}
           x={579.5428571428571}
-          y={80}
+          y={112}
         />
         <rect
-          height={7.4181818181818215}
+          height={2.077090909090913}
           onClick={[Function]}
           onContextMenu={[Function]}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571604}
           x={604.6857142857142}
-          y={72.58181818181818}
+          y={109.92290909090909}
         />
         <rect
-          height={7.4181818181818215}
+          height={2.077090909090913}
           onClick={[Function]}
           onContextMenu={[Function]}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.62857142857149}
           x={629.8285714285714}
-          y={72.58181818181818}
+          y={109.92290909090909}
         />
         <rect
           height={0}
@@ -916,43 +916,43 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.62857142857149}
           x={654.9714285714285}
-          y={80}
+          y={112}
         />
         <rect
-          height={7.4181818181818215}
+          height={2.077090909090913}
           onClick={[Function]}
           onContextMenu={[Function]}
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           style={
             Object {
-              "fill": "rgb(172, 189, 216)",
+              "fill": "#80bcd2",
               "opacity": 1,
-              "rx": "2px",
-              "ry": "2px",
-              "stroke": "rgb(172, 189, 216)",
+              "rx": "0px",
+              "ry": "0px",
+              "stroke": "#80bcd2",
             }
           }
           width={22.628571428571377}
           x={680.1142857142858}
-          y={72.58181818181818}
+          y={109.92290909090909}
         />
       </g>
       <g
         className=" rv-voronoi"
       >
         <path
-          className="rv-voronoi__cell"
-          d="M105.14285749999999,128L105.14285749999999,16L80,16L80,128Z"
+          className="rv-voronoi__cell "
+          d="M105.14285749999999,160L105.14285749999999,16L80,16L80,160Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -966,8 +966,8 @@ exports[`Histogram Initially should have default markup 1`] = `
           }
         />
         <path
-          className="rv-voronoi__cell"
-          d="M105.14285749999999,16L105.14285749999999,128L130.28571449999998,128L130.28571449999998,16Z"
+          className="rv-voronoi__cell "
+          d="M105.14285749999999,16L105.14285749999999,160L130.28571449999998,160L130.28571449999998,16Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -981,8 +981,8 @@ exports[`Histogram Initially should have default markup 1`] = `
           }
         />
         <path
-          className="rv-voronoi__cell"
-          d="M130.28571449999998,16L130.28571449999998,128L155.42857149999998,128L155.42857149999998,16Z"
+          className="rv-voronoi__cell "
+          d="M130.28571449999998,16L130.28571449999998,160L155.42857149999998,160L155.42857149999998,16Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -996,8 +996,8 @@ exports[`Histogram Initially should have default markup 1`] = `
           }
         />
         <path
-          className="rv-voronoi__cell"
-          d="M155.42857149999998,16L155.42857149999998,128L180.5714285,128L180.5714285,16Z"
+          className="rv-voronoi__cell "
+          d="M155.42857149999998,16L155.42857149999998,160L180.5714285,160L180.5714285,16Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -1011,8 +1011,8 @@ exports[`Histogram Initially should have default markup 1`] = `
           }
         />
         <path
-          className="rv-voronoi__cell"
-          d="M180.5714285,16L180.5714285,128L205.7142855,128L205.7142855,16Z"
+          className="rv-voronoi__cell "
+          d="M180.5714285,16L180.5714285,160L205.7142855,160L205.7142855,16Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -1026,8 +1026,152 @@ exports[`Histogram Initially should have default markup 1`] = `
           }
         />
         <path
-          className="rv-voronoi__cell"
-          d="M205.7142855,16L205.7142855,128L230.85714249999998,128L230.85714249999998,16Z"
+          className="rv-voronoi__cell "
+          d="M205.7142855,16L205.7142855,160L230.85714249999998,160L230.85714249999998,16Z"
+          fill="none"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          onMouseUp={[Function]}
+          style={
+            Object {
+              "cursor": "pointer",
+              "pointerEvents": "all",
+            }
+          }
+        />
+        <path
+          className="rv-voronoi__cell "
+          d="M230.85714249999998,16L230.85714249999998,160L255.99999999999997,160L255.99999999999997,16Z"
+          fill="none"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          onMouseUp={[Function]}
+          style={
+            Object {
+              "cursor": "pointer",
+              "pointerEvents": "all",
+            }
+          }
+        />
+        <path
+          className="rv-voronoi__cell "
+          d="M255.99999999999997,16L255.99999999999997,160L281.1428575,160L281.1428575,16Z"
+          fill="none"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          onMouseUp={[Function]}
+          style={
+            Object {
+              "cursor": "pointer",
+              "pointerEvents": "all",
+            }
+          }
+        />
+        <path
+          className="rv-voronoi__cell "
+          d="M281.1428575,16L281.1428575,160L306.2857145,160L306.2857145,16Z"
+          fill="none"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          onMouseUp={[Function]}
+          style={
+            Object {
+              "cursor": "pointer",
+              "pointerEvents": "all",
+            }
+          }
+        />
+        <path
+          className="rv-voronoi__cell "
+          d="M306.2857145,16L306.2857145,160L331.4285715,160L331.4285715,16Z"
+          fill="none"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          onMouseUp={[Function]}
+          style={
+            Object {
+              "cursor": "pointer",
+              "pointerEvents": "all",
+            }
+          }
+        />
+        <path
+          className="rv-voronoi__cell "
+          d="M331.4285715,16L331.4285715,160L356.5714285,160L356.5714285,16Z"
+          fill="none"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          onMouseUp={[Function]}
+          style={
+            Object {
+              "cursor": "pointer",
+              "pointerEvents": "all",
+            }
+          }
+        />
+        <path
+          className="rv-voronoi__cell "
+          d="M356.5714285,16L356.5714285,160L381.71428549999996,160L381.71428549999996,16Z"
+          fill="none"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          onMouseUp={[Function]}
+          style={
+            Object {
+              "cursor": "pointer",
+              "pointerEvents": "all",
+            }
+          }
+        />
+        <path
+          className="rv-voronoi__cell "
+          d="M381.71428549999996,16L381.71428549999996,160L406.8571425,160L406.8571425,16Z"
+          fill="none"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          onMouseUp={[Function]}
+          style={
+            Object {
+              "cursor": "pointer",
+              "pointerEvents": "all",
+            }
+          }
+        />
+        <path
+          className="rv-voronoi__cell "
+          d="M406.8571425,16L406.8571425,160L432,160L432,16Z"
+          fill="none"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          onMouseUp={[Function]}
+          style={
+            Object {
+              "cursor": "pointer",
+              "pointerEvents": "all",
+            }
+          }
+        />
+        <path
+          className="rv-voronoi__cell "
+          d="M432,16L432,160L457.1428575,160L457.1428575,16Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -1041,8 +1185,24 @@ exports[`Histogram Initially should have default markup 1`] = `
           }
         />
         <path
-          className="rv-voronoi__cell"
-          d="M230.85714249999998,16L230.85714249999998,128L255.99999999999997,128L255.99999999999997,16Z"
+          className="rv-voronoi__cell "
+          d="M457.1428575,16L457.1428575,160L482.2857144999999,160L482.2857144999999,16Z"
+          fill="none"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          onMouseUp={[Function]}
+          style={
+            Object {
+              "cursor": "pointer",
+              "pointerEvents": "all",
+            }
+          }
+        />
+        <path
+          className="rv-voronoi__cell "
+          d="M482.2857144999999,16L482.2857144999999,160L507.4285715,160L507.4285715,16Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -1056,8 +1216,8 @@ exports[`Histogram Initially should have default markup 1`] = `
           }
         />
         <path
-          className="rv-voronoi__cell"
-          d="M255.99999999999997,16L255.99999999999997,128L281.1428575,128L281.1428575,16Z"
+          className="rv-voronoi__cell "
+          d="M507.4285715,16L507.4285715,160L532.5714284999999,160L532.5714284999999,16Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -1071,8 +1231,24 @@ exports[`Histogram Initially should have default markup 1`] = `
           }
         />
         <path
-          className="rv-voronoi__cell"
-          d="M281.1428575,16L281.1428575,128L306.2857145,128L306.2857145,16Z"
+          className="rv-voronoi__cell "
+          d="M532.5714284999999,16L532.5714284999999,160L557.7142855,160L557.7142855,16Z"
+          fill="none"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          onMouseUp={[Function]}
+          style={
+            Object {
+              "cursor": "pointer",
+              "pointerEvents": "all",
+            }
+          }
+        />
+        <path
+          className="rv-voronoi__cell "
+          d="M557.7142855,16L557.7142855,160L582.8571425,160L582.8571425,16Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -1086,8 +1262,8 @@ exports[`Histogram Initially should have default markup 1`] = `
           }
         />
         <path
-          className="rv-voronoi__cell"
-          d="M306.2857145,16L306.2857145,128L331.4285715,128L331.4285715,16Z"
+          className="rv-voronoi__cell "
+          d="M582.8571425,16L582.8571425,160L608,160L608,16Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -1101,8 +1277,8 @@ exports[`Histogram Initially should have default markup 1`] = `
           }
         />
         <path
-          className="rv-voronoi__cell"
-          d="M331.4285715,16L331.4285715,128L356.5714285,128L356.5714285,16Z"
+          className="rv-voronoi__cell "
+          d="M608,16L608,160L633.1428575,160L633.1428575,16Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -1116,8 +1292,8 @@ exports[`Histogram Initially should have default markup 1`] = `
           }
         />
         <path
-          className="rv-voronoi__cell"
-          d="M356.5714285,16L356.5714285,128L381.71428549999996,128L381.71428549999996,16Z"
+          className="rv-voronoi__cell "
+          d="M633.1428575,16L633.1428575,160L658.2857145,160L658.2857145,16Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -1131,8 +1307,8 @@ exports[`Histogram Initially should have default markup 1`] = `
           }
         />
         <path
-          className="rv-voronoi__cell"
-          d="M381.71428549999996,16L381.71428549999996,128L406.8571425,128L406.8571425,16Z"
+          className="rv-voronoi__cell "
+          d="M658.2857145,16L658.2857145,160L683.4285715,160L683.4285715,16Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -1146,8 +1322,40 @@ exports[`Histogram Initially should have default markup 1`] = `
           }
         />
         <path
-          className="rv-voronoi__cell"
-          d="M406.8571425,16L406.8571425,128L432,128L432,16Z"
+          className="rv-voronoi__cell "
+          d="M683.4285715,16L683.4285715,160L708.5714284999999,160L708.5714284999999,16Z"
+          fill="none"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          onMouseUp={[Function]}
+          style={
+            Object {
+              "cursor": "pointer",
+              "pointerEvents": "all",
+            }
+          }
+        />
+        <path
+          className="rv-voronoi__cell "
+          d="M708.5714284999999,16L708.5714284999999,160L733.7142855,160L733.7142855,16Z"
+          fill="none"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          onMouseUp={[Function]}
+          style={
+            Object {
+              "cursor": "pointer",
+              "pointerEvents": "all",
+            }
+          }
+        />
+        <path
+          className="rv-voronoi__cell "
+          d="M733.7142855,16L733.7142855,160L758.8571425,160L758.8571425,16Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -1161,8 +1369,8 @@ exports[`Histogram Initially should have default markup 1`] = `
           }
         />
         <path
-          className="rv-voronoi__cell"
-          d="M432,16L432,128L457.1428575,128L457.1428575,16Z"
+          className="rv-voronoi__cell "
+          d="M758.8571425,16L758.8571425,160L800,160L800,16Z"
           fill="none"
           onClick={[Function]}
           onMouseDown={[Function]}
@@ -1171,201 +1379,7 @@ exports[`Histogram Initially should have default markup 1`] = `
           onMouseUp={[Function]}
           style={
             Object {
-              "pointerEvents": "all",
-            }
-          }
-        />
-        <path
-          className="rv-voronoi__cell"
-          d="M457.1428575,16L457.1428575,128L482.2857144999999,128L482.2857144999999,16Z"
-          fill="none"
-          onClick={[Function]}
-          onMouseDown={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          onMouseUp={[Function]}
-          style={
-            Object {
-              "pointerEvents": "all",
-            }
-          }
-        />
-        <path
-          className="rv-voronoi__cell"
-          d="M482.2857144999999,16L482.2857144999999,128L507.4285715,128L507.4285715,16Z"
-          fill="none"
-          onClick={[Function]}
-          onMouseDown={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          onMouseUp={[Function]}
-          style={
-            Object {
-              "pointerEvents": "all",
-            }
-          }
-        />
-        <path
-          className="rv-voronoi__cell"
-          d="M507.4285715,16L507.4285715,128L532.5714284999999,128L532.5714284999999,16Z"
-          fill="none"
-          onClick={[Function]}
-          onMouseDown={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          onMouseUp={[Function]}
-          style={
-            Object {
-              "pointerEvents": "all",
-            }
-          }
-        />
-        <path
-          className="rv-voronoi__cell"
-          d="M532.5714284999999,16L532.5714284999999,128L557.7142855,128L557.7142855,16Z"
-          fill="none"
-          onClick={[Function]}
-          onMouseDown={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          onMouseUp={[Function]}
-          style={
-            Object {
-              "pointerEvents": "all",
-            }
-          }
-        />
-        <path
-          className="rv-voronoi__cell"
-          d="M557.7142855,16L557.7142855,128L582.8571425,128L582.8571425,16Z"
-          fill="none"
-          onClick={[Function]}
-          onMouseDown={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          onMouseUp={[Function]}
-          style={
-            Object {
-              "pointerEvents": "all",
-            }
-          }
-        />
-        <path
-          className="rv-voronoi__cell"
-          d="M582.8571425,16L582.8571425,128L608,128L608,16Z"
-          fill="none"
-          onClick={[Function]}
-          onMouseDown={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          onMouseUp={[Function]}
-          style={
-            Object {
-              "pointerEvents": "all",
-            }
-          }
-        />
-        <path
-          className="rv-voronoi__cell"
-          d="M608,16L608,128L633.1428575,128L633.1428575,16Z"
-          fill="none"
-          onClick={[Function]}
-          onMouseDown={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          onMouseUp={[Function]}
-          style={
-            Object {
-              "pointerEvents": "all",
-            }
-          }
-        />
-        <path
-          className="rv-voronoi__cell"
-          d="M633.1428575,16L633.1428575,128L658.2857145,128L658.2857145,16Z"
-          fill="none"
-          onClick={[Function]}
-          onMouseDown={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          onMouseUp={[Function]}
-          style={
-            Object {
-              "pointerEvents": "all",
-            }
-          }
-        />
-        <path
-          className="rv-voronoi__cell"
-          d="M658.2857145,16L658.2857145,128L683.4285715,128L683.4285715,16Z"
-          fill="none"
-          onClick={[Function]}
-          onMouseDown={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          onMouseUp={[Function]}
-          style={
-            Object {
-              "pointerEvents": "all",
-            }
-          }
-        />
-        <path
-          className="rv-voronoi__cell"
-          d="M683.4285715,16L683.4285715,128L708.5714284999999,128L708.5714284999999,16Z"
-          fill="none"
-          onClick={[Function]}
-          onMouseDown={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          onMouseUp={[Function]}
-          style={
-            Object {
-              "pointerEvents": "all",
-            }
-          }
-        />
-        <path
-          className="rv-voronoi__cell"
-          d="M708.5714284999999,16L708.5714284999999,128L733.7142855,128L733.7142855,16Z"
-          fill="none"
-          onClick={[Function]}
-          onMouseDown={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          onMouseUp={[Function]}
-          style={
-            Object {
-              "pointerEvents": "all",
-            }
-          }
-        />
-        <path
-          className="rv-voronoi__cell"
-          d="M733.7142855,16L733.7142855,128L758.8571425,128L758.8571425,16Z"
-          fill="none"
-          onClick={[Function]}
-          onMouseDown={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          onMouseUp={[Function]}
-          style={
-            Object {
-              "pointerEvents": "all",
-            }
-          }
-        />
-        <path
-          className="rv-voronoi__cell"
-          d="M758.8571425,16L758.8571425,128L800,128L800,16Z"
-          fill="none"
-          onClick={[Function]}
-          onMouseDown={[Function]}
-          onMouseOut={[Function]}
-          onMouseOver={[Function]}
-          onMouseUp={[Function]}
-          style={
-            Object {
+              "cursor": "pointer",
               "pointerEvents": "all",
             }
           }
@@ -1398,73 +1412,20 @@ exports[`Histogram when hovering over a non-empty bucket should have correct mar
 }
 
 .c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  padding: 8px;
-  padding: 4px 16px 4px 8px;
+  margin: 8px;
+  margin-right: 16px;
   font-size: 12px;
 }
 
 .c3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin: 4px 0;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+  color: #666666;
+  font-size: 14px;
 }
 
 .c4 {
   color: #999999;
-}
-
-.c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  margin: 8px;
   font-size: 12px;
-  color: #666666;
-  cursor: pointer;
-  opacity: 1;
-  margin-right: 8px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.c5:last-of-type {
-  margin-right: 0;
-}
-
-.c6 {
-  width: 8px;
-  height: 8px;
-  margin-right: 4px;
-  background: rgb(172,189,216);
-  border-radius: 100%;
-}
-
-.c7 {
-  color: #666666;
-  font-size: 14px;
 }
 
 <div
@@ -1476,7 +1437,7 @@ exports[`Histogram when hovering over a non-empty bucket should have correct mar
       "marginLeft": "1%",
       "marginRight": "1%",
       "position": "absolute",
-      "top": 56,
+      "top": 72,
     }
   }
 >
@@ -1494,25 +1455,12 @@ exports[`Histogram when hovering over a non-empty bucket should have correct mar
       <div
         className="c3"
       >
-        <div
-          className="c4 c5"
-          disabled={false}
-          fontSize="12px"
-        >
-          <span
-            className="c6"
-            color="rgb(172, 189, 216)"
-            radius={8}
-          />
-          Requests
-        </div>
-        <div
-          className="c7"
-        >
-          49.0
-        </div>
+        49 requests
       </div>
     </div>
+    <div
+      className="c4"
+    />
   </div>
 </div>
 `;

@@ -35,6 +35,7 @@ Array [
 exports[`when response has data Initially should have correct markup 1`] = `
 .c0 {
   font-size: 16px;
+  margin-bottom: 8px;
 }
 
 .c1 {
@@ -116,69 +117,67 @@ exports[`when response has data Initially should have correct markup 1`] = `
 }
 
 <div>
-  <div>
+  <div
+    className="c0"
+  />
+  <div
+    className="c1"
+  >
     <div
-      className="c0"
-    />
-    <div
-      className="c1"
+      className="c2"
+      disabled={false}
+      fontSize="12px"
+      onClick={[Function]}
     >
-      <div
-        className="c2"
-        disabled={false}
-        fontSize="12px"
-        onClick={[Function]}
+      <span
+        className="c3"
+        color="#3185fc"
+        radius={11}
+      />
+      <span
+        className="c4"
       >
+        Avg.
         <span
-          className="c3"
-          color="#3185fc"
-          radius={11}
-        />
-        <span
-          className="c4"
+          className="c5"
         >
-          Avg.
-          <span
-            className="c5"
-          >
-            468 ms
-          </span>
+          468 ms
         </span>
-      </div>
-      <div
-        className="c2"
-        disabled={false}
-        fontSize="12px"
-        onClick={[Function]}
+      </span>
+    </div>
+    <div
+      className="c2"
+      disabled={false}
+      fontSize="12px"
+      onClick={[Function]}
+    >
+      <span
+        className="c6"
+        color="#ecae23"
+        radius={11}
+      />
+      <span
+        className="c4"
       >
-        <span
-          className="c6"
-          color="#ecae23"
-          radius={11}
-        />
-        <span
-          className="c4"
-        >
-          95th percentile
-        </span>
-      </div>
-      <div
-        className="c2"
-        disabled={false}
-        fontSize="12px"
-        onClick={[Function]}
+        95th percentile
+      </span>
+    </div>
+    <div
+      className="c2"
+      disabled={false}
+      fontSize="12px"
+      onClick={[Function]}
+    >
+      <span
+        className="c7"
+        color="#f98510"
+        radius={11}
+      />
+      <span
+        className="c4"
       >
-        <span
-          className="c7"
-          color="#f98510"
-          radius={11}
-        />
-        <span
-          className="c4"
-        >
-          99th percentile
-        </span>
-      </div>
+        99th percentile
+      </span>
     </div>
   </div>
   <div
@@ -607,7 +606,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
             className=" rv-voronoi"
           >
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M91.7333335,256L91.7333335,16L80,16L80,256Z"
               fill="none"
               onClick={[Function]}
@@ -622,7 +621,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M91.7333335,16L91.7333335,256L115.19999999999999,256L115.19999999999999,16Z"
               fill="none"
               onClick={[Function]}
@@ -637,7 +636,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M115.19999999999999,16L115.19999999999999,256L138.6666665,256L138.6666665,16Z"
               fill="none"
               onClick={[Function]}
@@ -652,7 +651,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M138.6666665,16L138.6666665,256L162.1333335,256L162.1333335,16Z"
               fill="none"
               onClick={[Function]}
@@ -667,7 +666,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M162.1333335,16L162.1333335,256L185.59999999999997,256L185.59999999999997,16Z"
               fill="none"
               onClick={[Function]}
@@ -682,7 +681,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M185.59999999999997,16L185.59999999999997,256L209.0666665,256L209.0666665,16Z"
               fill="none"
               onClick={[Function]}
@@ -697,7 +696,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M209.0666665,16L209.0666665,256L232.53333349999997,256L232.53333349999997,16Z"
               fill="none"
               onClick={[Function]}
@@ -712,7 +711,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M232.53333349999997,16L232.53333349999997,256L256,256L256,16Z"
               fill="none"
               onClick={[Function]}
@@ -727,7 +726,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M256,16L256,256L279.4666665,256L279.4666665,16Z"
               fill="none"
               onClick={[Function]}
@@ -742,7 +741,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M279.4666665,16L279.4666665,256L302.9333335,256L302.9333335,16Z"
               fill="none"
               onClick={[Function]}
@@ -757,7 +756,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M302.9333335,16L302.9333335,256L326.4,256L326.4,16Z"
               fill="none"
               onClick={[Function]}
@@ -772,7 +771,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M326.4,16L326.4,256L349.86666649999995,256L349.86666649999995,16Z"
               fill="none"
               onClick={[Function]}
@@ -787,7 +786,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M349.86666649999995,16L349.86666649999995,256L373.3333335,256L373.3333335,16Z"
               fill="none"
               onClick={[Function]}
@@ -802,7 +801,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M373.3333335,16L373.3333335,256L396.79999999999995,256L396.79999999999995,16Z"
               fill="none"
               onClick={[Function]}
@@ -817,7 +816,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M396.79999999999995,16L396.79999999999995,256L420.2666665,256L420.2666665,16Z"
               fill="none"
               onClick={[Function]}
@@ -832,7 +831,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M420.2666665,16L420.2666665,256L443.73333349999996,256L443.73333349999996,16Z"
               fill="none"
               onClick={[Function]}
@@ -847,7 +846,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M443.73333349999996,16L443.73333349999996,256L467.2,256L467.2,16Z"
               fill="none"
               onClick={[Function]}
@@ -862,7 +861,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M467.2,16L467.2,256L490.6666665,256L490.6666665,16Z"
               fill="none"
               onClick={[Function]}
@@ -877,7 +876,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M490.6666665,16L490.6666665,256L514.1333334999999,256L514.1333334999999,16Z"
               fill="none"
               onClick={[Function]}
@@ -892,7 +891,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M514.1333334999999,16L514.1333334999999,256L537.5999999999999,256L537.5999999999999,16Z"
               fill="none"
               onClick={[Function]}
@@ -907,7 +906,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M537.5999999999999,16L537.5999999999999,256L561.0666664999999,256L561.0666664999999,16Z"
               fill="none"
               onClick={[Function]}
@@ -922,7 +921,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M561.0666664999999,16L561.0666664999999,256L584.5333335,256L584.5333335,16Z"
               fill="none"
               onClick={[Function]}
@@ -937,7 +936,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M584.5333335,16L584.5333335,256L608,256L608,16Z"
               fill="none"
               onClick={[Function]}
@@ -952,7 +951,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M608,16L608,256L631.4666665,256L631.4666665,16Z"
               fill="none"
               onClick={[Function]}
@@ -967,7 +966,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M631.4666665,16L631.4666665,256L654.9333334999999,256L654.9333334999999,16Z"
               fill="none"
               onClick={[Function]}
@@ -982,7 +981,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M654.9333334999999,16L654.9333334999999,256L678.4,256L678.4,16Z"
               fill="none"
               onClick={[Function]}
@@ -997,7 +996,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M678.4,16L678.4,256L701.8666665000001,256L701.8666665000001,16Z"
               fill="none"
               onClick={[Function]}
@@ -1012,7 +1011,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M701.8666665000001,16L701.8666665000001,256L725.3333335,256L725.3333335,16Z"
               fill="none"
               onClick={[Function]}
@@ -1027,7 +1026,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M725.3333335,16L725.3333335,256L748.8,256L748.8,16Z"
               fill="none"
               onClick={[Function]}
@@ -1042,7 +1041,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M748.8,16L748.8,256L772.2666664999999,256L772.2666664999999,16Z"
               fill="none"
               onClick={[Function]}
@@ -1057,7 +1056,7 @@ exports[`when response has data Initially should have correct markup 1`] = `
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M772.2666664999999,16L772.2666664999999,256L800,256L800,16Z"
               fill="none"
               onClick={[Function]}
@@ -1091,8 +1090,8 @@ Object {
 exports[`when response has data when dragging without releasing should display SelectionMarker 1`] = `
 <rect
   fill="black"
+  fillOpacity="0.1"
   height={208}
-  opacity="0.2"
   pointerEvents="none"
   width={234.66666666666663}
   x={314.66666666666663}
@@ -1123,6 +1122,7 @@ Array [
 exports[`when response has data when setting hoverIndex should match snapshots 1`] = `
 .c0 {
   font-size: 16px;
+  margin-bottom: 8px;
 }
 
 .c1 {
@@ -1248,15 +1248,8 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
 }
 
 .c10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  padding: 8px;
-  padding: 4px 16px 4px 8px;
+  margin: 8px;
+  margin-right: 16px;
   font-size: 12px;
 }
 
@@ -1269,7 +1262,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin: 4px 0;
+  margin-bottom: 4px;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -1285,70 +1278,74 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
   font-size: 14px;
 }
 
+.c17 {
+  color: #999999;
+  margin: 8px;
+  font-size: 12px;
+}
+
 <div>
-  <div>
+  <div
+    className="c0"
+  />
+  <div
+    className="c1"
+  >
     <div
-      className="c0"
-    />
-    <div
-      className="c1"
+      className="c2"
+      disabled={false}
+      fontSize="12px"
+      onClick={[Function]}
     >
-      <div
-        className="c2"
-        disabled={false}
-        fontSize="12px"
-        onClick={[Function]}
+      <span
+        className="c3"
+        color="#3185fc"
+        radius={11}
+      />
+      <span
+        className="c4"
       >
+        Avg.
         <span
-          className="c3"
-          color="#3185fc"
-          radius={11}
-        />
-        <span
-          className="c4"
+          className="c5"
         >
-          Avg.
-          <span
-            className="c5"
-          >
-            468 ms
-          </span>
+          468 ms
         </span>
-      </div>
-      <div
-        className="c2"
-        disabled={false}
-        fontSize="12px"
-        onClick={[Function]}
+      </span>
+    </div>
+    <div
+      className="c2"
+      disabled={false}
+      fontSize="12px"
+      onClick={[Function]}
+    >
+      <span
+        className="c6"
+        color="#ecae23"
+        radius={11}
+      />
+      <span
+        className="c4"
       >
-        <span
-          className="c6"
-          color="#ecae23"
-          radius={11}
-        />
-        <span
-          className="c4"
-        >
-          95th percentile
-        </span>
-      </div>
-      <div
-        className="c2"
-        disabled={false}
-        fontSize="12px"
-        onClick={[Function]}
+        95th percentile
+      </span>
+    </div>
+    <div
+      className="c2"
+      disabled={false}
+      fontSize="12px"
+      onClick={[Function]}
+    >
+      <span
+        className="c7"
+        color="#f98510"
+        radius={11}
+      />
+      <span
+        className="c4"
       >
-        <span
-          className="c7"
-          color="#f98510"
-          radius={11}
-        />
-        <span
-          className="c4"
-        >
-          99th percentile
-        </span>
-      </div>
+        99th percentile
+      </span>
     </div>
   </div>
   <div
@@ -1812,12 +1809,12 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
         </svg>
         <div
           className="rv-hint  rv-hint--horizontalAlign-right
-             rv-hint--verticalAlign-top"
+             rv-hint--verticalAlign-bottom"
           style={
             Object {
-              "bottom": 32,
               "left": 432,
               "position": "absolute",
+              "top": 120,
             }
           }
         >
@@ -1896,6 +1893,9 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
                 </div>
               </div>
             </div>
+            <div
+              className="c17"
+            />
           </div>
         </div>
       </div>
@@ -1934,7 +1934,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
             className=" rv-voronoi"
           >
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M91.7333335,256L91.7333335,16L80,16L80,256Z"
               fill="none"
               onClick={[Function]}
@@ -1949,7 +1949,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M91.7333335,16L91.7333335,256L115.19999999999999,256L115.19999999999999,16Z"
               fill="none"
               onClick={[Function]}
@@ -1964,7 +1964,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M115.19999999999999,16L115.19999999999999,256L138.6666665,256L138.6666665,16Z"
               fill="none"
               onClick={[Function]}
@@ -1979,7 +1979,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M138.6666665,16L138.6666665,256L162.1333335,256L162.1333335,16Z"
               fill="none"
               onClick={[Function]}
@@ -1994,7 +1994,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M162.1333335,16L162.1333335,256L185.59999999999997,256L185.59999999999997,16Z"
               fill="none"
               onClick={[Function]}
@@ -2009,7 +2009,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M185.59999999999997,16L185.59999999999997,256L209.0666665,256L209.0666665,16Z"
               fill="none"
               onClick={[Function]}
@@ -2024,7 +2024,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M209.0666665,16L209.0666665,256L232.53333349999997,256L232.53333349999997,16Z"
               fill="none"
               onClick={[Function]}
@@ -2039,7 +2039,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M232.53333349999997,16L232.53333349999997,256L256,256L256,16Z"
               fill="none"
               onClick={[Function]}
@@ -2054,7 +2054,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M256,16L256,256L279.4666665,256L279.4666665,16Z"
               fill="none"
               onClick={[Function]}
@@ -2069,7 +2069,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M279.4666665,16L279.4666665,256L302.9333335,256L302.9333335,16Z"
               fill="none"
               onClick={[Function]}
@@ -2084,7 +2084,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M302.9333335,16L302.9333335,256L326.4,256L326.4,16Z"
               fill="none"
               onClick={[Function]}
@@ -2099,7 +2099,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M326.4,16L326.4,256L349.86666649999995,256L349.86666649999995,16Z"
               fill="none"
               onClick={[Function]}
@@ -2114,7 +2114,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M349.86666649999995,16L349.86666649999995,256L373.3333335,256L373.3333335,16Z"
               fill="none"
               onClick={[Function]}
@@ -2129,7 +2129,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M373.3333335,16L373.3333335,256L396.79999999999995,256L396.79999999999995,16Z"
               fill="none"
               onClick={[Function]}
@@ -2144,7 +2144,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M396.79999999999995,16L396.79999999999995,256L420.2666665,256L420.2666665,16Z"
               fill="none"
               onClick={[Function]}
@@ -2159,7 +2159,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M420.2666665,16L420.2666665,256L443.73333349999996,256L443.73333349999996,16Z"
               fill="none"
               onClick={[Function]}
@@ -2174,7 +2174,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M443.73333349999996,16L443.73333349999996,256L467.2,256L467.2,16Z"
               fill="none"
               onClick={[Function]}
@@ -2189,7 +2189,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M467.2,16L467.2,256L490.6666665,256L490.6666665,16Z"
               fill="none"
               onClick={[Function]}
@@ -2204,7 +2204,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M490.6666665,16L490.6666665,256L514.1333334999999,256L514.1333334999999,16Z"
               fill="none"
               onClick={[Function]}
@@ -2219,7 +2219,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M514.1333334999999,16L514.1333334999999,256L537.5999999999999,256L537.5999999999999,16Z"
               fill="none"
               onClick={[Function]}
@@ -2234,7 +2234,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M537.5999999999999,16L537.5999999999999,256L561.0666664999999,256L561.0666664999999,16Z"
               fill="none"
               onClick={[Function]}
@@ -2249,7 +2249,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M561.0666664999999,16L561.0666664999999,256L584.5333335,256L584.5333335,16Z"
               fill="none"
               onClick={[Function]}
@@ -2264,7 +2264,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M584.5333335,16L584.5333335,256L608,256L608,16Z"
               fill="none"
               onClick={[Function]}
@@ -2279,7 +2279,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M608,16L608,256L631.4666665,256L631.4666665,16Z"
               fill="none"
               onClick={[Function]}
@@ -2294,7 +2294,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M631.4666665,16L631.4666665,256L654.9333334999999,256L654.9333334999999,16Z"
               fill="none"
               onClick={[Function]}
@@ -2309,7 +2309,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M654.9333334999999,16L654.9333334999999,256L678.4,256L678.4,16Z"
               fill="none"
               onClick={[Function]}
@@ -2324,7 +2324,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M678.4,16L678.4,256L701.8666665000001,256L701.8666665000001,16Z"
               fill="none"
               onClick={[Function]}
@@ -2339,7 +2339,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M701.8666665000001,16L701.8666665000001,256L725.3333335,256L725.3333335,16Z"
               fill="none"
               onClick={[Function]}
@@ -2354,7 +2354,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M725.3333335,16L725.3333335,256L748.8,256L748.8,16Z"
               fill="none"
               onClick={[Function]}
@@ -2369,7 +2369,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M748.8,16L748.8,256L772.2666664999999,256L772.2666664999999,16Z"
               fill="none"
               onClick={[Function]}
@@ -2384,7 +2384,7 @@ exports[`when response has data when setting hoverIndex should match snapshots 1
               }
             />
             <path
-              className="rv-voronoi__cell"
+              className="rv-voronoi__cell "
               d="M772.2666664999999,16L772.2666664999999,256L800,256L800,16Z"
               fill="none"
               onClick={[Function]}
@@ -2418,32 +2418,13 @@ Object {
 exports[`when response has no data Initially should have correct markup 1`] = `
 .c0 {
   font-size: 16px;
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
+  margin-bottom: 8px;
 }
 
 <div>
-  <div>
-    <div
-      className="c0"
-    />
-    <div
-      className="c1"
-    />
-  </div>
+  <div
+    className="c0"
+  />
   <div
     style={
       Object {

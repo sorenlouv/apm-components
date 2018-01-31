@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { makeWidthFlexible } from 'react-vis';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+import styled from 'styled-components';
 
 import Legends from './Legends';
 import StaticPlot from './StaticPlot';
@@ -9,8 +10,14 @@ import InteractivePlot from './InteractivePlot';
 import VoronoiPlot from './VoronoiPlot';
 import { createSelector } from 'reselect';
 import { getPlotValues } from './plotUtils';
+import { fontSizes, units, px } from '../../variables';
 
-const VISIBLE_SERIES_COUNT = 5;
+const Title = styled.div`
+  font-size: ${fontSizes.large};
+  margin-bottom: ${px(units.half)};
+`;
+
+const VISIBLE_SERIES_COUNT = 4;
 
 export class InnerCustomPlot extends PureComponent {
   state = {
@@ -28,7 +35,8 @@ export class InnerCustomPlot extends PureComponent {
   );
 
   getPlotValues = createSelector(
-    state => state.series,
+    state => state.visibleSeries,
+    state => state.enabledSeries,
     state => state.width,
     getPlotValues
   );
@@ -88,7 +96,7 @@ export class InnerCustomPlot extends PureComponent {
   };
 
   render() {
-    const { chartTitle, series, truncateLegends, width } = this.props;
+    const { chartTitle, series, truncateLegends, noHits, width } = this.props;
 
     if (_.isEmpty(series) || !width) {
       return null;
@@ -100,11 +108,22 @@ export class InnerCustomPlot extends PureComponent {
       visibleSeries,
       seriesEnabledState: this.state.seriesEnabledState
     });
-    const plotValues = this.getPlotValues({ series: enabledSeries, width });
+
+    const plotValues = this.getPlotValues({
+      visibleSeries,
+      enabledSeries,
+      width
+    });
+    if (_.isEmpty(plotValues)) {
+      return null;
+    }
 
     return (
       <div>
+        <Title>{chartTitle}</Title>
+
         <Legends
+          noHits={noHits}
           chartTitle={chartTitle}
           truncateLegends={truncateLegends}
           series={visibleSeries}
@@ -115,6 +134,7 @@ export class InnerCustomPlot extends PureComponent {
 
         <div style={{ position: 'relative', height: plotValues.XY_HEIGHT }}>
           <StaticPlot
+            noHits={noHits}
             plotValues={plotValues}
             series={enabledSeries}
             tickFormatY={this.props.tickFormatY}
@@ -132,6 +152,7 @@ export class InnerCustomPlot extends PureComponent {
           />
 
           <VoronoiPlot
+            noHits={noHits}
             plotValues={plotValues}
             series={enabledSeries}
             onHover={this.onHover}
@@ -147,6 +168,7 @@ export class InnerCustomPlot extends PureComponent {
 
 InnerCustomPlot.propTypes = {
   hoverIndex: PropTypes.number,
+  noHits: PropTypes.bool.isRequired,
   onHover: PropTypes.func.isRequired,
   onMouseLeave: PropTypes.func.isRequired,
   onSelectionEnd: PropTypes.func.isRequired,

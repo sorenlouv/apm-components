@@ -19,8 +19,7 @@ import {
 } from 'react-vis';
 import { unit, colors } from '../../variables';
 
-const barColor = 'rgb(172, 189, 216)';
-const XY_HEIGHT = unit * 8;
+const XY_HEIGHT = unit * 10;
 const XY_MARGIN = {
   top: unit,
   left: unit * 5,
@@ -28,7 +27,7 @@ const XY_MARGIN = {
   bottom: unit * 2
 };
 
-const X_TICK_TOTAL = 10;
+const X_TICK_TOTAL = 8;
 
 const ChartsWrapper = styled.div`
   user-select: none;
@@ -38,12 +37,12 @@ export class HistogramInner extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      hoveredBucket: null
+      hoveredBucket: {}
     };
   }
 
   onClick = bucket => {
-    if (this.props.onClick && bucket.y > 0) {
+    if (this.props.onClick) {
       this.props.onClick(bucket);
     }
   };
@@ -53,48 +52,49 @@ export class HistogramInner extends PureComponent {
   };
 
   onBlur = () => {
-    this.setState({ hoveredBucket: null });
+    this.setState({ hoveredBucket: {} });
   };
 
   getChartData(items, selectedItem) {
-    const yMax = Math.max(...items.map(item => item.y));
-    const yMin = yMax * 0.1;
+    const yMax = d3.max(items, d => d.y);
+    const MINIMUM_BUCKET_SIZE = yMax * 0.02;
 
     return items.map(item => {
       const padding = (item.x - item.x0) / 20;
       return {
         ...item,
-        color: item === selectedItem ? colors.blue1 : undefined,
+        color: item === selectedItem ? colors.blue2 : colors.apmLightBlue,
         x0: item.x0 + padding,
         x: item.x - padding,
-        y: item.y > 0 ? Math.max(item.y, yMin) : 0
+        y: item.y > 0 ? Math.max(item.y, MINIMUM_BUCKET_SIZE) : 0
       };
     });
   }
 
   render() {
     const {
+      backgroundHover,
+      bucketIndex,
       buckets,
-      transactionId,
       bucketSize,
-      width: XY_WIDTH,
-      formatXValue,
-      formatYValue,
-      formatTooltipHeader,
-      tooltipLegendTitle
+      formatX,
+      formatYShort,
+      formatYLong,
+      tooltipFooter,
+      tooltipHeader,
+      verticalLineHover,
+      width: XY_WIDTH
     } = this.props;
+    const { hoveredBucket } = this.state;
     if (_.isEmpty(buckets) || XY_WIDTH === 0) {
       return null;
     }
-
-    const selectedBucket =
-      transactionId &&
-      buckets.find(bucket => bucket.transactionId === transactionId);
 
     const xMin = d3.min(buckets, d => d.x0);
     const xMax = d3.max(buckets, d => d.x);
     const yMin = 0;
     const yMax = d3.max(buckets, d => d.y);
+    const selectedBucket = buckets[bucketIndex];
     const chartData = this.getChartData(buckets, selectedBucket);
 
     const x = scaleLinear()
@@ -108,10 +108,12 @@ export class HistogramInner extends PureComponent {
     const xDomain = x.domain();
     const yDomain = y.domain();
     const yTickValues = [0, yDomain[1] / 2, yDomain[1]];
-    const hoveredBucket = this.state.hoveredBucket || {};
     const isTimeSeries = this.props.xType === 'time';
     const shouldShowTooltip =
       hoveredBucket.x > 0 && (hoveredBucket.y > 0 || isTimeSeries);
+
+    const showVerticalLineHover = verticalLineHover(hoveredBucket);
+    const showBackgroundHover = backgroundHover(hoveredBucket);
 
     return (
       <ChartsWrapper>
@@ -130,24 +132,24 @@ export class HistogramInner extends PureComponent {
             tickSizeOuter={10}
             tickSizeInner={0}
             tickTotal={X_TICK_TOTAL}
-            tickFormat={formatXValue}
+            tickFormat={formatX}
           />
           <YAxis
             tickSize={0}
             hideLine
             tickValues={yTickValues}
-            tickFormat={formatYValue}
+            tickFormat={formatYShort}
           />
-          {this.props.onClick &&
-            _.get(this.state.hoveredBucket, 'y') > 0 && (
-              <SingleRect
-                x={x(this.state.hoveredBucket.x0)}
-                width={x(bucketSize) - x(0)}
-                style={{
-                  fill: colors.gray4
-                }}
-              />
-            )}
+
+          {showBackgroundHover && (
+            <SingleRect
+              x={x(hoveredBucket.x0)}
+              width={x(bucketSize) - x(0)}
+              style={{
+                fill: colors.gray5
+              }}
+            />
+          )}
 
           {shouldShowTooltip && (
             <Tooltip
@@ -155,47 +157,49 @@ export class HistogramInner extends PureComponent {
                 marginLeft: '1%',
                 marginRight: '1%'
               }}
-              header={formatTooltipHeader(hoveredBucket.x0, hoveredBucket.x)}
-              tooltipPoints={[
-                {
-                  color: barColor,
-                  value: formatYValue(hoveredBucket.y, false),
-                  text: tooltipLegendTitle
-                }
-              ]}
+              header={tooltipHeader(hoveredBucket)}
+              footer={tooltipFooter(hoveredBucket)}
+              tooltipPoints={[{ value: formatYLong(hoveredBucket.y) }]}
               x={hoveredBucket.x}
               y={yDomain[1] / 2}
             />
           )}
+
           {selectedBucket && (
             <SingleRect
               x={x(selectedBucket.x0)}
               width={x(bucketSize) - x(0)}
               style={{
                 fill: 'transparent',
-                stroke: 'rgb(172, 189, 220)'
+                stroke: colors.blue2,
+                rx: '0px',
+                ry: '0px'
               }}
             />
           )}
+
           <VerticalRectSeries
             colorType="literal"
-            color="rgb(172, 189, 216)"
+            color={colors.apmLightBlue}
             data={chartData}
             style={{
-              rx: '2px',
-              ry: '2px'
+              rx: '0px',
+              ry: '0px'
             }}
           />
-          {isTimeSeries &&
-            hoveredBucket.x > 0 && (
-              <VerticalGridLines tickValues={[hoveredBucket.x]} />
-            )}
+
+          {showVerticalLineHover && (
+            <VerticalGridLines tickValues={[hoveredBucket.x]} />
+          )}
+
           <Voronoi
             extent={[[XY_MARGIN.left, XY_MARGIN.top], [XY_WIDTH, XY_HEIGHT]]}
-            nodes={this.props.buckets.map(item => ({
-              ...item,
-              x: (item.x0 + item.x) / 2
-            }))}
+            nodes={this.props.buckets.map(bucket => {
+              return {
+                ...bucket,
+                x: (bucket.x0 + bucket.x) / 2
+              };
+            })}
             onClick={this.onClick}
             onHover={this.onHover}
             onBlur={this.onBlur}
@@ -209,21 +213,28 @@ export class HistogramInner extends PureComponent {
 }
 
 HistogramInner.propTypes = {
-  width: PropTypes.number.isRequired,
-  transactionId: PropTypes.string,
-  bucketSize: PropTypes.number.isRequired,
-  onClick: PropTypes.func,
+  backgroundHover: PropTypes.func,
+  bucketIndex: PropTypes.number,
   buckets: PropTypes.array.isRequired,
-  xType: PropTypes.string,
-  formatXValue: PropTypes.func,
-  formatYValue: PropTypes.func,
-  formatTooltipHeader: PropTypes.func,
-  tooltipLegendTitle: PropTypes.string
+  bucketSize: PropTypes.number.isRequired,
+  formatX: PropTypes.func,
+  formatYLong: PropTypes.func,
+  formatYShort: PropTypes.func,
+  onClick: PropTypes.func,
+  tooltipFooter: PropTypes.func,
+  tooltipHeader: PropTypes.func,
+  verticalLineHover: PropTypes.func,
+  width: PropTypes.number.isRequired,
+  xType: PropTypes.string
 };
 
 HistogramInner.defaultProps = {
-  formatTooltipHeader: () => null,
-  formatYValue: value => value,
+  backgroundHover: () => null,
+  formatYLong: value => value,
+  formatYShort: value => value,
+  tooltipFooter: () => null,
+  tooltipHeader: () => null,
+  verticalLineHover: () => null,
   xType: 'linear'
 };
 

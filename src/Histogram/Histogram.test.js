@@ -4,7 +4,7 @@ import d3 from 'd3';
 import { HistogramInner } from './Histogram';
 import getFormattedBuckets from './Histogram/getFormattedBuckets';
 import response from './data/responseTime.json';
-import { getTimeFormatter, asDecimal, timeUnit } from '../formatters';
+import { getTimeFormatter, timeUnit } from '../formatters';
 import { toJson } from '../testHelpers';
 
 describe('Histogram', () => {
@@ -21,17 +21,17 @@ describe('Histogram', () => {
       <HistogramInner
         buckets={buckets}
         bucketSize={response.bucketSize}
-        transactionId="myTransactionId"
+        bucketIndex={null}
         onClick={onClick}
-        formatXValue={timeFormatter}
-        formatYValue={asDecimal}
-        formatTooltipHeader={(hoveredX0, hoveredX) =>
-          `${timeFormatter(hoveredX0, false)} - ${timeFormatter(
-            hoveredX,
+        formatX={timeFormatter}
+        formatYShort={value => `${value} req.`}
+        formatYLong={value => `${value} requests`}
+        tooltipHeader={bucket =>
+          `${timeFormatter(bucket.x0, false)} - ${timeFormatter(
+            bucket.x,
             false
           )} ${unit}`
         }
-        tooltipLegendTitle="Requests"
         width={800}
       />
     );
@@ -39,7 +39,7 @@ describe('Histogram', () => {
 
   describe('Initially', () => {
     it('should have default state', () => {
-      expect(wrapper.state()).toEqual({ hoveredBucket: null });
+      expect(wrapper.state()).toEqual({ hoveredBucket: {} });
     });
 
     it('should have default markup', () => {
@@ -78,7 +78,7 @@ describe('Histogram', () => {
       expect(tooltips.length).toBe(1);
       expect(tooltips.prop('header')).toBe('811 - 869 ms');
       expect(tooltips.prop('tooltipPoints')).toEqual([
-        { color: 'rgb(172, 189, 216)', text: 'Requests', value: '49.0' }
+        { value: '49 requests' }
       ]);
       expect(tooltips.prop('x')).toEqual(869010);
       expect(tooltips.prop('y')).toEqual(27.5);
@@ -87,6 +87,8 @@ describe('Histogram', () => {
     it('should update state with "hoveredBucket"', () => {
       expect(wrapper.state()).toEqual({
         hoveredBucket: {
+          sampled: true,
+          style: { cursor: 'pointer' },
           transactionId: '99c50a5b-44b4-4289-a3d1-a2815d128192',
           x: 869010,
           x0: 811076,
@@ -111,6 +113,8 @@ describe('Histogram', () => {
 
     it('should call onClick with bucket', () => {
       expect(onClick).toHaveBeenCalledWith({
+        sampled: true,
+        style: { cursor: 'pointer' },
         transactionId: '99c50a5b-44b4-4289-a3d1-a2815d128192',
         x: 869010,
         x0: 811076,

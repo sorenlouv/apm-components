@@ -3,12 +3,14 @@ export default function getFormattedBuckets(buckets, bucketSize) {
     return null;
   }
 
-  return buckets.map(({ count, key, transactionId }) => {
+  return buckets.map(({ sampled, count, key, transactionId }) => {
     return {
+      sampled,
       transactionId,
       x0: key,
       x: key + bucketSize,
-      y: count
+      y: count,
+      style: count > 0 && sampled ? { cursor: 'pointer' } : {}
     };
   });
 }

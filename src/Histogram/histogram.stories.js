@@ -5,7 +5,7 @@ import Histogram from './Histogram';
 import responseTimeData from './data/responseTime.json';
 import errorOccurencesData from './data/errorOccurences.json';
 import getFormattedBuckets from './Histogram/getFormattedBuckets';
-import { getTimeFormatter, asInteger } from '../formatters';
+import { getTimeFormatter, asInteger, timeUnit } from '../formatters';
 
 class HistogramWrapper extends React.Component {
   constructor(props) {
@@ -23,10 +23,15 @@ class HistogramWrapper extends React.Component {
 
     const xMax = d3.max(responseTimeBuckets, d => d.x);
     const timeFormatter = getTimeFormatter(xMax);
+    const unit = timeUnit(xMax);
 
     const errorOccurencesBuckets = getFormattedBuckets(
       errorOccurencesData.buckets,
       errorOccurencesData.bucketSize
+    );
+
+    const bucketIndex = responseTimeBuckets.findIndex(
+      bucket => bucket.transactionId === this.state.transactionId
     );
 
     return (
@@ -34,24 +39,38 @@ class HistogramWrapper extends React.Component {
         <Histogram
           buckets={responseTimeBuckets}
           bucketSize={responseTimeData.bucketSize}
-          transactionId={this.state.transactionId}
-          onClick={selectedBucket => {
-            this.setState({ transactionId: selectedBucket.transactionId });
+          bucketIndex={bucketIndex}
+          onClick={bucket => {
+            if (bucket.y > 0 && bucket.sampled) {
+              this.setState({ transactionId: bucket.transactionId });
+            }
           }}
-          formatXValue={timeFormatter}
-          formatYValue={asInteger}
+          formatX={timeFormatter}
+          formatYShort={value => `${value} req.`}
+          formatYLong={value => `${value} requests`}
           formatTooltipHeader={(hoveredX0, hoveredX) =>
             `${timeFormatter(hoveredX0, false)} - ${timeFormatter(hoveredX)}`
           }
-          tooltipLegendTitle="Requests"
+          verticalLineHover={bucket => bucket.y > 0 && !bucket.sampled}
+          backgroundHover={bucket => bucket.y > 0 && bucket.sampled}
+          tooltipHeader={bucket =>
+            `${timeFormatter(bucket.x0, false)} - ${timeFormatter(
+              bucket.x,
+              false
+            )} ${unit}`
+          }
+          tooltipFooter={bucket =>
+            !bucket.sampled && 'No sample available for this bucket'
+          }
         />
 
         <Histogram
           xType="time"
           buckets={errorOccurencesBuckets}
           bucketSize={errorOccurencesData.bucketSize}
-          formatYValue={value => `${value} err.`}
-          tooltipLegendTitle="Occurences"
+          formatYShort={value => `${value} err.`}
+          formatYLong={value => `${value} errors`}
+          verticalLineHover={bucket => bucket.x}
         />
       </div>
     );
