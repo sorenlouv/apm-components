@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import { setStatus, subscribe, STATUS, _purge } from './onLoadingChange';
+export { subscribe, STATUS, _purge };
 
-export const STATUSES = {
-  LOADING: 'LOADING',
-  SUCCESS: 'SUCCESS',
-  FAILURE: 'FAILURE'
-};
+export class RequestState extends React.Component {
+  constructor(props) {
+    super(props);
 
-export default class RequestState extends React.Component {
-  state = {
-    status: null,
-    data: null,
-    error: null
-  };
+    this.componentId = props.id ? props.id : `component-${_.uniqueId()}`;
+    this.state = {
+      status: null,
+      data: null,
+      error: null
+    };
+  }
 
   componentWillMount() {
     this.fetchData(this.props);
@@ -29,20 +30,29 @@ export default class RequestState extends React.Component {
     return this.didPropsChange(nextProps) || this.state !== nextState;
   }
 
+  componentWillUnmount() {
+    this.fetchId = null;
+    setStatus(this.componentId, null);
+  }
+
   fetchData(nextProps) {
-    this.setState({ status: STATUSES.LOADING });
-    const id = (this.id = _.uniqueId());
+    this.setState({ status: STATUS.LOADING });
+    setStatus(this.componentId, STATUS.LOADING);
+
+    const fetchId = (this.fetchId = _.uniqueId());
 
     return nextProps
       .fn(...nextProps.args)
       .then(data => {
-        if (id === this.id) {
-          this.setState({ data, status: STATUSES.SUCCESS });
+        if (fetchId === this.fetchId) {
+          this.setState({ data, status: STATUS.SUCCESS });
+          setStatus(this.componentId, STATUS.SUCCESS);
         }
       })
       .catch(error => {
-        if (id === this.id) {
-          this.setState({ error, status: STATUSES.FAILURE });
+        if (fetchId === this.fetchId) {
+          this.setState({ error, status: STATUS.FAILURE });
+          setStatus(this.componentId, STATUS.FAILURE);
         }
       });
   }
