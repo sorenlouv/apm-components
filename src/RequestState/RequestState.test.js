@@ -1,186 +1,167 @@
-import React from 'react';
-import { RequestState, STATUS, subscribe, _purge } from './RequestState';
 import { shallow } from 'enzyme';
+import React from 'react';
+import { _RequestState as RequestState, STATUS } from './RequestState';
 
-jest.useFakeTimers();
-
-function delay(ms, ...args) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(`Resolved in ${ms}ms with [${args}]`);
-    }, ms);
-  });
-}
+const resolvedPromise = (...args) => Promise.resolve(...args);
 
 describe('RequestState', () => {
-  beforeEach(_purge);
-
-  describe('When rendering one instance', () => {
-    let wrapper, fnSpy, subscribeSpy, promise;
+  describe('When mounting with empty requestState', () => {
+    let fnSpy, renderSpy, onRequestStatusChangeSpy, wrapper;
 
     beforeEach(() => {
-      fnSpy = jest.fn((...args) => {
-        promise = delay(5000, ...args);
-        return promise;
-      });
-
-      subscribeSpy = jest.fn();
-      subscribe(subscribeSpy);
+      fnSpy = jest.fn(resolvedPromise);
+      renderSpy = jest.fn();
+      onRequestStatusChangeSpy = jest.fn();
 
       wrapper = shallow(
         <RequestState
+          args={['myInitialArg']}
           fn={fnSpy}
-          args={['myInitialId']}
-          render={({ status, data, error }) => {
-            return (
-              <div>
-                Status: {status}; Data: {data}; Error: {error};
-              </div>
-            );
+          hashedArgs="myHashedArgs"
+          id="myId"
+          onRequestStatusChange={onRequestStatusChangeSpy}
+          render={renderSpy}
+          requestState={{}}
+        />
+      );
+    });
+    describe('initially', () => {
+      it('should call fnSpy with args', () => {
+        expect(fnSpy).toHaveBeenCalledTimes(1);
+        expect(fnSpy).toHaveBeenCalledWith('myInitialArg');
+      });
+
+      it('should request new data', () => {
+        expect(onRequestStatusChangeSpy).toHaveBeenCalledTimes(2);
+        expect(onRequestStatusChangeSpy.mock.calls).toEqual([
+          [{ hashedArgs: 'myHashedArgs', id: 'myId', status: 'LOADING' }],
+          [
+            {
+              data: 'myInitialArg',
+              hashedArgs: 'myHashedArgs',
+              id: 'myId',
+              status: 'SUCCESS'
+            }
+          ]
+        ]);
+      });
+
+      it('should render undefined', () => {
+        expect(renderSpy).toHaveBeenCalledTimes(1);
+        expect(renderSpy).toHaveBeenCalledWith({
+          data: undefined,
+          error: undefined,
+          status: undefined
+        });
+      });
+    });
+
+    describe('when data has loaded', () => {
+      beforeEach(() => {
+        wrapper.setProps({
+          requestState: {
+            status: STATUS.SUCCESS,
+            data: 'myData',
+            hashedArgs: 'myHashedArgs'
+          }
+        });
+      });
+
+      it('should not call fnSpy a second time', () => {
+        expect(fnSpy).toHaveBeenCalledTimes(1);
+      });
+
+      it('should not request new data a second time', () => {
+        expect(onRequestStatusChangeSpy).toHaveBeenCalledTimes(2);
+      });
+
+      it('should render SUCCESS', () => {
+        expect(renderSpy).toHaveBeenCalledTimes(2);
+        expect(renderSpy).toHaveBeenCalledWith({
+          data: 'myData',
+          error: undefined,
+          status: 'SUCCESS'
+        });
+      });
+    });
+  });
+
+  describe('When mounting with data in requestState', () => {
+    let fnSpy, renderSpy, onRequestStatusChangeSpy, wrapper;
+
+    beforeEach(() => {
+      fnSpy = jest.fn(resolvedPromise);
+      renderSpy = jest.fn();
+      onRequestStatusChangeSpy = jest.fn();
+
+      wrapper = shallow(
+        <RequestState
+          args={['myInitialArg']}
+          fn={fnSpy}
+          hashedArgs="myHashedArgs"
+          id="myId"
+          onRequestStatusChange={onRequestStatusChangeSpy}
+          render={renderSpy}
+          requestState={{
+            status: STATUS.SUCCESS,
+            data: 'myData',
+            hashedArgs: 'myHashedArgs'
           }}
         />
       );
     });
 
     describe('initially', () => {
-      it('should have initial state and markup', () => {
-        expect(fnSpy).toHaveBeenCalledWith('myInitialId');
-
-        expect(wrapper.state()).toEqual({
-          data: null,
-          error: null,
-          status: STATUS.LOADING
-        });
-
-        expect(wrapper.html()).toEqual(
-          '<div>Status: LOADING; Data: ; Error: ;</div>'
-        );
+      it('should not call fnSpy', () => {
+        expect(fnSpy).not.toHaveBeenCalled();
       });
 
-      it('should call subscribe', () => {
-        expect(subscribeSpy.mock.calls).toEqual([[true]]);
+      it('should not request new data', () => {
+        expect(onRequestStatusChangeSpy).not.toHaveBeenCalled();
+      });
+
+      it('should render SUCCESS', () => {
+        expect(renderSpy).toHaveBeenCalledTimes(1);
+        expect(renderSpy).toHaveBeenCalledWith({
+          data: 'myData',
+          status: 'SUCCESS'
+        });
       });
     });
 
-    describe('after promise has resolved', () => {
-      beforeEach(async () => {
-        jest.runAllTimers();
-        await promise;
-        wrapper.update();
-      });
-
-      it('should have correct state', async () => {
-        expect(fnSpy).toHaveBeenCalledTimes(1);
-        expect(wrapper.state()).toEqual({
-          data: 'Resolved in 5000ms with [myInitialId]',
-          error: null,
-          status: STATUS.SUCCESS
-        });
-      });
-
-      it('should have correct markup', () => {
-        expect(wrapper.html()).toEqual(
-          '<div>Status: SUCCESS; Data: Resolved in 5000ms with [myInitialId]; Error: ;</div>'
-        );
-      });
-
-      it('should call subscribe', () => {
-        expect(subscribeSpy.mock.calls).toEqual([[true], [false]]);
-      });
-    });
-
-    describe('when props change', () => {
+    describe('when args change', () => {
       beforeEach(() => {
-        wrapper.setProps({ args: ['mySecondId'] });
-      });
-
-      it('should call spy again', () => {
-        expect(fnSpy).toHaveBeenCalledTimes(2);
-        expect(wrapper.state()).toEqual({
-          data: null,
-          error: null,
-          status: STATUS.LOADING
-        });
-      });
-
-      it('should update state after second promise resolves', async () => {
-        jest.runAllTimers();
-        await promise;
-
-        expect(wrapper.state()).toEqual({
-          data: 'Resolved in 5000ms with [mySecondId]',
-          error: null,
-          status: STATUS.SUCCESS
-        });
-      });
-    });
-
-    describe('when two request are racing', () => {
-      it('should render the prop that was initiated last', async () => {
-        let shortPromise;
-
         wrapper.setProps({
-          args: ['myThirdId'],
-          fn: (...args) => {
-            shortPromise = delay(100, args);
-            return shortPromise;
-          }
-        });
-
-        jest.runAllTimers();
-        await promise, shortPromise;
-
-        expect(fnSpy).toHaveBeenCalledTimes(1);
-        expect(wrapper.state()).toEqual({
-          data: 'Resolved in 100ms with [myThirdId]',
-          error: null,
-          status: STATUS.SUCCESS
+          hashedArgs: 'myHashedArgs2',
+          args: ['mySecondArg']
         });
       });
-    });
 
-    it('should not call fn again when unrelated props change', () => {
-      wrapper.setProps({ unrelatedProp: 'hello' });
-      expect(fnSpy).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('when rendering two instances', () => {
-    it('should call subscribe', async () => {
-      const subscribeSpy = jest.fn();
-      subscribe(subscribeSpy);
-
-      const fn = async () => {};
-      const wrapper = shallow(<RequestState fn={fn} render={() => {}} />);
-      const wrapper2 = shallow(<RequestState fn={fn} render={() => {}} />);
-
-      await fn;
-      expect(subscribeSpy.mock.calls).toEqual([
-        [true],
-        [true],
-        [true],
-        [false]
-      ]);
-
-      wrapper.setProps({
-        args: ['myArg']
+      it('should call fnSpy', () => {
+        expect(fnSpy).toHaveBeenCalledWith('mySecondArg');
       });
 
-      wrapper2.setProps({
-        args: ['myArg2']
+      it('should request new data', () => {
+        expect(onRequestStatusChangeSpy.mock.calls).toEqual([
+          [{ hashedArgs: 'myHashedArgs2', id: 'myId', status: 'LOADING' }],
+          [
+            {
+              data: 'mySecondArg',
+              hashedArgs: 'myHashedArgs2',
+              id: 'myId',
+              status: 'SUCCESS'
+            }
+          ]
+        ]);
       });
 
-      await fn;
-      expect(subscribeSpy.mock.calls).toEqual([
-        [true],
-        [true],
-        [true],
-        [false],
-        [true],
-        [true],
-        [true],
-        [false]
-      ]);
+      it('should render SUCCESS', () => {
+        expect(renderSpy).toHaveBeenCalledTimes(1);
+        expect(renderSpy).toHaveBeenCalledWith({
+          data: 'myData',
+          status: 'SUCCESS'
+        });
+      });
     });
   });
 });

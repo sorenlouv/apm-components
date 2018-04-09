@@ -1,81 +1,109 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import _ from 'lodash';
-import { setStatus, subscribe, STATUS, _purge } from './onLoadingChange';
-export { subscribe, STATUS, _purge };
+import hash from 'object-hash/index';
+import { reducer } from './reducer';
+export const requestStateReducer = reducer;
 
-export class RequestState extends React.Component {
-  constructor(props) {
-    super(props);
+export const STATUS = {
+  LOADING: 'LOADING',
+  SUCCESS: 'SUCCESS',
+  FAILURE: 'FAILURE'
+};
 
-    this.componentId = props.id ? props.id : `component-${_.uniqueId()}`;
-    this.state = {
-      status: null,
-      data: null,
-      error: null
-    };
-  }
-
+export class _RequestState extends React.Component {
   componentWillMount() {
-    this.fetchData(this.props);
+    if (this.shouldFetchData(this.props)) {
+      this.fetchData(this.props);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.didPropsChange(nextProps)) {
+    if (this.shouldFetchData(nextProps)) {
       this.fetchData(nextProps);
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.didPropsChange(nextProps) || this.state !== nextState;
+  shouldComponentUpdate(nextProps) {
+    return this.props.requestState !== nextProps.requestState;
   }
 
   componentWillUnmount() {
     this.fetchId = null;
-    setStatus(this.componentId, null);
   }
 
-  fetchData(nextProps) {
-    this.setState({ status: STATUS.LOADING });
-    setStatus(this.componentId, STATUS.LOADING);
+  async fetchData(nextProps) {
+    const { id, hashedArgs, onRequestStatusChange, fn, args } = nextProps;
+    onRequestStatusChange({ id, hashedArgs, status: STATUS.LOADING });
 
     const fetchId = (this.fetchId = _.uniqueId());
 
-    return nextProps
-      .fn(...nextProps.args)
-      .then(data => {
-        if (fetchId === this.fetchId) {
-          this.setState({ data, status: STATUS.SUCCESS });
-          setStatus(this.componentId, STATUS.SUCCESS);
-        }
-      })
-      .catch(error => {
-        if (fetchId === this.fetchId) {
-          this.setState({ error, status: STATUS.FAILURE });
-          setStatus(this.componentId, STATUS.FAILURE);
-        }
-      });
+    try {
+      const data = await fn(...args);
+      if (fetchId === this.fetchId) {
+        onRequestStatusChange({ id, hashedArgs, status: STATUS.SUCCESS, data });
+      }
+    } catch (error) {
+      if (fetchId === this.fetchId) {
+        onRequestStatusChange({
+          id,
+          hashedArgs,
+          status: STATUS.FAILURE,
+          error
+        });
+      }
+    }
   }
 
-  didPropsChange(nextProps) {
-    return (
-      !_.isEqual(this.props.args, nextProps.args) ||
-      this.props.fn !== nextProps.fn
-    );
+  // if "id" or "args"/"hashedArgs" change, fn should be invoked (to fetch data)
+  shouldFetchData(nextProps) {
+    return nextProps.requestState.hashedArgs !== nextProps.hashedArgs;
   }
 
   render() {
-    const { status, data, error } = this.state;
+    const { status, data, error } = this.props.requestState;
     return this.props.render({ status, data, error });
   }
 }
 
-RequestState.propTypes = {
-  fn: PropTypes.func.isRequired,
+_RequestState.propTypes = {
   args: PropTypes.array,
-  render: PropTypes.func.isRequired
+  fn: PropTypes.func.isRequired,
+  hashedArgs: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  onRequestStatusChange: PropTypes.func.isRequired,
+  render: PropTypes.func.isRequired,
+  requestState: PropTypes.object
 };
 
-RequestState.defaultProps = {
+_RequestState.defaultProps = {
   args: []
 };
+
+const mapStateToProps = (state, ownProps) => {
+  const hashedArgs = hash(ownProps.args);
+  return {
+    hashedArgs,
+    requestState: state.requestState[ownProps.id] || {}
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onRequestStatusChange: ({ id, hashedArgs, status, data, error }) => {
+      dispatch({
+        data,
+        error,
+        hashedArgs,
+        id,
+        status,
+        type: 'requestStatusChange'
+      });
+    }
+  };
+};
+
+export const RequestState = connect(mapStateToProps, mapDispatchToProps)(
+  _RequestState
+);
