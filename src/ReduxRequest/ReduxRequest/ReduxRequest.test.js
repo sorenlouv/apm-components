@@ -1,46 +1,53 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { _RequestState as RequestState, STATUS } from './RequestState';
+import { ReduxRequestView } from './view';
+import { ACTION_TYPES, STATUS } from './reducer';
 
 const resolvedPromise = (...args) => Promise.resolve(...args);
 
-describe('RequestState', () => {
-  describe('When mounting with empty requestState', () => {
-    let fnSpy, renderSpy, onRequestStatusChangeSpy, wrapper;
+describe('ReduxRequest', () => {
+  describe('When mounting with empty result', () => {
+    let fnSpy, renderSpy, dispatchSpy, wrapper;
 
     beforeEach(() => {
       fnSpy = jest.fn(resolvedPromise);
       renderSpy = jest.fn();
-      onRequestStatusChangeSpy = jest.fn();
+      dispatchSpy = jest.fn();
 
       wrapper = shallow(
-        <RequestState
+        <ReduxRequestView
           args={['myInitialArg']}
+          dispatch={dispatchSpy}
           fn={fnSpy}
           hashedArgs="myHashedArgs"
           id="myId"
-          onRequestStatusChange={onRequestStatusChangeSpy}
           render={renderSpy}
-          requestState={{}}
         />
       );
     });
+
     describe('initially', () => {
-      it('should call fnSpy with args', () => {
+      it('should call fnSpy with args once', () => {
         expect(fnSpy).toHaveBeenCalledTimes(1);
         expect(fnSpy).toHaveBeenCalledWith('myInitialArg');
       });
 
-      it('should request new data', () => {
-        expect(onRequestStatusChangeSpy).toHaveBeenCalledTimes(2);
-        expect(onRequestStatusChangeSpy.mock.calls).toEqual([
-          [{ hashedArgs: 'myHashedArgs', id: 'myId', status: 'LOADING' }],
+      it('should dispatch loading and success states', () => {
+        expect(dispatchSpy).toHaveBeenCalledTimes(2);
+        expect(dispatchSpy.mock.calls).toEqual([
+          [
+            {
+              hashedArgs: 'myHashedArgs',
+              id: 'myId',
+              type: ACTION_TYPES.LOADING
+            }
+          ],
           [
             {
               data: 'myInitialArg',
               hashedArgs: 'myHashedArgs',
               id: 'myId',
-              status: 'SUCCESS'
+              type: ACTION_TYPES.SUCCESS
             }
           ]
         ]);
@@ -58,8 +65,14 @@ describe('RequestState', () => {
 
     describe('when data has loaded', () => {
       beforeEach(() => {
+        fnSpy.mockReset();
+        dispatchSpy.mockReset();
+        renderSpy.mockReset();
+        fnSpy.mockImplementation(resolvedPromise);
+
         wrapper.setProps({
-          requestState: {
+          prevHashedArgs: 'myHashedArgs',
+          result: {
             status: STATUS.SUCCESS,
             data: 'myData',
             hashedArgs: 'myHashedArgs'
@@ -67,45 +80,42 @@ describe('RequestState', () => {
         });
       });
 
-      it('should not call fnSpy a second time', () => {
-        expect(fnSpy).toHaveBeenCalledTimes(1);
+      it('should not call fnSpy again', () => {
+        expect(fnSpy).not.toHaveBeenCalled();
       });
 
-      it('should not request new data a second time', () => {
-        expect(onRequestStatusChangeSpy).toHaveBeenCalledTimes(2);
+      it('should not call dispatch again', () => {
+        expect(dispatchSpy).not.toHaveBeenCalled();
       });
 
-      it('should render SUCCESS', () => {
-        expect(renderSpy).toHaveBeenCalledTimes(2);
-        expect(renderSpy).toHaveBeenCalledWith({
-          data: 'myData',
-          error: undefined,
-          status: 'SUCCESS'
-        });
+      it('should render data', () => {
+        expect(renderSpy.mock.calls).toEqual([
+          [{ data: 'myData', error: undefined, status: 'SUCCESS' }]
+        ]);
       });
     });
   });
 
-  describe('When mounting with data in requestState', () => {
-    let fnSpy, renderSpy, onRequestStatusChangeSpy, wrapper;
+  describe('When mounting with data', () => {
+    let fnSpy, renderSpy, dispatchSpy, wrapper;
 
     beforeEach(() => {
       fnSpy = jest.fn(resolvedPromise);
       renderSpy = jest.fn();
-      onRequestStatusChangeSpy = jest.fn();
+      dispatchSpy = jest.fn();
 
       wrapper = shallow(
-        <RequestState
+        <ReduxRequestView
           args={['myInitialArg']}
           fn={fnSpy}
+          prevHashedArgs="myHashedArgs"
           hashedArgs="myHashedArgs"
           id="myId"
-          onRequestStatusChange={onRequestStatusChangeSpy}
+          dispatch={dispatchSpy}
           render={renderSpy}
-          requestState={{
+          result={{
             status: STATUS.SUCCESS,
-            data: 'myData',
-            hashedArgs: 'myHashedArgs'
+            data: 'myData'
           }}
         />
       );
@@ -117,15 +127,13 @@ describe('RequestState', () => {
       });
 
       it('should not request new data', () => {
-        expect(onRequestStatusChangeSpy).not.toHaveBeenCalled();
+        expect(dispatchSpy).not.toHaveBeenCalled();
       });
 
       it('should render SUCCESS', () => {
-        expect(renderSpy).toHaveBeenCalledTimes(1);
-        expect(renderSpy).toHaveBeenCalledWith({
-          data: 'myData',
-          status: 'SUCCESS'
-        });
+        expect(renderSpy.mock.calls).toEqual([
+          [{ data: 'myData', error: undefined, status: 'SUCCESS' }]
+        ]);
       });
     });
 
@@ -142,14 +150,20 @@ describe('RequestState', () => {
       });
 
       it('should request new data', () => {
-        expect(onRequestStatusChangeSpy.mock.calls).toEqual([
-          [{ hashedArgs: 'myHashedArgs2', id: 'myId', status: 'LOADING' }],
+        expect(dispatchSpy.mock.calls).toEqual([
+          [
+            {
+              hashedArgs: 'myHashedArgs2',
+              id: 'myId',
+              type: ACTION_TYPES.LOADING
+            }
+          ],
           [
             {
               data: 'mySecondArg',
               hashedArgs: 'myHashedArgs2',
               id: 'myId',
-              status: 'SUCCESS'
+              type: ACTION_TYPES.SUCCESS
             }
           ]
         ]);
@@ -159,9 +173,27 @@ describe('RequestState', () => {
         expect(renderSpy).toHaveBeenCalledTimes(1);
         expect(renderSpy).toHaveBeenCalledWith({
           data: 'myData',
-          status: 'SUCCESS'
+          status: STATUS.SUCCESS
         });
       });
+    });
+  });
+
+  describe('shouldInvoke', () => {
+    it('should not call fnSpy', () => {
+      const fnSpy = jest.fn(resolvedPromise);
+      shallow(
+        <ReduxRequestView
+          args={['myInitialArg']}
+          shouldInvoke={false}
+          fn={fnSpy}
+          hashedArgs="myHashedArgs"
+          id="myId"
+          dispatch={() => {}}
+        />
+      );
+
+      expect(fnSpy).not.toHaveBeenCalled();
     });
   });
 });

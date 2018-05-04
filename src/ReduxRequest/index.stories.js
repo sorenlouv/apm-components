@@ -1,13 +1,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { RequestState, requestStateReducer } from './RequestState';
+import { ReduxRequest, reduxRequestReducer } from './ReduxRequest';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 const store = createStore((state = {}, action) => {
   return {
     ...state,
-    requestState: requestStateReducer(state.requestState, action)
+    reduxRequest: reduxRequestReducer(state.reduxRequest, action)
   };
 });
 
@@ -19,11 +19,9 @@ function mySlowFunction(id) {
   });
 }
 
-class RequestStateWrapper extends React.Component {
+class ReduxRequestWrapper extends React.Component {
   state = {
-    counter: 0,
-    counter2: 0,
-    id: 'my-id'
+    counter: 1
   };
 
   componentDidMount() {
@@ -35,9 +33,24 @@ class RequestStateWrapper extends React.Component {
   render() {
     return (
       <div>
-        {this.state.id}
-        <RequestState
-          id={this.state.id}
+        {this.state.counter}
+        <ReduxRequest
+          id="test2"
+          fn={mySlowFunction}
+          args={[this.state.counter]}
+          render={({ status, data, error }) => {
+            return (
+              <div>
+                <div>Status: {status}</div>
+                <div>Data: {data}</div>
+                <div>Error: {error}</div>
+              </div>
+            );
+          }}
+        />
+
+        <ReduxRequest
+          id="test1"
           fn={mySlowFunction}
           args={[this.state.counter]}
           render={({ status, data, error }) => {
@@ -55,8 +68,8 @@ class RequestStateWrapper extends React.Component {
   }
 }
 
-storiesOf('RequestState', module).add('initial playground', () => (
+storiesOf('ReduxRequest', module).add('initial playground', () => (
   <Provider store={store}>
-    <RequestStateWrapper />
+    <ReduxRequestWrapper />
   </Provider>
 ));
