@@ -1,15 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { ReduxRequest, reduxRequestReducer } from './ReduxRequest';
+import { ReduxRequest, reduxRequestReducer } from '@sqren/redux-request';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
-const store = createStore((state = {}, action) => {
-  return {
-    ...state,
-    reduxRequest: reduxRequestReducer(state.reduxRequest, action)
-  };
-});
+const reducers = combineReducers({ reduxRequest: reduxRequestReducer });
+const store = createStore(reducers);
 
 function mySlowFunction(id) {
   return new Promise(resolve => {
@@ -37,7 +33,7 @@ class ReduxRequestWrapper extends React.Component {
         <ReduxRequest
           id="test2"
           fn={mySlowFunction}
-          args={[this.state.counter]}
+          args={[1]}
           render={({ status, data, error }) => {
             return (
               <div>
@@ -52,7 +48,7 @@ class ReduxRequestWrapper extends React.Component {
         <ReduxRequest
           id="test1"
           fn={mySlowFunction}
-          args={[this.state.counter]}
+          args={[2]}
           render={({ status, data, error }) => {
             return (
               <div>
