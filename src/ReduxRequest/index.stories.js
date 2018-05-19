@@ -1,10 +1,22 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { ReduxRequest, reduxRequestReducer } from '@sqren/redux-request';
+import { Request, reducer } from 'react-redux-request';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 
-const reducers = combineReducers({ reduxRequest: reduxRequestReducer });
+function incrementer(state = 0, action) {
+  switch (action.type) {
+    case 'increment':
+      return state + 1;
+    default:
+      return state;
+  }
+}
+
+const reducers = combineReducers({
+  reactReduxRequest: reducer,
+  incrementer
+});
 const store = createStore(reducers);
 
 function mySlowFunction(id) {
@@ -23,42 +35,28 @@ class ReduxRequestWrapper extends React.Component {
   componentDidMount() {
     setInterval(() => {
       this.setState(state => ({ counter: state.counter + 1 }));
+      store.dispatch({
+        type: 'increment'
+      });
     }, 2000);
   }
+
+  myRender = ({ status, data, error }) => {
+    console.log('render', this.state.counter);
+    return (
+      <div>
+        <div>Status: {status}</div>
+        <div>Data: {data}</div>
+        <div>Error: {error}</div>
+      </div>
+    );
+  };
 
   render() {
     return (
       <div>
         {this.state.counter}
-        <ReduxRequest
-          id="test2"
-          fn={mySlowFunction}
-          args={[1]}
-          render={({ status, data, error }) => {
-            return (
-              <div>
-                <div>Status: {status}</div>
-                <div>Data: {data}</div>
-                <div>Error: {error}</div>
-              </div>
-            );
-          }}
-        />
-
-        <ReduxRequest
-          id="test1"
-          fn={mySlowFunction}
-          args={[2]}
-          render={({ status, data, error }) => {
-            return (
-              <div>
-                <div>Status: {status}</div>
-                <div>Data: {data}</div>
-                <div>Error: {error}</div>
-              </div>
-            );
-          }}
-        />
+        <Request id="test2" fn={mySlowFunction} render={this.myRender} />
       </div>
     );
   }

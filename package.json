@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@sqren/redux-request": "^1.2.1",
+    "react-redux-request": "^1.4.3",
     "d3": "^3.5.6",
     "d3-scale": "^1.0.6",
     "lodash.get": "^4.4.2",
@@ -34,7 +34,7 @@
     "format": "prettier \"./src/**/*.js\" --write"
   },
   "devDependencies": {
-    "@storybook/react": "^3.3.11",
+    "@storybook/react": "^3.4.5",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
