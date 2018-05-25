@@ -1,0 +1,898 @@
+[
+  {
+    "type": "field",
+    "text": "_id ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">_id</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "_index ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">_index</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "_score ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">_score</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "_type ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">_type</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "@timestamp ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">@timestamp</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "beat.hostname ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">beat.hostname</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "beat.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">beat.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "beat.timezone ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">beat.timezone</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "beat.version ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">beat.version</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.process.pid ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.process.pid</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.process.ppid ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.process.ppid</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.process.title ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.process.title</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.request.http_version ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.request.http_version</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.request.method ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.request.method</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.request.url.full ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.request.url.full</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.request.url.hash ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.request.url.hash</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.request.url.hostname ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.request.url.hostname</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.request.url.pathname ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.request.url.pathname</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.request.url.port ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.request.url.port</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.request.url.protocol ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.request.url.protocol</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.request.url.raw ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.request.url.raw</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.request.url.search ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.request.url.search</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.response.finished ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.response.finished</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.response.status_code ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.response.status_code</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.service.agent.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.service.agent.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.service.agent.version ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.service.agent.version</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.service.environment ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.service.environment</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.service.framework.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.service.framework.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.service.framework.version ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.service.framework.version</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.service.language.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.service.language.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.service.language.version ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.service.language.version</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.service.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.service.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.service.runtime.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.service.runtime.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.service.runtime.version ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.service.runtime.version</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.service.version ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.service.version</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.system.architecture ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.system.architecture</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.system.hostname ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.system.hostname</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.system.ip ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.system.ip</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.system.platform ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.system.platform</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.tags.foo ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.tags.foo</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.tags.lines_count ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.tags.lines_count</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.tags.lorem ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.tags.lorem</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.tags.multi-line ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.tags.multi-line</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.tags.request_id ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.tags.request_id</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.tags.served_from_cache ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.tags.served_from_cache</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.tags.this-is-a-very-long-tag-name-without-any-spaces ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.tags.this-is-a-very-long-tag-name-without-any-spaces</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.tags.total_amount ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.tags.total_amount</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.user.email ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.user.email</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.user.id ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.user.id</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.user.ip ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.user.ip</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.user.user-agent ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.user.user-agent</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "context.user.username ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">context.user.username</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "docker.container.id ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">docker.container.id</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "docker.container.image ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">docker.container.image</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "docker.container.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">docker.container.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error id icon ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error id icon</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.code ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.code</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.culprit ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.culprit</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.exception.code ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.exception.code</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.exception.handled ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.exception.handled</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.exception.message ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.exception.message</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.exception.module ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.exception.module</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.exception.type ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.exception.type</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.grouping_key ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.grouping_key</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.id ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.id</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.log.level ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.log.level</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.log.logger_name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.log.logger_name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.log.message ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.log.message</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.log.param_message ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.log.param_message</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.message ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.message</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "error.type ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">error.type</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "host.architecture ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">host.architecture</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "host.id ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">host.id</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "host.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">host.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "host.os.family ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">host.os.family</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "host.os.platform ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">host.os.platform</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "host.os.version ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">host.os.version</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "kubernetes.container.image ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">kubernetes.container.image</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "kubernetes.container.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">kubernetes.container.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "kubernetes.namespace ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">kubernetes.namespace</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "kubernetes.node.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">kubernetes.node.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "kubernetes.pod.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">kubernetes.pod.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "listening ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">listening</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "meta.cloud.availability_zone ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">meta.cloud.availability_zone</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "meta.cloud.instance_id ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">meta.cloud.instance_id</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "meta.cloud.instance_name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">meta.cloud.instance_name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "meta.cloud.machine_type ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">meta.cloud.machine_type</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "meta.cloud.project_id ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">meta.cloud.project_id</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "meta.cloud.provider ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">meta.cloud.provider</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "meta.cloud.region ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">meta.cloud.region</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "processor.event ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">processor.event</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "processor.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">processor.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "sourcemap.bundle_filepath ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">sourcemap.bundle_filepath</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "sourcemap.service.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">sourcemap.service.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "sourcemap.service.version ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">sourcemap.service.version</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "span.duration.us ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">span.duration.us</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "span.id ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">span.id</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "span.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">span.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "span.parent ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">span.parent</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "span.start.us ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">span.start.us</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "span.type ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">span.type</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "tags ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">tags</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "transaction.duration.us ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">transaction.duration.us</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "transaction.id ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">transaction.id</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "transaction.name.keyword ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">transaction.name.keyword</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "transaction.name ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">transaction.name</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "transaction.result ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">transaction.result</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "transaction.sampled ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">transaction.sampled</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "transaction.span_count.dropped.total ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">transaction.span_count.dropped.total</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "transaction.type ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">transaction.type</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "view errors ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">view errors</span></p>",
+    "start": 0,
+    "end": 0
+  },
+  {
+    "type": "field",
+    "text": "view spans ",
+    "description":
+      "<p>Filter results that contain <span class=\"suggestionItem__callout\">view spans</span></p>",
+    "start": 0,
+    "end": 0
+  }
+]
