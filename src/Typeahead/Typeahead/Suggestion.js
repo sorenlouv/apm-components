@@ -2,6 +2,45 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // import { EuiIcon } from '@elastic/eui';
+import { colors } from '../../../style/variables';
+
+function getIconColor(type) {
+  switch (type) {
+    case 'field':
+      return colors.apmOrange;
+
+    case 'value':
+      return colors.teal;
+
+    case 'operator':
+      return colors.apmBlue;
+
+    case 'conjunction':
+      return colors.apmPurple;
+
+    case 'recentSearch':
+      return colors.gray3;
+  }
+}
+
+function getIconBgColor(type) {
+  switch (type) {
+    case 'field':
+      return '#fccd9f';
+
+    case 'value':
+      return '#99dbd7';
+
+    case 'operator':
+      return '#accefd';
+
+    case 'conjunction':
+      return '#b699d3';
+
+    case 'recentSearch':
+      return colors.gray5;
+  }
+}
 
 const ListItem = styled.li`
   font-size: 13px;
@@ -21,6 +60,12 @@ const ListItem = styled.li`
 
 const Icon = styled.div`
   flex: 0 0 32px;
+  background: ${props => getIconBgColor(props.type)};
+  color: ${props => getIconColor(props.type)};
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 32px;
 `;
 
 const TextValue = styled.div`
@@ -44,7 +89,7 @@ const Description = styled.div`
   }
 `;
 
-function getIconType(type) {
+function getEuiIconType(type) {
   switch (type) {
     case 'field':
       return 'kqlField';
@@ -57,7 +102,7 @@ function getIconType(type) {
     case 'operator':
       return 'kqlOperand';
     default:
-      throw new Error('Unknow type', type);
+      throw new Error('Unknown type', type);
   }
 }
 
@@ -65,10 +110,12 @@ function Suggestion(props) {
   return (
     <ListItem
       selected={props.selected}
-      onClick={props.onClick}
+      onClick={() => props.onClick(props.suggestion)}
       onMouseOver={props.onMouseOver}
     >
-      <Icon>{/* <EuiIcon type={getIconType(props.suggestion.type)} /> */}</Icon>
+      <Icon type={props.suggestion.type}>
+        {/* <EuiIcon type={getEuiIconType(props.suggestion.type)} /> */}
+      </Icon>
       <TextValue>{props.suggestion.text}</TextValue>
       <Description
         dangerouslySetInnerHTML={{ __html: props.suggestion.description }}

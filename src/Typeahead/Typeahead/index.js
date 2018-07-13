@@ -19,17 +19,28 @@ const Input = styled.input`
   outline: none;
 `;
 
-export default class Typeahead extends React.Component {
+export class Typeahead extends React.Component {
   state = {
     isSuggestionsVisible: false,
     index: null,
-    value: ''
+    value: '',
+    inputValueChanged: false
   };
 
   componentDidUpdate(prevProps) {
     if (prevProps.suggestions !== this.props.suggestions) {
       this.setState({ isSuggestionsVisible: true, index: null });
     }
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (!state.inputValueChanged && props.initialValue) {
+      return {
+        value: props.initialValue
+      };
+    }
+
+    return null;
   }
 
   onBlurInput = () => {
@@ -49,8 +60,8 @@ export default class Typeahead extends React.Component {
 
   decrementIndex = currentIndex => {
     let previousIndex = currentIndex - 1;
-    if (currentIndex === null || previousIndex < 0) {
-      previousIndex = this.props.suggestions.length - 1;
+    if (previousIndex < 0) {
+      previousIndex = null;
     }
     this.setState({ index: previousIndex });
   };
@@ -90,7 +101,7 @@ export default class Typeahead extends React.Component {
       case KEY_CODES.ENTER:
         event.preventDefault();
         if (isSuggestionsVisible && index !== null) {
-          this.props.onSuggestionSelected(index);
+          this.onClickSuggestion(this.props.suggestions[index]);
         } else {
           this.props.onSubmit(value);
         }
@@ -103,20 +114,28 @@ export default class Typeahead extends React.Component {
     }
   };
 
-  onChangeInput = event => {
+  onChangeInputValue = event => {
     const { value, selectionStart } = event.target;
-    this.setState({ value });
+    this.setState({ value, inputValueChanged: true });
     this.props.onChange(value, selectionStart);
   };
 
-  onClickInput = () => {
+  onClickInput = event => {
+    const { selectionStart } = event.target;
     this.setState({ isSuggestionsVisible: true });
+    this.props.onChange(this.state.value, selectionStart);
   };
 
-  onClickSuggestion = index => {
+  onClickSuggestion = suggestion => {
     this.inputRef.focus();
-    this.setState({ index, isSuggestionsVisible: false });
-    this.props.onSuggestionSelected(index);
+
+    const nextInput =
+      this.state.value.substr(0, suggestion.start) +
+      suggestion.text +
+      this.state.value.substr(suggestion.end);
+
+    this.setState({ value: nextInput, isSuggestionsVisible: false });
+    this.props.onChange(nextInput, nextInput.length);
   };
 
   onMouseOverSuggestion = index => {
@@ -132,13 +151,13 @@ export default class Typeahead extends React.Component {
           value={this.state.value}
           onKeyDown={this.onKeyDown}
           onKeyUp={this.onKeyUp}
-          onChange={this.onChangeInput}
+          onChange={this.onChangeInputValue}
           onClick={this.onClickInput}
           onBlur={this.onBlurInput}
         />
         <Suggestions
           show={this.state.isSuggestionsVisible}
-          //   show
+          // show
           suggestions={this.props.suggestions}
           index={this.state.index}
           onClick={this.onClickSuggestion}
@@ -150,12 +169,12 @@ export default class Typeahead extends React.Component {
 }
 
 Typeahead.propTypes = {
-  onSubmit: PropTypes.func,
-  onSuggestionSelected: PropTypes.func,
-  suggestions: PropTypes.array.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  suggestions: PropTypes.array.isRequired,
+  initialValue: PropTypes.string
 };
 
 Typeahead.defaultProps = {
-  onSuggestionSelected: () => {},
   suggestions: []
 };

@@ -24,9 +24,7 @@ function Suggestions(props) {
       <Suggestion
         selected={index === props.index}
         suggestion={suggestion}
-        onClick={() => {
-          props.onClick(index);
-        }}
+        onClick={props.onClick}
         onMouseOver={() => props.onMouseOver(index)}
         key={key}
       />

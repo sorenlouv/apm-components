@@ -1,15 +1,16 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import TypeAhead from './TypeAhead';
+import Typeahead from './Typeahead';
 import suggestions from './suggestions.json';
 
-class TypeAheadExample extends React.Component {
+class TypeaheadExample extends React.Component {
   state = {};
 
   render() {
     return (
       <div style={{ padding: '10px' }}>
-        <TypeAhead
+        <Typeahead
+          initialValue="test"
           onChange={(value, selectionStart) => {
             console.log(value, selectionStart);
           }}
@@ -17,15 +18,12 @@ class TypeAheadExample extends React.Component {
             console.log('Input submitted:', value);
           }}
           suggestions={suggestions.slice(4, 10)}
-          onSuggestionSelected={index => {
-            console.log('Suggestion selected:', index, suggestions[index]);
-          }}
         />
       </div>
     );
   }
 }
 
-storiesOf('TypeAhead', module).add('initial playground', () => (
-  <TypeAheadExample />
+storiesOf('Typeahead', module).add('initial playground', () => (
+  <TypeaheadExample />
 ));
